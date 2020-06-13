@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{8C6B68A0-48F5-477A-BC13-5C14C716BA96}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MCValueAtRisk</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AmericanCallFunction.cpp" />
+    <ClCompile Include="AmericanPutFunction.cpp" />
+    <ClCompile Include="Arrays.cpp" />
+    <ClCompile Include="BinomialTree.cpp" />
+    <ClCompile Include="BondFunction.cpp" />
+    <ClCompile Include="BSCallFunction.cpp" />
+    <ClCompile Include="BSPutFunction.cpp" />
+    <ClCompile Include="Cholezky.cpp" />
+    <ClCompile Include="EquityForwardFunction.cpp" />
+    <ClCompile Include="FixedForFixedFXSwapFunction.cpp" />
+    <ClCompile Include="FRAFunction.cpp" />
+    <ClCompile Include="FunctionCombiner.cpp" />
+    <ClCompile Include="FXForwardFunction.cpp" />
+    <ClCompile Include="InstrumentStatisticsGatherer.cpp" />
+    <ClCompile Include="InterestRateSwapFunction.cpp" />
+    <ClCompile Include="MCEngine.cpp" />
+    <ClCompile Include="MonteCarloBasketOptionFunction.cpp" />
+    <ClCompile Include="MonteCarloRainbowOptionFunction.cpp" />
+    <ClCompile Include="MonteCarloVanillaOptionFunction.cpp" />
+    <ClCompile Include="Normals.cpp" />
+    <ClCompile Include="OneStepBrownianMotion.cpp" />
+    <ClCompile Include="OneStepBSEngine.cpp" />
+    <ClCompile Include="ConvergenceTable.cpp" />
+    <ClCompile Include="MCStatistics.cpp" />
+    <ClCompile Include="Main_MCValueAtRisk.cpp" />
+    <ClCompile Include="OneStepMonteCarloValuation.cpp" />
+    <ClCompile Include="PayOff.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="SimulationEngine.cpp" />
+    <ClCompile Include="StatisticsCompiler.cpp" />
+    <ClCompile Include="StockPriceFunction.cpp" />
+    <ClCompile Include="TimeSeriesHandler.cpp" />
+    <ClCompile Include="TreeAmerican.cpp" />
+    <ClCompile Include="TreeEuropean.cpp" />
+    <ClCompile Include="TreeProducts.cpp" />
+    <ClCompile Include="valuationFunction.cpp" />
+    <ClCompile Include="StandardExcerciseOption.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbsOrRelReturns.h" />
+    <ClInclude Include="AmericanCallFunction.h" />
+    <ClInclude Include="AmericanPutFunction.h" />
+    <ClInclude Include="Arrays.h" />
+    <ClInclude Include="BinomialTree.h" />
+    <ClInclude Include="BondFunction.h" />
+    <ClInclude Include="BSCallFunction.h" />
+    <ClInclude Include="BSPutFunction.h" />
+    <ClInclude Include="Cholezky.h" />
+    <ClInclude Include="ConvergenceTable.h" />
+    <ClInclude Include="DiscretizedPathMonteCarloValuation.h" />
+    <ClInclude Include="EquityForwardFunction.h" />
+    <ClInclude Include="FRAFunction.h" />
+    <ClInclude Include="FunctionCombiner.h" />
+    <ClInclude Include="FXForwardFunction.h" />
+    <ClInclude Include="FixedForFixedFXSwapFunction.h" />
+    <ClInclude Include="InstrumentStatisticsGatherer.h" />
+    <ClInclude Include="InterestRateSwapFunction.h" />
+    <ClInclude Include="MCStatistics.h" />
+    <ClInclude Include="MonteCarloBasketOptionFunction.h" />
+    <ClInclude Include="MonteCarloRainbowOptionFunction.h" />
+    <ClInclude Include="MonteCarloVanillaOptionFunction.h" />
+    <ClInclude Include="Normals.h" />
+    <ClInclude Include="OneStepBrownianMotion.h" />
+    <ClInclude Include="OneStepMonteCarloValuation.h" />
+    <ClInclude Include="PayOff.h" />
+    <ClInclude Include="RainbowOptionTypes.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="OneStepBSEngine.h" />
+    <ClInclude Include="ReadCSV.h" />
+    <ClInclude Include="RiskFactors.h" />
+    <ClInclude Include="SimulationEngine.h" />
+    <ClInclude Include="StatisticsCompiler.h" />
+    <ClInclude Include="MCEngine.h" />
+    <ClInclude Include="StockPriceFunction.h" />
+    <ClInclude Include="TimeSeriesHandler.h" />
+    <ClInclude Include="TreeAmerican.h" />
+    <ClInclude Include="TreeEuropean.h" />
+    <ClInclude Include="TreeProducts.h" />
+    <ClInclude Include="valuationFunction.h" />
+    <ClInclude Include="StandardExcerciseOption.h" />
+    <ClInclude Include="Wrapper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
