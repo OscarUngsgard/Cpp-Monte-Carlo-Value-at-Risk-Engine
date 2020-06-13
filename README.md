@@ -1,4 +1,4 @@
-## Cpp-Monte-Carlo-Value-at-Risk-Engine
+# Cpp-Monte-Carlo-Value-at-Risk-Engine
 ##Background and overview
 
 This program is the culmination of two months of work to create a fully functional and comprehensive Monte Carlo Value at Risk engine for calculating the risk of a financial portfolio, on a total portfolio level as well as on an individual instrument level. The program was written in my spare time immediately following graduating with a Master’s degree in Financial Mathematics while at the same time working full time as a quantitative analyst at an investment bank. The task was undertaken with the motivation of solidifying my knowledge of the fundamentals of risk and valuations calculations and teaching myself proper usage of C++ as a tool for implementing sound financial engineering solutions with object-oriented programming.
