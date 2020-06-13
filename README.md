@@ -1,4 +1,4 @@
-# Cpp-Monte-Carlo-Value-at-Risk-Engine
+# C++-Monte-Carlo-Value-at-Risk-Engine
 
 ## Background and overview
 
