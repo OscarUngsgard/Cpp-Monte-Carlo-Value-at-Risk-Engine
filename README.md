@@ -1,11 +1,12 @@
 # Cpp-Monte-Carlo-Value-at-Risk-Engine
-##Background and overview
+
+## Background and overview
 
 This program is the culmination of two months of work to create a fully functional and comprehensive Monte Carlo Value at Risk engine for calculating the risk of a financial portfolio, on a total portfolio level as well as on an individual instrument level. The program was written in my spare time immediately following graduating with a Master’s degree in Financial Mathematics while at the same time working full time as a quantitative analyst at an investment bank. The task was undertaken with the motivation of solidifying my knowledge of the fundamentals of risk and valuations calculations and teaching myself proper usage of C++ as a tool for implementing sound financial engineering solutions with object-oriented programming.
 
 The knowledge base drawn upon when implementing the financial models in C++ primarily comes from the book C++ Design Patterns and Derivatives Pricing by Mark Joshi. The program as such readily makes use of design patterns to produce reusable and extensible code following the open/closed principle of object-oriented programming. This has resulted in a code base that can be seamlessly extended in a logical way to handle additional functionality such as support for additional instrument types and calculations of different statistics (VaR itself being one statistic), one could even straightforwardly extend the program by adding additional stochastic processes for the path simulations of the risk factors such as a jump diffusion processes or allowing for stochastic volatility.
 
-#Structure and components of the program
+## Structure and components of the program
 
 Attached in the repository is a class diagram of the program showing the structure of the system. The system comprises the core MCEngine class where the Monte Carlo simulation takes place along with 3 key base classes that together make up the structure of the program. These are the pure virtual classes: SimulationEngine, ValuationFunction and MCStatistics. 
 
@@ -24,7 +25,7 @@ Saving the results in the two statistics gathering objects.
 
 Care is taken to make this process as optimized as possible but the computational bottleneck will in most cases be in 2. as a full re-valuation of the instruments needs to be completed for each iteration.
 
-#Setting up the simulation in the main function
+## Setting up the simulation in the main function
 
 An example of a risk calculation being done for a portfolio is given in the main function of the program. In order to run the simulation we first need to calculate a covariance matrix of the risk factors and find the current spot rates for the underlyings. These preliminary tasks are handled by the class TimeSeriesHandler which transforms a two dimensional vector of closing prices to returns and then calculates the sample covariance matrix. Additional functionality could be added to support more refined methods such as exponentially weighted moving averages for the calculation of the covariance matrix. The class CSVReader allows the input of a headerless CSV file of closing prices for a series of risk factors from which the covariance matrix can be calculated. A short python script can be found in the repository which extracts these values from Yahoo Finance and saves them to a CSV file. The covariance matrix and spot rates can of course also manually be inputted.
 
