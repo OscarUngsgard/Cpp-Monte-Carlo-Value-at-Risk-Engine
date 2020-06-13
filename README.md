@@ -8,7 +8,7 @@ The knowledge base drawn upon when implementing the financial models in C++ prim
 
 ## Structure and components of the program
 
-Attached in the repository is a class diagram of the program showing the structure of the system. The system comprises the core MCEngine class where the Monte Carlo simulation takes place along with 3 key base classes that together make up the structure of the program. These are the pure virtual classes: SimulationEngine, ValuationFunction and MCStatistics. 
+Attached in the repository is a class diagram of the program showing the structure of the system. The system comprises the core MCEngine class where the Monte Carlo simulation takes place along with 3 key base classes that together make up the structure of the program. These are the pure virtual classes: *SimulationEngine*, *ValuationFunction* and *MCStatistics*. 
 
 An object of the class ValuationFunction serves the purpose of representing one position in the portfolio, it has members such as nominal and uniqueIdentifier that describe the position with instrument specific attributes such as the spot value of an underlying risk factor or the implied volatility of an instrument being members of the relevant derived classes. Examples of such derived classes are various equity derivatives, Bonds and IRS, and FX forwards. The primary function of the ValuationFunction is to value the position which is done in the function ValueInstrument for each path in the Monte Carlo simulation. Note that the ValueInstrument function itself may employ heavy numerical procedures when necessary, such as constructing a binomial tree for American options or a Monte Carlo simulation on a position level to value derivatives like rainbow options where no other approach is suitable.
 
