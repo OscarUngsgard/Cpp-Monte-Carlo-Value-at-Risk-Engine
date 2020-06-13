@@ -23,7 +23,7 @@ The core class that instructs the sequencing of the Monte Carlo Value at Risk si
 2. Valuing the instruments and portfolio using the functionality provided in the *ValuationFunction* objects.
 3. Saving the results in the two statistics gathering objects.
 
-Care is taken to make this process as optimized as possible but the computational bottleneck will in most cases be in 2. as a full re-valuation of the instruments needs to be completed for each iteration.
+Care is taken to make this process as optimized as possible but the computational bottleneck will in most cases be in 2. as a full re-valuation of the instruments needs to be completed for each iteration which for instrument types with complicated payoffs that need to be numerically calculated quickly can become very computationally expensive.
 
 ## Setting up the simulation in the main function
 
