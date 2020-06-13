@@ -19,9 +19,9 @@ The MCStatistics class is delegated the task of aggregating the results of the M
 On top of the classes derived from these three base classes there is an ensemble of helper classes to facilitate their usage along with a few more general classes and functions for numerical computations or tasks such as producing a covariance matrix from time series and creating correlated normal variates for the simulation using a Cholesky decomposition as in the class GetArraysOfCorrelatedGauassiansByBoxMuller.
 
 The core class that instructs the sequencing of the Monte Carlo Value at Risk simulation is, as previously mentioned, the class MCEngine which takes as input in its constructor: a vector of SimulationEngine objects (each having as a member an object of type ValuationFunction) here called EngineVector, and the covariance matrix of the risk factors going into the simulation. It is when calling the DoSimulation function of the MCEngine that the magic happens. The DoSimulation function takes as arguments an object of type MCStatistics, an object of type InstrumentStatisticsGatherer, as well as the time horizon and the number of iterations that will be carried out in the simulation. By and large DoSimulation works by for each iteration carrying out the following tasks:
-Simulating paths for the underlying risk factors using the different SimulationEngine objects in EngineVector
-Valuing the instruments and portfolio using the functionality provided in the ValuationFunction objects
-Saving the results in the two statistics gathering objects.
+1. Simulating paths for the underlying risk factors using the different SimulationEngine objects in EngineVector
+2. Valuing the instruments and portfolio using the functionality provided in the ValuationFunction objects
+3. Saving the results in the two statistics gathering objects.
 
 Care is taken to make this process as optimized as possible but the computational bottleneck will in most cases be in 2. as a full re-valuation of the instruments needs to be completed for each iteration.
 
