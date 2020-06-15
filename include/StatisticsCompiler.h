@@ -1,7 +1,7 @@
 #pragma once
 #define STATISTICS_COMPILER_H
 #include "MCStatistics.h"
-#include "wrapper.h"
+#include "Wrapper.h"
 
 
 class StatisticsCompiler : public StatisticsMC

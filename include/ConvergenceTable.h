@@ -1,7 +1,7 @@
 #pragma once
 #define CONVERGENCE_TABLE_H
 #include "MCStatistics.h"
-#include "wrapper.h"
+#include "Wrapper.h"
 class ConvergenceTable : public StatisticsMC
 {
 public:

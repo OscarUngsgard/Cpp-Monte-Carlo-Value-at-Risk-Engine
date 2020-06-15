@@ -1,6 +1,6 @@
 #pragma once
 #define MCENGINE_H
-#include "wrapper.h"
+#include "Wrapper.h"
 #include "MCStatistics.h"
 #include "InstrumentStatisticsGatherer.h"
 #include <vector>

@@ -12,7 +12,7 @@
 #include "Cholezky.h"
 //enums
 #include "RiskFactors.h"
-#include "include/AbsOrRelReturns.h"
+#include "AbsOrRelReturns.h"
 #include "RainbowOptionTypes.h"
 //Statistics calculations e.g. VaR from quantile
 #include "MCStatistics.h"
@@ -89,8 +89,8 @@ int main()
 
     //Declare variables and set some constants
     const unsigned long binomialTreeSteps = 10; //for american options
-    const unsigned long NumberOfPaths = pow(10, 3);
-    const unsigned long MCValuationNumberOfPaths = pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
+    const unsigned long NumberOfPaths = pow(10, 4);
+    const unsigned long MCValuationNumberOfPaths = 5*pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
     double timeHorizon = 20.0 / 252.0;
     double S0;    double TTM;    double Strike;    double d;    double impvol;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
