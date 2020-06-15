@@ -1,4 +1,5 @@
 #pragma warning( disable : 4786 )
+#pragma once
 #include "TreeProducts.h"
 #include <vector>
 #include "Arrays.h"

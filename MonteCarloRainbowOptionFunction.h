@@ -15,7 +15,6 @@ public:
 	virtual valuationFunction* clone() const;
 private:
 	unsigned long numberOfPaths;
-	int nominal;
 	double r;
 	std::vector<double> S_vect;
 	std::vector<double> d_vect;

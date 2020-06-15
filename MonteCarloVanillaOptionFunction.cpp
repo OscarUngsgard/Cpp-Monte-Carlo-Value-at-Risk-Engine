@@ -5,7 +5,7 @@
 #include "MCStatistics.h"
 #include "Random.h"
 
-MonteCarloVanillaOptionFunction::MonteCarloVanillaOptionFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, const Wrapper<PayOff>& ThePayOff_, unsigned long numberOfPaths_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), ThePayOff(ThePayOff_), numberOfPaths(numberOfPaths_)
+MonteCarloVanillaOptionFunction::MonteCarloVanillaOptionFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, const Wrapper<PayOff>& ThePayOff_, unsigned long numberOfPaths_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), ThePayOff(ThePayOff_), numberOfPaths(numberOfPaths_)
 {
 }
 

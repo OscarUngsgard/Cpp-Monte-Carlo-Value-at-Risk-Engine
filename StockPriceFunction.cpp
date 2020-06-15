@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-StockPriceFunction::StockPriceFunction(std::string uniqueIdentifier_, int nominal_, double S_) : nominal(nominal_), S(S_), valuationFunction(uniqueIdentifier_, 0)
+StockPriceFunction::StockPriceFunction(std::string uniqueIdentifier_, int nominal_, double S_) : S(S_), valuationFunction(uniqueIdentifier_, INT_MAX, nominal_)
 {
 }
 

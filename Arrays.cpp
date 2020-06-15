@@ -1,6 +1,7 @@
 #include "Arrays.h"
 #include <algorithm>
 #include <numeric>
+#include <functional>
 MJArray::MJArray(unsigned long size)
 	: Size(size), Capacity(size)
 {

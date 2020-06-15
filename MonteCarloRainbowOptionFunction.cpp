@@ -4,12 +4,10 @@
 #include "OneStepMonteCarloValuation.h"
 #include "MCStatistics.h"
 #include "Random.h"
-#include <cmath>
-#include <minmax.h>
 #include <algorithm>
 #include <iostream>
 
-MonteCarloRainbowOptionFunction::MonteCarloRainbowOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, std::vector<Wrapper<PayOff>> ThePayOffVect_, unsigned long numberOfPaths_, RainbowOptionType optionType_) : r(r_), S_vect(S0_vect), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), ThePayOffVect(std::move(ThePayOffVect_)), numberOfPaths(numberOfPaths_), optionType(optionType_), impvol_vect(impvol_vect_)
+MonteCarloRainbowOptionFunction::MonteCarloRainbowOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, std::vector<Wrapper<PayOff>> ThePayOffVect_, unsigned long numberOfPaths_, RainbowOptionType optionType_) : r(r_), S_vect(S0_vect), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_),ThePayOffVect(std::move(ThePayOffVect_)), numberOfPaths(numberOfPaths_), optionType(optionType_), impvol_vect(impvol_vect_)
 {
 	if (covMatrix.size() != S_vect.size())
 		throw("Missmatched Covariance matrix and initial spot values array sizes in MonteCarloRainbowOptionFunction");

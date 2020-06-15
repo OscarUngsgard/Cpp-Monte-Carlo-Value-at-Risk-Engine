@@ -11,6 +11,5 @@ public:
 	virtual std::vector<std::reference_wrapper<valuationFunction>> GetInnerReference();
 	virtual valuationFunction* clone() const;
 private:
-	int nominal;
 	double S;
 };

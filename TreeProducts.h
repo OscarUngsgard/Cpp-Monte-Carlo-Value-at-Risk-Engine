@@ -1,4 +1,4 @@
-#ifndef TREE_PRODUCTS_H
+#pragma once
 #define TREE_PRODUCTS_H
 class TreeProduct
 {
@@ -12,4 +12,3 @@ public:
 private:
 	double FinalTime;
 };
-#endif

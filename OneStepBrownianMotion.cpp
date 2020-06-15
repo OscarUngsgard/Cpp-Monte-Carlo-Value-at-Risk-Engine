@@ -1,26 +1,37 @@
 #include "OneStepBrownianMotion.h"
 #include <iostream>
+#include <algorithm>
 
-OneStepBrownianMotionEngine::OneStepBrownianMotionEngine(double horizon_, double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor_) : SimulationEngine(horizon_, theFunction_, simulatedRiskFactor_), drift(drift_)
+OneStepBrownianMotionEngine::OneStepBrownianMotionEngine(double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor_) : SimulationEngine(theFunction_, simulatedRiskFactor_), drift(drift_)
 {
 }
 
 
-void OneStepBrownianMotionEngine::DoOnePath(double vol, double normvariate)
+void OneStepBrownianMotionEngine::DoOnePath(double horizon, double vol, double normvariate)
 {
-    double variance = vol * vol * horizon;
-    double rootVariance = sqrt(variance);
-    double increment = (horizon * drift + rootVariance * normvariate);
-    theFunction->RiskFactorAdd(increment, simulatedRiskFactor);
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        double adjustedHorizon = std::min(horizon, innerReferences[i].get().GetOrigTTM());
+        double variance = vol * vol * horizon;
+        double rootVariance = sqrt(variance);
+        double increment = (horizon * drift + rootVariance * normvariate);
+        innerReferences[i].get().RiskFactorAdd(increment, simulatedRiskFactor);
+    }
     return;
 }
 
-void OneStepBrownianMotionEngine::UnDoOnePath(double vol, double normvariate)
+void OneStepBrownianMotionEngine::UnDoOnePath(double horizon, double vol, double normvariate)
 {
-    double variance = vol * vol * horizon;
-    double rootVariance = sqrt(variance);
-    double increment = (horizon * drift + rootVariance * normvariate);
-    theFunction->RiskFactorAdd(-increment, simulatedRiskFactor);
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        double adjustedHorizon = std::min(horizon, innerReferences[i].get().GetOrigTTM());
+        double variance = vol * vol * horizon;
+        double rootVariance = sqrt(variance);
+        double increment = (horizon * drift + rootVariance * normvariate);
+        innerReferences[i].get().RiskFactorAdd(-increment, simulatedRiskFactor);
+    }
     return;
 }
 

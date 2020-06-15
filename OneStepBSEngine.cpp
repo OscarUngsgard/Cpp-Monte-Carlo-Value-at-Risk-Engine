@@ -1,28 +1,38 @@
 #include "OneStepBSEngine.h"
 #include <iostream>
+#include <algorithm>
 
-OneStepBSEngine::OneStepBSEngine(double horizon_, double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor_) : SimulationEngine(horizon_, theFunction_, simulatedRiskFactor_), drift(drift_)
+OneStepBSEngine::OneStepBSEngine(double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor_) : SimulationEngine(theFunction_, simulatedRiskFactor_), drift(drift_)
 {
 }
 
-void OneStepBSEngine::DoOnePath(double vol, double normvariate)
+void OneStepBSEngine::DoOnePath(double horizon, double vol, double normvariate)
 {
-    double variance = vol * vol * horizon;
-    double rootVariance = sqrt(variance);
-    double itoCorrection = -0.5 * variance;
-    double factor = exp(drift * horizon + itoCorrection + rootVariance * normvariate);
-    theFunction->RiskFactorMultiply(factor, simulatedRiskFactor);
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        double adjustedHorizon = std::min(horizon, innerReferences[i].get().GetOrigTTM());  //If original TTM is lower than the VaR time horizion then only simulate up to that point
+        double variance = vol * vol * adjustedHorizon;
+        double rootVariance = sqrt(variance);
+        double itoCorrection = -0.5 * variance;
+        double factor = exp(drift * adjustedHorizon + itoCorrection + rootVariance * normvariate);
+        innerReferences[i].get().RiskFactorMultiply(factor, simulatedRiskFactor);
+    }
     return;
 }
 
-void OneStepBSEngine::UnDoOnePath(double vol, double normvariate)
+void OneStepBSEngine::UnDoOnePath(double horizon, double vol, double normvariate)
 {
-    double variance = vol * vol * horizon;
-    double rootVariance = sqrt(variance);
-    double itoCorrection = -0.5 * variance;
-    double factor = exp(drift * horizon + itoCorrection + rootVariance * normvariate);
-    theFunction->RiskFactorMultiply(1/factor, simulatedRiskFactor);
-    return;
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        double adjustedHorizon = std::min(horizon, innerReferences[i].get().GetOrigTTM());  //If original TTM is lower than the VaR time horizion then only simulate up to that point
+        double variance = vol * vol * adjustedHorizon;
+        double rootVariance = sqrt(variance);
+        double itoCorrection = -0.5 * variance;
+        double factor = exp(drift * adjustedHorizon + itoCorrection + rootVariance * normvariate);
+        innerReferences[i].get().RiskFactorMultiply(1/factor, simulatedRiskFactor);
+    }
 }
 
 SimulationEngine* OneStepBSEngine::clone() const

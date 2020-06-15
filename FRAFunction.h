@@ -13,7 +13,6 @@ public:
 	void UpdateTTM(double timeStep);
 	virtual valuationFunction* clone() const;
 private:
-	int nominal;
 	double r;
 	double contractRate;
 	double forwardRate;

@@ -1,21 +1,24 @@
 #include "InterestRateSwapFunction.h"
 #include <iostream>
 #include <cmath>
-#include <minmax.h>
 #include <iostream>
 
-InterestRateSwapFunction::InterestRateSwapFunction(std::string uniqueIdentifier_, int nominal_, double r_, double contractRate_, MJArray continousCompoundingForwardRates_, unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), frequency(frequency_), contractRate(contractRate_), continousCompoundingForwardRates(continousCompoundingForwardRates_)
+InterestRateSwapFunction::InterestRateSwapFunction(std::string uniqueIdentifier_, int nominal_, double r_, double contractRate_, MJArray continousCompoundingForwardRates_, unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_, nominal_), frequency(frequency_), contractRate(contractRate_), continousCompoundingForwardRates(continousCompoundingForwardRates_)
 {
 	discountingRates.resize(continousCompoundingForwardRates.size());
 	discountingRates = r_;
 }
 
-InterestRateSwapFunction::InterestRateSwapFunction(std::string uniqueIdentifier_, int nominal_, MJArray riskFreeRates_, double contractRate_, MJArray continousCompoundingForwardRates_, unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), discountingRates(riskFreeRates_), frequency(frequency_), contractRate(contractRate_), continousCompoundingForwardRates(continousCompoundingForwardRates_)
+InterestRateSwapFunction::InterestRateSwapFunction(std::string uniqueIdentifier_, int nominal_, MJArray riskFreeRates_, double contractRate_, MJArray continousCompoundingForwardRates_, unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_, nominal_), discountingRates(riskFreeRates_), frequency(frequency_), contractRate(contractRate_), continousCompoundingForwardRates(continousCompoundingForwardRates_)
 {
 }
 
 void InterestRateSwapFunction::ValueInstrument()
 {
+	if (discountingRates.size() != continousCompoundingForwardRates.size())
+		throw("Mismatched number of forward rates and spot rates provided in IRS");
+	if (floor(TTM * frequency) > discountingRates.size() && std::fmod(TTM, (1.0 / frequency)) != 0)
+		throw("Mismatch between TTM, coupoun frequency or number of spot/forward rates provided.");
 	MJArray forwardRates(continousCompoundingForwardRates);
 	for (unsigned long i = 0; i < forwardRates.size(); i++) //continious to frequency/year compounding
 	{

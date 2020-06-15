@@ -1,7 +1,7 @@
 #include "BSPutFunction.h"
 #include "Random.h"
 #include <cmath>
-BSPutFunction::BSPutFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), strike(strike_) //nominal(nominal_),
+BSPutFunction::BSPutFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_) //nominal(nominal_),
 {
 }
 

@@ -1,9 +1,9 @@
 #include "FRAFunction.h"
-#include <minmax.h>
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
-FRAFunction::FRAFunction(std::string uniqueIdentifier_, int nominal_, double r_, double contractRate_, double forwardRate_, double TimeToForwardtime_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), r(r_), forwardRate(forwardRate_), contractRate(contractRate_), TimeToForwardtime(TimeToForwardtime_)
+FRAFunction::FRAFunction(std::string uniqueIdentifier_, int nominal_, double r_, double contractRate_, double forwardRate_, double TimeToForwardtime_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_, nominal_), r(r_), forwardRate(forwardRate_), contractRate(contractRate_), TimeToForwardtime(TimeToForwardtime_)
 {
 }
 
@@ -60,8 +60,8 @@ std::vector<std::reference_wrapper<valuationFunction>> FRAFunction::GetInnerRefe
 
 void FRAFunction::UpdateTTM(double timeStep)
 {
-	TTM = max(0, TTM - timeStep);
-	TimeToForwardtime = max(0, TimeToForwardtime - timeStep);
+	TTM = std::max(0.0, TTM - timeStep);
+	TimeToForwardtime = std::max(0.0, TimeToForwardtime - timeStep);
 	return;
 }
 

@@ -1,5 +1,5 @@
-#include "PowerOption.h"
-#include <minmax.h>
+#include "PayOffPowerOption.h"
+#include <algorithm>
 #include <cmath>
 PayOffPowerOption::PayOffPowerOption(double Strike_, double Power_) : Strike(Strike_), Power(Power_)
 {
@@ -7,7 +7,7 @@ PayOffPowerOption::PayOffPowerOption(double Strike_, double Power_) : Strike(Str
 
 double PayOffPowerOption::operator()(double Spot) const
 {
-	return max(pow(Spot,Power),0);
+	return std::max(pow(Spot,Power),0.0);
 }
 
 PayOffPowerOption* PayOffPowerOption::clone() const

@@ -19,18 +19,18 @@ MCEngine::MCEngine(std::vector<Wrapper<SimulationEngine>> EngineVector_, std::ve
 		{
 			if (std::find(functionIdentifiers.begin(), functionIdentifiers.end(), thisUniqueIdentifierVector[j]) == functionIdentifiers.end()) //Checks if unique instrument has been added already.
 			{
-				functionIdentifiers.push_back(thisUniqueIdentifierVector[j]);
-				functionReferences.push_back(thisFunctionReferences[j]);		
+				functionIdentifiers.push_back(thisUniqueIdentifierVector[j]);	//Stores the unique names of the positions.
+				functionReferences.push_back(thisFunctionReferences[j]);		//Stores the actual reference to the position (valuationFunction) that will be accessed to value the portfolio.
 			}
 		}
 	}
 }
 
-void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, InstrumentStatisticsGatherer& InstrumentStatisticsGatherer, unsigned long numberOfPaths)
+void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, InstrumentStatisticsGatherer& InstrumentStatisticsGatherer, unsigned long numberOfPaths, double timeHorizon)
 {
 	std::chrono::steady_clock sc;
 	auto start = sc.now();
-	UpdateTTM();
+	UpdateTTM(timeHorizon);
 	double thisPortfolioValue;
 	MJArray theseInstrumentValues;
 	std::vector<MJArray> correlatedNormVariates = GetArraysOfCorrelatedGauassiansByBoxMuller(numberOfPaths, covMatrix);
@@ -38,7 +38,7 @@ void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, Instrumen
 	{
 		for (unsigned long j = 0; j < EngineVector.size(); ++j)
 		{
-			EngineVector[j]->DoOnePath(sqrt(covMatrix[j][j]), correlatedNormVariates[j][i]);
+			EngineVector[j]->DoOnePath(timeHorizon, sqrt(covMatrix[j][j]) , correlatedNormVariates[j][i]);
 		}		
 		ValuePortfolio();
 		thisPortfolioValue = GetPortfolioValue();
@@ -47,16 +47,16 @@ void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, Instrumen
 		InstrumentStatisticsGatherer.DumpOneSetOfResult(theseInstrumentValues);
 		for (unsigned long j = 0; j < EngineVector.size(); ++j)
 		{
-			EngineVector[j]->UnDoOnePath(sqrt(covMatrix[j][j]), correlatedNormVariates[j][i]); //resets the riskfactors for the positions. (This looks artificial but does not significantly increase computation time and allows the use of smart pointers)
+			EngineVector[j]->UnDoOnePath(timeHorizon, sqrt(covMatrix[j][j]), correlatedNormVariates[j][i]); //resets the riskfactors for the positions.
 		}
 
-		if (i == 100)
+		if (i == (numberOfPaths/10) -1)
 		{
 			auto time_span = static_cast<std::chrono::duration<double>>(sc.now() - start);
 			std::cout << "Estimated reamining computation time: " << (1 / 60.0) * time_span.count() * (((double)numberOfPaths-i) / i) << "minutes." << "\n";
 			std::cout << "% Completed:";
 		}
-		if ((i+1) % (numberOfPaths / 10) == 0)
+		if (((i+1) % (numberOfPaths / 10) == 0))
 			std::cout << 100 * ((i+1UL) / (double)numberOfPaths) << " "; //progress bar
 
 	}
@@ -93,13 +93,21 @@ const std::vector<std::string> MCEngine::GetInstrumentIdentifiers()
 	return functionIdentifiers;
 }
 
-void MCEngine::UpdateTTM()
+const std::vector<int> MCEngine::GetInstrumentNominals()
 {
-	double timestep;
-	for (unsigned long i = 0; i < EngineVector.size(); ++i)
+	std::vector<int> instrumentNominals(functionReferences.size());
+	for (unsigned long i = 0; i < functionReferences.size(); ++i)
 	{
-		timestep = EngineVector[i]->GetHorizon();
-		EngineVector[i]->GetFunction()->UpdateTTM(timestep);
+		instrumentNominals[i] = functionReferences[i].get().GetNominal();
+	}
+	return instrumentNominals;
+}
+
+void MCEngine::UpdateTTM(double timeHorizon)
+{
+	for (unsigned long i = 0; i < functionReferences.size(); ++i)
+	{
+		functionReferences[i].get().UpdateTTM(timeHorizon);
 	}
 	return;
 }

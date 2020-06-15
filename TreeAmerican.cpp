@@ -1,5 +1,5 @@
 #include "TreeAmerican.h"
-#include <minmax.h>
+#include <algorithm>
 
 TreeAmerican::TreeAmerican(double FinalTime_, const Wrapper<PayOff>& ThePayOff_) : TreeProduct(FinalTime_), ThePayOff(ThePayOff_)
 {
@@ -17,5 +17,5 @@ double TreeAmerican::FinalPayOff(double Spot) const
 
 double TreeAmerican::PreFinalValue(double Spot, double Time, double DiscountedFutureValue) const
 {
-	return max(ThePayOff->operator()(Spot), DiscountedFutureValue);
+	return std::max(ThePayOff->operator()(Spot), DiscountedFutureValue);
 }

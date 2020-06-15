@@ -155,6 +155,7 @@
     <ClCompile Include="BSCallFunction.cpp" />
     <ClCompile Include="BSPutFunction.cpp" />
     <ClCompile Include="Cholezky.cpp" />
+    <ClCompile Include="PayOffDoubleDigital.cpp" />
     <ClCompile Include="EquityForwardFunction.cpp" />
     <ClCompile Include="FixedForFixedFXSwapFunction.cpp" />
     <ClCompile Include="FRAFunction.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Main_MCValueAtRisk.cpp" />
     <ClCompile Include="OneStepMonteCarloValuation.cpp" />
     <ClCompile Include="PayOff.cpp" />
+    <ClCompile Include="PayOffPowerOption.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SimulationEngine.cpp" />
     <ClCompile Include="StatisticsCompiler.cpp" />
@@ -186,7 +188,7 @@
     <ClCompile Include="StandardExcerciseOption.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbsOrRelReturns.h" />
+    <ClInclude Include="include\AbsOrRelReturns.h" />
     <ClInclude Include="AmericanCallFunction.h" />
     <ClInclude Include="AmericanPutFunction.h" />
     <ClInclude Include="Arrays.h" />
@@ -196,7 +198,7 @@
     <ClInclude Include="BSPutFunction.h" />
     <ClInclude Include="Cholezky.h" />
     <ClInclude Include="ConvergenceTable.h" />
-    <ClInclude Include="DiscretizedPathMonteCarloValuation.h" />
+    <ClInclude Include="PayOffDoubleDigital.h" />
     <ClInclude Include="EquityForwardFunction.h" />
     <ClInclude Include="FRAFunction.h" />
     <ClInclude Include="FunctionCombiner.h" />
@@ -212,6 +214,7 @@
     <ClInclude Include="OneStepBrownianMotion.h" />
     <ClInclude Include="OneStepMonteCarloValuation.h" />
     <ClInclude Include="PayOff.h" />
+    <ClInclude Include="PayOffPowerOption.h" />
     <ClInclude Include="RainbowOptionTypes.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="OneStepBSEngine.h" />

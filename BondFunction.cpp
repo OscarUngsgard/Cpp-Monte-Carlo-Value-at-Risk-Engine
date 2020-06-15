@@ -2,12 +2,17 @@
 #include "Arrays.h"
 #include <cmath>
 #include <iostream>
-BondFunction::BondFunction(std::string uniqueIdentifier_, int nominal_, double yield_, double faceValue_, double couponRate_, int couponFreq_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_), yield(yield_), nominal(nominal_), faceValue(faceValue_), couponRate(couponRate_), couponFreq(couponFreq_)
+BondFunction::BondFunction(std::string uniqueIdentifier_, int nominal_, double yield_, double faceValue_, double couponRate_, int couponFreq_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_, nominal_), yield(yield_), faceValue(faceValue_), couponRate(couponRate_), couponFreq(couponFreq_)
 {
 }
 
 void BondFunction::ValueInstrument()
 {
+	if (TTM == 0)
+	{
+		f = nominal * faceValue; //clean price at maturity
+		return;
+	}
     MJArray couponTimes(ceil(TTM * couponFreq));
     double timeToNextCoupon = std::fmod(TTM, (1.0 / couponFreq)) == 0 ? (1.0 / couponFreq) : std::fmod(TTM, (1.0 / couponFreq));
     couponTimes[0] = timeToNextCoupon;
@@ -26,6 +31,7 @@ void BondFunction::ValueInstrument()
     dirtyprice += exp(-yield * couponTimes[couponTimes.size() - 1]) * faceValue * (1 + coupon);
     double cleanprice = dirtyprice - accruedInterest;
     f = nominal * cleanprice;
+	return;
 }
 
 

@@ -8,10 +8,10 @@
 class OneStepBrownianMotionEngine : public SimulationEngine
 {
 public:
-	OneStepBrownianMotionEngine(double horizon_, double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor_);
+	OneStepBrownianMotionEngine(double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor_);
 	virtual SimulationEngine* clone() const;
-	void DoOnePath(double vol, double normvariate);
-	void UnDoOnePath(double vol, double normvariate);
+	void DoOnePath(double horizon, double vol, double normvariate);
+	void UnDoOnePath(double horizon, double vol, double normvariate);
 private:
 	double drift;
 };

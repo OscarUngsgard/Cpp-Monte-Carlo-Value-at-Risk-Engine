@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-FixedForFixedFXSwapFunction::FixedForFixedFXSwapFunction(std::string uniqueIdentifier_, int notional_domestic_, int notional_foreign_, double FXRate_, double r_domestic_, double r_foreign_, double contractRate_domestic_, double contractRate_foreign_ , unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_), notional_domestic(notional_domestic_), notional_foreign(notional_foreign_), FXRate(FXRate_), frequency(frequency_), contractRate_domestic(contractRate_domestic_), contractRate_foreign(contractRate_foreign_)
+FixedForFixedFXSwapFunction::FixedForFixedFXSwapFunction(std::string uniqueIdentifier_, int notional_domestic_, int notional_foreign_, double FXRate_, double r_domestic_, double r_foreign_, double contractRate_domestic_, double contractRate_foreign_ , unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_, 1), notional_domestic(notional_domestic_), notional_foreign(notional_foreign_), FXRate(FXRate_), frequency(frequency_), contractRate_domestic(contractRate_domestic_), contractRate_foreign(contractRate_foreign_)
 {
 	unsigned long swapCount(ceil(TTM * frequency));
 	discountingRates_domestic.resize(swapCount);
@@ -12,7 +12,7 @@ FixedForFixedFXSwapFunction::FixedForFixedFXSwapFunction(std::string uniqueIdent
 	discountingRates_foreign = r_foreign_;
 }
 
-FixedForFixedFXSwapFunction::FixedForFixedFXSwapFunction(std::string uniqueIdentifier_, int notional_domestic_, int notional_foreign_, double FXRate_, MJArray r_domestic_rates_, MJArray r_foreign_rates_, double contractRate_domestic_, double contractRate_foreign_, unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_), notional_domestic(notional_domestic_), notional_foreign(notional_foreign_), FXRate(FXRate_), discountingRates_domestic(r_domestic_rates_), discountingRates_foreign(r_foreign_rates_), frequency(frequency_), contractRate_domestic(contractRate_domestic_), contractRate_foreign(contractRate_foreign_)
+FixedForFixedFXSwapFunction::FixedForFixedFXSwapFunction(std::string uniqueIdentifier_, int notional_domestic_, int notional_foreign_, double FXRate_, MJArray r_domestic_rates_, MJArray r_foreign_rates_, double contractRate_domestic_, double contractRate_foreign_, unsigned long frequency_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_,1), notional_domestic(notional_domestic_), notional_foreign(notional_foreign_), FXRate(FXRate_), discountingRates_domestic(r_domestic_rates_), discountingRates_foreign(r_foreign_rates_), frequency(frequency_), contractRate_domestic(contractRate_domestic_), contractRate_foreign(contractRate_foreign_)
 {
 	if (r_domestic_rates_.size() != r_foreign_rates_.size())
 		throw("mismatched size of domestic and foreign rates");

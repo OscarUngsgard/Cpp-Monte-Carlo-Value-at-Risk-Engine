@@ -1,5 +1,6 @@
 #ifndef MJARRAYS_H
 #define MJARRAYS_H
+//#define USE_VAL_ARRAY
 #ifdef USE_VAL_ARRAY
 #include <valarray>
 typedef std::valarray<double> MJArray;

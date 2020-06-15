@@ -2,13 +2,19 @@
 #include "TreeAmerican.h"
 #include "BinomialTree.h"
 
-AmericanPutFunction::AmericanPutFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_, unsigned long binomTreeSteps_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), strike(strike_), binomTreeSteps(binomTreeSteps_)
+AmericanPutFunction::AmericanPutFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_, unsigned long binomTreeSteps_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_), binomTreeSteps(binomTreeSteps_)
 {
 }
 
 
 void AmericanPutFunction::ValueInstrument()
 {
+	if (TTM == 0)
+	{
+		PayOffPut thePayOff(strike);
+		f = nominal * thePayOff(S);
+		return;
+	}
 	SimpleBinomialTree theTree(S, r, d, impvol, binomTreeSteps, TTM);
 	PayOffPut thePayOff(strike);
 	TreeAmerican americanOption(TTM, thePayOff);

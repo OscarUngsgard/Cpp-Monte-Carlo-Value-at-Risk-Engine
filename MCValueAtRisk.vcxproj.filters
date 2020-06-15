@@ -82,9 +82,6 @@
     <Filter Include="Header Files\GeneralClassesAndFunctions\enums">
       <UniqueIdentifier>{fc48965d-5c1e-4cbc-998f-b98e3195f8ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions\PathDependant">
-      <UniqueIdentifier>{814f9061-3b90-4c3f-b9f2-2bdfefd1bc2d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MCEngine.cpp">
@@ -197,6 +194,12 @@
     </ClCompile>
     <ClCompile Include="MonteCarloBasketOptionFunction.cpp">
       <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="PayOffDoubleDigital.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
+    </ClCompile>
+    <ClCompile Include="PayOffPowerOption.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,17 +317,20 @@
     <ClInclude Include="RiskFactors.h">
       <Filter>Header Files\GeneralClassesAndFunctions\enums</Filter>
     </ClInclude>
-    <ClInclude Include="AbsOrRelReturns.h">
-      <Filter>Header Files\GeneralClassesAndFunctions\enums</Filter>
-    </ClInclude>
     <ClInclude Include="RainbowOptionTypes.h">
       <Filter>Header Files\GeneralClassesAndFunctions\enums</Filter>
     </ClInclude>
     <ClInclude Include="MonteCarloBasketOptionFunction.h">
       <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClInclude>
-    <ClInclude Include="DiscretizedPathMonteCarloValuation.h">
-      <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions\PathDependant</Filter>
+    <ClInclude Include="PayOffDoubleDigital.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs</Filter>
+    </ClInclude>
+    <ClInclude Include="PayOffPowerOption.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AbsOrRelReturns.h">
+      <Filter>Header Files\GeneralClassesAndFunctions\enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,9 +8,9 @@
 class OneStepBSEngine : public SimulationEngine
 {
 public:
-	OneStepBSEngine(double horizon_, double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor);
-	void DoOnePath(double vol, double normvariate);
-	void UnDoOnePath(double vol, double normvariate);
+	OneStepBSEngine(double drift_, std::shared_ptr<valuationFunction>& theFunction_, RiskFactor simulatedRiskFactor);
+	void DoOnePath(double horizon, double vol, double normvariate);
+	void UnDoOnePath(double horizon, double vol, double normvariate);
 	virtual SimulationEngine* clone() const;
 private:
 	double drift;

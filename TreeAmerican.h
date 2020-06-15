@@ -1,4 +1,4 @@
-#ifndef TREE_AMERICAN_H
+#pragma once
 #define TREE_AMERICAN_H
 #include "TreeProducts.h"
 #include "Wrapper.h"
@@ -14,4 +14,3 @@ public:
 private:
 	Wrapper<PayOff> ThePayOff;
 };
-#endif

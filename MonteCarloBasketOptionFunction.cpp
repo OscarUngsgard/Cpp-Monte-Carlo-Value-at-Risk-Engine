@@ -1,16 +1,14 @@
-#include "MonteCarloRainbowOptionFunction.h"
 #include "PayOff.h"
 #include "StandardExcerciseOption.h"
 #include "OneStepMonteCarloValuation.h"
 #include "MCStatistics.h"
 #include "Random.h"
 #include <cmath>
-#include <minmax.h>
 #include <algorithm>
 #include <iostream>
 #include "MonteCarloBasketOptionFunction.h"
 
-MonteCarloBasketOptionFunction::MonteCarloBasketOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<double> weights_vect_, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, Wrapper<PayOff> ThePayOff_, unsigned long numberOfPaths_) : r(r_), S_vect(S0_vect), weights_vect(weights_vect_), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_), nominal(nominal_), ThePayOff(std::move(ThePayOff_)), numberOfPaths(numberOfPaths_), impvol_vect(impvol_vect_)
+MonteCarloBasketOptionFunction::MonteCarloBasketOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<double> weights_vect_, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, Wrapper<PayOff> ThePayOff_, unsigned long numberOfPaths_) : r(r_), S_vect(S0_vect), weights_vect(weights_vect_), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), ThePayOff(std::move(ThePayOff_)), numberOfPaths(numberOfPaths_), impvol_vect(impvol_vect_)
 {
 	if (covMatrix.size() != S_vect.size())
 		throw("Missmatched Covariance matrix and initial spot values array sizes in MonteCarloBasketOptionFunction");

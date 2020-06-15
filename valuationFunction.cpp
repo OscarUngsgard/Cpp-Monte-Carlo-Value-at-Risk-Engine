@@ -1,7 +1,8 @@
 #include "valuationFunction.h"
-#include <minmax.h>
+#include <iostream>
+#include <algorithm>
 
-valuationFunction::valuationFunction(std::string uniqueIdentifier_, double TTM_)  : f(0), TTM(TTM_), uniqueIdentifier(uniqueIdentifier_)
+valuationFunction::valuationFunction(std::string uniqueIdentifier_, double TTM_, int nominal_)  : f(0), TTM(TTM_), origTTM(TTM_), uniqueIdentifier(uniqueIdentifier_), nominal(nominal_)
 {
 }
 
@@ -19,6 +20,17 @@ std::vector<std::string> valuationFunction::GetuniqueIdentifier() const
 
 void valuationFunction::UpdateTTM(double timeStep)
 {
-	TTM = max(0, TTM - timeStep);
+	TTM = std::max(0.0, TTM - timeStep);
 	return;
 }
+
+const int valuationFunction::GetNominal() const
+{
+	return nominal;
+}
+
+const double valuationFunction::GetOrigTTM() const
+{
+	return origTTM;
+}
+
