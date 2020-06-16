@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MJArray" Collapsed="true">
-    <Position X="16.5" Y="6" Width="1.5" />
+    <Position X="14.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAFAAMEAAQgAAAAoAAAQACAAEAAAAAAQAgABAAAAA=</HashCode>
       <FileName>include\general\Other\Arrays.h</FileName>
@@ -95,7 +95,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Wrapper&lt;T&gt;" Collapsed="true">
-    <Position X="14.75" Y="6" Width="1.5" />
+    <Position X="16.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAIAAAAAAgAgAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>include\general\Other\Wrapper.h</FileName>
@@ -200,49 +200,49 @@
     </TypeIdentifier>
   </Class>
   <Class Name="FRAFunction" Collapsed="true">
-    <Position X="5.5" Y="9.75" Width="1.5" />
+    <Position X="7" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEACAAAAAAEAAAAAAAAAAAAAEQAAAAAAAAABEBABAIA=</HashCode>
       <FileName>include\ValuationFunctions\ClosedFormFunctions\InterestRateDerivativeFunctions\FRAFunction.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FXForwardFunction" Collapsed="true">
-    <Position X="7" Y="9.75" Width="1.5" />
+    <Position X="4" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAEAAAAAAAEgCAEBAAQAA=</HashCode>
       <FileName>include\ValuationFunctions\ClosedFormFunctions\FXDerivativeFunctions\FXForwardFunction.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="InstrumentStatisticsGatherer" Collapsed="true">
-    <Position X="14.75" Y="7" Width="1.5" />
+  <Class Name="InstrumentStatisticsGatherer">
+    <Position X="12.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAiAAAAAAAAAAAAAAAAAAQAEAACAAAAAACAAEAAAAAA=</HashCode>
       <FileName>include\ValuationFunctions\ClosedFormFunctions\InstrumentStatisticsGatherer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InterestRateSwapFunction" Collapsed="true">
-    <Position X="4" Y="9.75" Width="1.5" />
+    <Position X="5.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAIABAAEAAAAACAAAAAEBABAAQ=</HashCode>
       <FileName>include\ValuationFunctions\ClosedFormFunctions\InterestRateDerivativeFunctions\InterestRateSwapFunction.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MonteCarloBasketOptionFunction" Collapsed="true">
-    <Position X="7" Y="8.25" Width="1.5" />
+    <Position X="7" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAEAAAAAAAAAAAMAEAACAAAiAAIBEBAAAQA=</HashCode>
       <FileName>include\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloBasketOptionFunction.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MonteCarloRainbowOptionFunction" Collapsed="true">
-    <Position X="5.5" Y="9" Width="1.5" />
+    <Position X="5.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAEAAAAAAAAAAAIAEAgCAAAgAAIBEBAAgQA=</HashCode>
       <FileName>include\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloRainbowOptionFunction.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MonteCarloVanillaOptionFunction" Collapsed="true">
-    <Position X="4" Y="9" Width="1.5" />
+    <Position X="4" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAEAAAAAAAAAAAEAUAAAAAAEAAIBEBCAAAA=</HashCode>
       <FileName>include\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloVanillaOptionFunction.h</FileName>
@@ -277,7 +277,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="StandardExcerciseOption" Collapsed="true">
-    <Position X="16.5" Y="7" Width="1.5" />
+    <Position X="5.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAAAAQAAFAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>include\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\StandardExcerciseOption.h</FileName>
@@ -302,6 +302,13 @@
     <TypeIdentifier>
       <HashCode>QAAAAEAAAAAAEAAABAAAAAADAAQACAAgABAAEAQAAAE=</HashCode>
       <FileName>include\general\Numerical\TimeSeriesHandler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PayOff" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAQAAAAEEAAAAA=</HashCode>
+      <FileName>include\ValuationFunctions\PayOffs\BaseClass\PayOff.h</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="AbsOrRel" Collapsed="true">

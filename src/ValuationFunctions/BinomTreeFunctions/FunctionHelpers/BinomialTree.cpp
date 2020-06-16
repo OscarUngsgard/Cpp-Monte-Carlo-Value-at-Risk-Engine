@@ -5,8 +5,7 @@ SimpleBinomialTree::SimpleBinomialTree(double Spot_, const double r_, const doub
 	TreeBuilt = false;
 }
 
-double SimpleBinomialTree::GetThePrice(const TreeProduct&
-	TheProduct)
+double SimpleBinomialTree::GetThePrice(const TreeProduct& TheProduct)
 {
 	if (!TreeBuilt)
 		BuildTree();

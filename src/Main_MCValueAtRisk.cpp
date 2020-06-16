@@ -37,7 +37,8 @@
 #include "FXForwardFunction.h"
 #include "BSCallFunction.h"
 #include "BSPutFunction.h"
-#include "AmericanCallFunction.h" //Note: Risk for American options are computed with a full revaluation using a binomial tree and hence will increase the computation time significantly if included in the portfolio
+#include "AmericanGeneralPayOffFunction.h" // Note: Risk for American options are computed with a full revaluation using a binomial treeand hence will increase the computation time significantly if included in the portfolio
+#include "AmericanCallFunction.h" 
 #include "AmericanPutFunction.h"
 #include "StockPriceFunction.h"
 #include "BondFunction.h"
@@ -111,7 +112,8 @@ int main()
     nominal = 140; S0 = spotRates[1];
     std::shared_ptr<valuationFunction> storytelStock = std::make_shared<StockPriceFunction>("Storytel", nominal, S0);
     nominal = -200; double storytelDivYield = 0.03; Strike = 0.9 * spotRates[1]; double storytelImpvol = 0.5; TTM = 3.0 / 12.0;
-    std::shared_ptr<valuationFunction> StorytelAmericanCall = std::make_shared<AmericanCallFunction>("Storytel 3 month In-the-money American call", nominal, S0, r, storytelDivYield, storytelImpvol, TTM, Strike, binomialTreeSteps);
+    PayOffCall StorytelATMCallPayOff(0.9 * spotRates[1]);
+    std::shared_ptr<valuationFunction> StorytelAmericanCall = std::make_shared<AmericanGeneralPayOffFunction>("Storytel 3 month In-the-money American call", nominal, S0, r, storytelDivYield, storytelImpvol, TTM, StorytelATMCallPayOff, binomialTreeSteps);
     //RiskFactor 2 and 3 Derivatives - Some sexy exotics
     nominal = 100;
     vector<vector<double>> rainBowCovMatrix = myTimeSeriesHandlder.GetPartsOfCovarianceMatrix(vector<unsigned long>{0, 1});

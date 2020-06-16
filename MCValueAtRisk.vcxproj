@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticsAbsVaR.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticsMean.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="include\StatisticsGatherers\StatisticsRelES.h" />
     <ClInclude Include="include\StatisticsGatherers\StatisticsRelVaR.h" />
     <ClInclude Include="include\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanCallFunction.h" />
+    <ClInclude Include="include\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.h" />
     <ClInclude Include="include\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanPutFunction.h" />
     <ClInclude Include="include\general\Other\Arrays.h" />
     <ClInclude Include="include\ValuationFunctions\BinomTreeFunctions\FunctionHelpers\BinomialTree.h" />
