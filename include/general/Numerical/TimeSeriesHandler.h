@@ -19,5 +19,4 @@ private:
 	std::vector<AbsOrRel> absOrRelReturnsVector;
 	std::vector<std::vector<double>> returns;
 	std::vector<std::vector<double>> covMatrix;
-	
 };

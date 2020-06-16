@@ -1,22 +1,23 @@
-#include "AmericanPutFunction.h"
+#include "AmericanCallFunction.h"
+#include "PayOffCall.h"
 #include "TreeAmerican.h"
 #include "BinomialTree.h"
-
-AmericanPutFunction::AmericanPutFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_, unsigned long binomTreeSteps_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_), binomTreeSteps(binomTreeSteps_)
+#include <iostream>
+//Makes use of the binomial tree code provided in C++ Design Patterns, augmented to use risk neutral probabilities of up and down movements to make the implied discounted price a martingale
+AmericanCallFunction::AmericanCallFunction(std::string uniqueIdentifier_, int nominal_, double S_, double r_, double d_, double impvol_, double TTM_, double strike_, unsigned long binomTreeSteps_) : r(r_), S(S_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_), binomTreeSteps(binomTreeSteps_)
 {
 }
 
-
-void AmericanPutFunction::ValueInstrument()
+void AmericanCallFunction::ValueInstrument()
 {
-	if (TTM == 0)
+	if (TTM == 0) 
 	{
-		PayOffPut thePayOff(strike);
+		PayOffCall thePayOff(strike);
 		f = nominal * thePayOff(S);
 		return;
 	}
 	SimpleBinomialTree theTree(S, r, d, impvol, binomTreeSteps, TTM);
-	PayOffPut thePayOff(strike);
+	PayOffCall thePayOff(strike);
 	TreeAmerican americanOption(TTM, thePayOff);
 	double price1 = theTree.GetThePrice(americanOption);
 	binomTreeSteps++; //Calculate again with another step and take average of results
@@ -27,8 +28,7 @@ void AmericanPutFunction::ValueInstrument()
 	return;
 }
 
-
-void AmericanPutFunction::RiskFactorAdd(double increment, RiskFactor simulatedRiskFactor)
+void AmericanCallFunction::RiskFactorAdd(double increment, RiskFactor simulatedRiskFactor)
 {
 	switch (simulatedRiskFactor)
 	{
@@ -51,13 +51,13 @@ void AmericanPutFunction::RiskFactorAdd(double increment, RiskFactor simulatedRi
 		S += increment;
 		break;
 	default:
-		throw std::runtime_error("Unsupported or unknown risk factor found in " + GetuniqueIdentifier()[0]);
+		throw("Unsupported or unknown risk factor found in " + GetuniqueIdentifier()[0]);
 		break;
 	}
 	return;
 }
 
-void AmericanPutFunction::RiskFactorMultiply(double factor, RiskFactor simulatedRiskFactor)
+void AmericanCallFunction::RiskFactorMultiply(double factor, RiskFactor simulatedRiskFactor)
 {
 	switch (simulatedRiskFactor)
 	{
@@ -86,16 +86,16 @@ void AmericanPutFunction::RiskFactorMultiply(double factor, RiskFactor simulated
 	return;
 }
 
-std::vector<std::reference_wrapper<valuationFunction>> AmericanPutFunction::GetInnerReference()
+std::vector<std::reference_wrapper<valuationFunction>> AmericanCallFunction::GetInnerReference()
 {
 	std::vector<std::reference_wrapper<valuationFunction>> innerVector;
+	innerVector.reserve(1);
 	innerVector.push_back(std::ref(*this));
 	return innerVector;
 }
 
 
-
-valuationFunction* AmericanPutFunction::clone() const
+valuationFunction* AmericanCallFunction::clone() const
 {
-	return new AmericanPutFunction(*this);
+	return new AmericanCallFunction(*this);
 }

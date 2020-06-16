@@ -16,6 +16,11 @@
 #include "RainbowOptionTypes.h"
 //Statistics calculations e.g. VaR from quantile
 #include "MCStatistics.h"
+#include "StatisticsMean.h"
+#include "StatisticsRelVaR.h"
+#include "StatisticsAbsVaR.h"
+#include "StatisticsRelES.h"
+#include "StatisticsQuantiles.h"
 #include "ConvergenceTable.h"
 #include "StatisticsCompiler.h"
 #include "InstrumentStatisticsGatherer.h"
@@ -44,7 +49,8 @@
 #include "MonteCarloRainbowOptionFunction.h" //Note: Monte Carlo valuations increase computation time significantly but are the only sensible alternative for rainbow options
 #include "MonteCarloBasketOptionFunction.h"
 //Payoffs
-#include "PayOff.h"
+#include "PayOffCall.h"
+#include "PayOffPut.h"
 
 using namespace std;
 
@@ -92,7 +98,7 @@ int main()
     const unsigned long NumberOfPaths = pow(10, 4);
     const unsigned long MCValuationNumberOfPaths = 5*pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
     double timeHorizon = 20.0 / 252.0;
-    double S0;    double TTM;    double Strike;    double d;    double impvol;    double contractRate;    double facevalue;
+    double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
     double zeroDrift = 0;    double r = 0.0035;
 

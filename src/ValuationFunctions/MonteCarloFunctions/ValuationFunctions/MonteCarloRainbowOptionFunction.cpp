@@ -2,7 +2,7 @@
 #include "PayOff.h"
 #include "StandardExcerciseOption.h"
 #include "OneStepMonteCarloValuation.h"
-#include "MCStatistics.h"
+#include "StatisticAllPaths.h"
 #include "Random.h"
 #include <algorithm>
 #include <iostream>
