@@ -112,8 +112,8 @@ int main()
     nominal = 140; S0 = spotRates[1];
     std::shared_ptr<valuationFunction> storytelStock = std::make_shared<StockPriceFunction>("Storytel", nominal, S0);
     nominal = -200; double storytelDivYield = 0.03; Strike = 0.9 * spotRates[1]; double storytelImpvol = 0.5; TTM = 3.0 / 12.0;
-    PayOffCall StorytelATMCallPayOff(0.9 * spotRates[1]);
-    std::shared_ptr<valuationFunction> StorytelAmericanCall = std::make_shared<AmericanGeneralPayOffFunction>("Storytel 3 month In-the-money American call", nominal, S0, r, storytelDivYield, storytelImpvol, TTM, StorytelATMCallPayOff, binomialTreeSteps);
+    PayOffCall StorytelITMCallPayOff(0.9 * spotRates[1]);
+    std::shared_ptr<valuationFunction> StorytelAmericanCall = std::make_shared<AmericanGeneralPayOffFunction>("Storytel 3 month In-the-money American call", nominal, S0, r, storytelDivYield, storytelImpvol, TTM, StorytelITMCallPayOff, binomialTreeSteps);
     //RiskFactor 2 and 3 Derivatives - Some sexy exotics
     nominal = 100;
     vector<vector<double>> rainBowCovMatrix = myTimeSeriesHandlder.GetPartsOfCovarianceMatrix(vector<unsigned long>{0, 1});
