@@ -1,7 +1,7 @@
 #pragma once
 #define FIXED_FOR_FIXED_FX_SWAP_FUNCTION
-#include "..\include\valuationFunction.h"
-#include "..\include\Arrays.h"
+#include "valuationFunction.h"
+#include "Arrays.h"
 class FixedForFixedFXSwapFunction : public valuationFunction
 {
 public:

@@ -1,6 +1,6 @@
 #pragma once
 #define FX_FORWARD_FUNCTION
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 //If equity forward then d is div yield. If FX forward then d is simply the foreign risk free rate of return
 class FXForwardFunction : public valuationFunction
 {

@@ -1,5 +1,5 @@
-#include "..\include\BondFunction.h"
-#include "..\include\Arrays.h"
+#include "BondFunction.h"
+#include "Arrays.h"
 #include <cmath>
 #include <iostream>
 BondFunction::BondFunction(std::string uniqueIdentifier_, int nominal_, double yield_, double faceValue_, double couponRate_, int couponFreq_, double TTM_) : valuationFunction(uniqueIdentifier_, TTM_, nominal_), yield(yield_), faceValue(faceValue_), couponRate(couponRate_), couponFreq(couponFreq_)

@@ -1,4 +1,4 @@
-#include "..\include\StatisticsMean.h"
+#include "StatisticsMean.h"
 StatisticsMean::StatisticsMean() : RunningSum(0.0), PathsDone(0)
 {
 }

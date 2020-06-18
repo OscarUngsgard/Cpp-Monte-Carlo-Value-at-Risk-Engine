@@ -3,7 +3,7 @@ code to implement the basic distribution functions necessary
 in mathematical finance via rational approximations
 */
 #include <cmath>
-#include "..\include\Normals.h"
+#include "Normals.h"
 // the basic math functions should be in namespace std but
 // aren’t in VCPP6
 #if !defined(_MSC_VER)

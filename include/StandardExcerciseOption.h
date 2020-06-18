@@ -1,7 +1,7 @@
 #pragma once
 #define STANDARD_EXCERCISE_OPTION_H
-#include "..\include\PayOff.h"
-#include "..\include\Wrapper.h"
+#include "PayOff.h"
+#include "Wrapper.h"
 class StandardExcerciseOption
 {
 public:

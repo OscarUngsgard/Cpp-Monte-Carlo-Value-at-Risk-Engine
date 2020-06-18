@@ -1,4 +1,4 @@
-#include "..\include\PayOffForward.h"
+#include "PayOffForward.h"
 
 PayOffForward::PayOffForward(double Strike_) : Strike(Strike_)
 {

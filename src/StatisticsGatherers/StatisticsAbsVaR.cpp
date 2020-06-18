@@ -1,4 +1,4 @@
-#include "..\include\StatisticsAbsVaR.h"
+#include "StatisticsAbsVaR.h"
 #include <algorithm>
 StatisticsAbsVaR::StatisticsAbsVaR(double p_, unsigned long minimumNumberOfPaths) : p(p_), PathsDone(0)
 {

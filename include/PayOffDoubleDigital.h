@@ -1,6 +1,6 @@
 #pragma once
 #define PAYOFF_DOUBLEDIGITAL_H
-#include "..\include\PayOff.h"
+#include "PayOff.h"
 
 class PayOffDoubleDigital : public PayOff
 {

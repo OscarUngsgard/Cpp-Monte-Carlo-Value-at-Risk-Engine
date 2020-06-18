@@ -1,8 +1,8 @@
 #pragma once
 #define FUNCTION_COMBINER_H
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 #include <memory>
-#include "..\include\Wrapper.h"
+#include "Wrapper.h"
 #include <vector>
 class FunctionCombiner : public valuationFunction
 {

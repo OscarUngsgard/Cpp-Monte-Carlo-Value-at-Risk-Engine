@@ -1,7 +1,7 @@
-#include "..\include\BSCallFunction.h"
-#include "..\include\Random.h"
+#include "BSCallFunction.h"
+#include "Random.h"
 #include <cmath>
-#include "..\include\Normals.h"
+#include "Normals.h"
 #include <iostream>
 BSCallFunction::BSCallFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_)
 {

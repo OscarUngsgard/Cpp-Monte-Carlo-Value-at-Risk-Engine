@@ -1,9 +1,9 @@
 #pragma once
 #define SIMULATION_ENGINE_H
 #include <memory>
-#include "..\include\valuationFunction.h"
-#include "..\include\Wrapper.h"
-#include "..\include\RiskFactors.h"
+#include "valuationFunction.h"
+#include "Wrapper.h"
+#include "RiskFactors.h"
 class SimulationEngine
 {
 public:

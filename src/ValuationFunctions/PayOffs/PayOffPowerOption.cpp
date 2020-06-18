@@ -1,4 +1,4 @@
-#include "..\include\PayOffPowerOption.h"
+#include "PayOffPowerOption.h"
 #include <algorithm>
 #include <cmath>
 PayOffPowerOption::PayOffPowerOption(double Strike_, double Power_) : Strike(Strike_), Power(Power_)

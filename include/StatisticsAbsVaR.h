@@ -1,9 +1,9 @@
 #pragma once
 #define MC_STATISTICS_ABS_VAR_H
 #include <vector>
-#include "..\include\Arrays.h"
+#include "Arrays.h"
 #include <numeric>  
-#include "..\include\MCStatistics.h"
+#include "MCStatistics.h"
 class StatisticsAbsVaR : public StatisticsMC
 {
 public:

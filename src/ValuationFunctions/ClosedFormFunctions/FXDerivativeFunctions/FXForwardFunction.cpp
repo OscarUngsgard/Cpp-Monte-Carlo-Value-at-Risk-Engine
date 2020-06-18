@@ -1,4 +1,4 @@
-#include "..\include\FXForwardFunction.h"
+#include "FXForwardFunction.h"
 #include <cmath>
 
 FXForwardFunction::FXForwardFunction(std::string uniqueIdentifier_, int nominal_, double X_, double r_domestic_, double r_foreign_, double TTM_, double strike_) : r_domestic(r_domestic_), X(X_), r_foreign(r_foreign_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_)

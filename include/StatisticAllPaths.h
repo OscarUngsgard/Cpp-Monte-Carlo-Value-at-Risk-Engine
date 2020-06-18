@@ -1,9 +1,9 @@
 #pragma once
 #define MC_STATISTICS_ALL_PATHS_H
 #include <vector>
-#include "..\include\Arrays.h"
+#include "Arrays.h"
 #include <numeric>  
-#include "..\include\MCStatistics.h"
+#include "MCStatistics.h"
 class StatisticAllPaths : public StatisticsMC
 {
 public:

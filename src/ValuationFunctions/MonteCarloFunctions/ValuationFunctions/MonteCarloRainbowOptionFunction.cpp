@@ -1,9 +1,9 @@
-#include "..\include\MonteCarloRainbowOptionFunction.h"
-#include "..\include\PayOff.h"
-#include "..\include\StandardExcerciseOption.h"
-#include "..\include\OneStepMonteCarloValuation.h"
-#include "..\include\StatisticAllPaths.h"
-#include "..\include\Random.h"
+#include "MonteCarloRainbowOptionFunction.h"
+#include "PayOff.h"
+#include "StandardExcerciseOption.h"
+#include "OneStepMonteCarloValuation.h"
+#include "StatisticAllPaths.h"
+#include "Random.h"
 #include <algorithm>
 #include <iostream>
 

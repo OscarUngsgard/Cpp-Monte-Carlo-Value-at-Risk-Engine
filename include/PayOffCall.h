@@ -1,5 +1,5 @@
 #pragma once
-#include "..\include\PayOff.h"
+#include "PayOff.h"
 #define PAYOFF_CALL_H
 
 class PayOffCall : public PayOff

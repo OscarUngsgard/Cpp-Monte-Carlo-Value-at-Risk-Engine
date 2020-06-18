@@ -1,6 +1,6 @@
 #pragma once
 #define RANDOM1_H
-#include "..\include\Arrays.h"
+#include "Arrays.h"
 #include <vector>
 double GetOneGaussianBySummation();
 double GetOneGaussianByBoxMuller();

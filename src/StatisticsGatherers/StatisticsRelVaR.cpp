@@ -1,4 +1,4 @@
-#include "..\include\StatisticsRelVaR.h"
+#include "StatisticsRelVaR.h"
 #include <algorithm>
 
 StatisticsRelVaR::StatisticsRelVaR(double p_, unsigned long minimumNumberOfPaths) : p(p_), PathsDone(0)

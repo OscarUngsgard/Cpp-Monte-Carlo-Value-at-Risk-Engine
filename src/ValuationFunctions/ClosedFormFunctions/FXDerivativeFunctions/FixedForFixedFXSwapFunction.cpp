@@ -1,4 +1,4 @@
-#include "..\include\FixedForFixedFXSwapFunction.h"
+#include "FixedForFixedFXSwapFunction.h"
 #include <cmath>
 #include <iostream>
 

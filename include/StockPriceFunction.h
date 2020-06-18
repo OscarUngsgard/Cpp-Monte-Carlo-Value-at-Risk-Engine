@@ -1,6 +1,6 @@
 #pragma once
 #define STOCK_PRICE_FUNCTION_H
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 class StockPriceFunction : public valuationFunction
 {
 public:

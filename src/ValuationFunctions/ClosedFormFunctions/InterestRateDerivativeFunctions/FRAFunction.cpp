@@ -1,4 +1,4 @@
-#include "..\include\FRAFunction.h"
+#include "FRAFunction.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>

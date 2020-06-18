@@ -1,9 +1,9 @@
-#include "..\include\MonteCarloVanillaOptionFunction.h"
-#include "..\include\PayOff.h"
-#include "..\include\StandardExcerciseOption.h"
-#include "..\include\OneStepMonteCarloValuation.h"
-#include "..\include\StatisticsMean.h"
-#include "..\include\Random.h"
+#include "MonteCarloVanillaOptionFunction.h"
+#include "PayOff.h"
+#include "StandardExcerciseOption.h"
+#include "OneStepMonteCarloValuation.h"
+#include "StatisticsMean.h"
+#include "Random.h"
 
 MonteCarloVanillaOptionFunction::MonteCarloVanillaOptionFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, const Wrapper<PayOff>& ThePayOff_, unsigned long numberOfPaths_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), ThePayOff(ThePayOff_), numberOfPaths(numberOfPaths_)
 {

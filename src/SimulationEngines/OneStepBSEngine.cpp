@@ -1,4 +1,4 @@
-#include "..\include\OneStepBSEngine.h"
+#include "OneStepBSEngine.h"
 #include <iostream>
 #include <algorithm>
 

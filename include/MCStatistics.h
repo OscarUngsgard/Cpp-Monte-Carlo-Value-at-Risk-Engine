@@ -1,7 +1,7 @@
 #pragma once
 #define STATISTICS_H
 #include <vector>
-#include "..\include\Arrays.h"
+#include "Arrays.h"
 #include <numeric>  
 class StatisticsMC
 {

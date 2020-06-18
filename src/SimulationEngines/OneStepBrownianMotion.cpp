@@ -1,4 +1,4 @@
-#include "..\include\OneStepBrownianMotion.h"
+#include "OneStepBrownianMotion.h"
 #include <iostream>
 #include <algorithm>
 

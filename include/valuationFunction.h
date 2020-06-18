@@ -1,6 +1,6 @@
 #pragma once
 #define VALUATION_FUNCTION_H
-#include "..\include\RiskFactors.h"
+#include "RiskFactors.h"
 #include <vector>
 #include <memory>
 #include <string>

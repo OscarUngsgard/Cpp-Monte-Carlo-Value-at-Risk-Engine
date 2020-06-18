@@ -4,54 +4,54 @@
 #include <chrono>
 #include <memory>
 //General classes and functions
-#include "..\include\ReadCSV.h"
-#include "..\include\Wrapper.h"
+#include "ReadCSV.h"
+#include "Wrapper.h"
 //Numerical calculations
-#include "..\include\TimeSeriesHandler.h"
-#include "..\include\Random.h"
-#include "..\include\Cholezky.h"
+#include "TimeSeriesHandler.h"
+#include "Random.h"
+#include "Cholezky.h"
 //enums
-#include "..\include\RiskFactors.h"
-#include "..\include\AbsOrRelReturns.h"
-#include "..\include\RainbowOptionTypes.h"
+#include "RiskFactors.h"
+#include "AbsOrRelReturns.h"
+#include "RainbowOptionTypes.h"
 //Statistics calculations e.g. VaR from quantile
-#include "..\include\MCStatistics.h"
-#include "..\include\StatisticsMean.h"
-#include "..\include\StatisticsRelVaR.h"
-#include "..\include\StatisticsAbsVaR.h"
-#include "..\include\StatisticsRelES.h"
-#include "..\include\StatisticsQuantiles.h"
-#include "..\include\ConvergenceTable.h"
-#include "..\include\StatisticsCompiler.h"
-#include "..\include\InstrumentStatisticsGatherer.h"
+#include "MCStatistics.h"
+#include "StatisticsMean.h"
+#include "StatisticsRelVaR.h"
+#include "StatisticsAbsVaR.h"
+#include "StatisticsRelES.h"
+#include "StatisticsQuantiles.h"
+#include "ConvergenceTable.h"
+#include "StatisticsCompiler.h"
+#include "InstrumentStatisticsGatherer.h"
 // Main monte carlo VaR simulations engine
-#include "..\include\MCEngine.h"
+#include "MCEngine.h"
 //Inner VaR simulation Engines. E.g. Geometric brownian motion for stocks and simple brownian motion for short rate
-#include "..\include\SimulationEngine.h"
-#include "..\include\OneStepBSEngine.h"
-#include "..\include\OneStepBrownianMotion.h"
+#include "SimulationEngine.h"
+#include "OneStepBSEngine.h"
+#include "OneStepBrownianMotion.h"
 //valuation functions used as input into the simulationengine
-#include "..\include\valuationFunction.h"
-#include "..\include\FunctionCombiner.h"
-#include "..\include\EquityForwardFunction.h"
-#include "..\include\FXForwardFunction.h"
-#include "..\include\BSCallFunction.h"
-#include "..\include\BSPutFunction.h"
-#include "..\include\AmericanGeneralPayOffFunction.h" // Note: Risk for American options are computed with a full revaluation using a binomial treeand hence will increase the computation time significantly if included in the portfolio
-#include "..\include\AmericanCallFunction.h" 
-#include "..\include\AmericanPutFunction.h"
-#include "..\include\StockPriceFunction.h"
-#include "..\include\BondFunction.h"
-#include "..\include\FRAFunction.h" 
-#include "..\include\InterestRateSwapFunction.h"
-#include "..\include\FixedForFixedFXSwapFunction.h"
+#include "valuationFunction.h"
+#include "FunctionCombiner.h"
+#include "EquityForwardFunction.h"
+#include "FXForwardFunction.h"
+#include "BSCallFunction.h"
+#include "BSPutFunction.h"
+#include "AmericanGeneralPayOffFunction.h" // Note: Risk for American options are computed with a full revaluation using a binomial treeand hence will increase the computation time significantly if included in the portfolio
+#include "AmericanCallFunction.h" 
+#include "AmericanPutFunction.h"
+#include "StockPriceFunction.h"
+#include "BondFunction.h"
+#include "FRAFunction.h" 
+#include "InterestRateSwapFunction.h"
+#include "FixedForFixedFXSwapFunction.h"
 //monte carlo option pricers
-#include "..\include\MonteCarloVanillaOptionFunction.h" //can be freely used to simulate any payoff 
-#include "..\include\MonteCarloRainbowOptionFunction.h" //Note: Monte Carlo valuations increase computation time significantly but are the only sensible alternative for rainbow options
-#include "..\include\MonteCarloBasketOptionFunction.h"
+#include "MonteCarloVanillaOptionFunction.h" //can be freely used to simulate any payoff 
+#include "MonteCarloRainbowOptionFunction.h" //Note: Monte Carlo valuations increase computation time significantly but are the only sensible alternative for rainbow options
+#include "MonteCarloBasketOptionFunction.h"
 //Payoffs
-#include "..\include\PayOffCall.h"
-#include "..\include\PayOffPut.h"
+#include "PayOffCall.h"
+#include "PayOffPut.h"
 
 using namespace std;
 
@@ -60,7 +60,16 @@ int main()
     //Start timer and set seed
     chrono::steady_clock sc;   
     auto start = sc.now();
-    srand(2);
+    srand(1);
+
+    //Declare variables and set some constants
+    const unsigned long binomialTreeSteps = 10; //for american options
+    const unsigned long NumberOfPaths = pow(10, 4);
+    const unsigned long MCValuationNumberOfPaths = 5 * pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
+    double timeHorizon = 20.0 / 252.0;
+    double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
+    double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
+    double zeroDrift = 0;    double r = 0.0035;
 
     //Read in file of prices to get most recent prices and covariance matrix
     vector<vector<double>> myTimeSeries = parse2DCsvFile("riskFactorsnew.csv");
@@ -93,15 +102,6 @@ int main()
     //std::vector<double> covmatrow3{ 0.000565568, 0.000646747, 0.000103739, -5.52115e-05 };
     //std::vector<double> covmatrow4{ -7.56869e-05, -0.000195283, -5.52115e-05, 0.00492995 };
     //std::vector<std::vector<double>> myCovMatrix{ covmatrow1, covmatrow2, covmatrow3, covmatrow4 };
-
-    //Declare variables and set some constants
-    const unsigned long binomialTreeSteps = 10; //for american options
-    const unsigned long NumberOfPaths = pow(10, 4);
-    const unsigned long MCValuationNumberOfPaths = 5*pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
-    double timeHorizon = 20.0 / 252.0;
-    double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
-    double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
-    double zeroDrift = 0;    double r = 0.0035;
 
     //Creating the positions//
     //RiskFactor 1 derivatives - A straddle

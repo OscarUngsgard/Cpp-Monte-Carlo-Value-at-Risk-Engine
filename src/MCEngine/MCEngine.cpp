@@ -1,6 +1,6 @@
-#include "..\include\MCEngine.h"
-#include "..\include\Cholezky.h"
-#include "..\include\Random.h"
+#include "MCEngine.h"
+#include "Cholezky.h"
+#include "Random.h"
 #include <string>
 #include <iostream>
 #include <chrono>

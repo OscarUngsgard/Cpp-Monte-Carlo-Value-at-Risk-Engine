@@ -1,9 +1,9 @@
 #pragma once
 #define MONTE_CARLO_RAINBOW_OPTION_FUNCTION_H
-#include "..\include\valuationFunction.h"
-#include "..\include\PayOff.h"
-#include "..\include\RainbowOptionTypes.h"
-#include "..\include\Wrapper.h"
+#include "valuationFunction.h"
+#include "PayOff.h"
+#include "RainbowOptionTypes.h"
+#include "Wrapper.h"
 class MonteCarloRainbowOptionFunction : public valuationFunction
 {
 public:

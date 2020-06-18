@@ -1,10 +1,10 @@
 #pragma once
 #define BSENGINE_H
-#include "..\include\MCStatistics.h"
-#include "..\include\Random.h"
-#include "..\include\MCEngine.h"
-#include "..\include\valuationFunction.h"
-#include "..\include\SimulationEngine.h"
+#include "MCStatistics.h"
+#include "Random.h"
+#include "MCEngine.h"
+#include "valuationFunction.h"
+#include "SimulationEngine.h"
 class OneStepBSEngine : public SimulationEngine
 {
 public:

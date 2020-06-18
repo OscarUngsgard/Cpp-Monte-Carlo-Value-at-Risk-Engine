@@ -1,7 +1,7 @@
 #pragma once
 #define BOND_FUNCTION
-#include "..\include\valuationFunction.h"
-#include "..\include\Arrays.h"
+#include "valuationFunction.h"
+#include "Arrays.h"
 class BondFunction : public valuationFunction
 {
 public:

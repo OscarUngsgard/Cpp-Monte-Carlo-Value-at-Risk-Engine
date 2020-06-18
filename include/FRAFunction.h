@@ -1,7 +1,7 @@
 #pragma once
 #define FRA_FUNCTION
-#include "..\include\valuationFunction.h"
-#include "..\include\Arrays.h"
+#include "valuationFunction.h"
+#include "Arrays.h"
 class FRAFunction : public valuationFunction
 {
 public:

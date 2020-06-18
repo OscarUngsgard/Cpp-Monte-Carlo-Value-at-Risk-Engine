@@ -1,7 +1,7 @@
 #pragma once
 #define INTEREST_RATE_SWAP_FUNCTION
-#include "..\include\valuationFunction.h"
-#include "..\include\Arrays.h"
+#include "valuationFunction.h"
+#include "Arrays.h"
 class InterestRateSwapFunction : public valuationFunction
 {
 public:

@@ -1,4 +1,4 @@
-#include "..\include\InstrumentStatisticsGatherer.h"
+#include "InstrumentStatisticsGatherer.h"
 
 InstrumentStatisticsGatherer::InstrumentStatisticsGatherer(Wrapper<StatisticsMC> StatisticsGatherer, unsigned long numberOfInstruments_) : numberOfInstruments(numberOfInstruments_)
 {

@@ -1,4 +1,4 @@
-#include "..\include\PayOffCall.h"
+#include "PayOffCall.h"
 #include <algorithm>
 
 PayOffCall::PayOffCall(double Strike_) : Strike(Strike_)

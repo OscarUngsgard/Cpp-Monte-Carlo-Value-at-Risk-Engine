@@ -1,8 +1,8 @@
 #pragma once
 #define TREE_EUROPEAN_H
-#include "..\include\TreeProducts.h"
-#include "..\include\Wrapper.h"
-#include "..\include\PayOff.h"
+#include "TreeProducts.h"
+#include "Wrapper.h"
+#include "PayOff.h"
 class TreeEuropean : public TreeProduct
 {
 public:

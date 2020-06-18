@@ -1,4 +1,4 @@
-#include "..\include\StatisticsRelES.h"
+#include "StatisticsRelES.h"
 #include <algorithm>
 StatisticsRelES::StatisticsRelES(double p_, unsigned long minimumNumberOfPaths) : p(p_), PathsDone(0)
 {

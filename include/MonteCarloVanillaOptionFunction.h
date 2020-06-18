@@ -1,9 +1,9 @@
 #pragma once
 #define MONTE_CARLO_VANILLA_OPTION_FUNCTION_H
-#include "..\include\valuationFunction.h"
-#include "..\include\PayOff.h"
+#include "valuationFunction.h"
+#include "PayOff.h"
 
-#include "..\include\Wrapper.h"
+#include "Wrapper.h"
 class MonteCarloVanillaOptionFunction : public valuationFunction
 {
 public:

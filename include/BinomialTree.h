@@ -1,8 +1,8 @@
 #pragma warning( disable : 4786 )
 #pragma once
-#include "..\include\TreeProducts.h"
+#include "TreeProducts.h"
 #include <vector>
-#include "..\include\Arrays.h"
+#include "Arrays.h"
 class SimpleBinomialTree
 {
 public:

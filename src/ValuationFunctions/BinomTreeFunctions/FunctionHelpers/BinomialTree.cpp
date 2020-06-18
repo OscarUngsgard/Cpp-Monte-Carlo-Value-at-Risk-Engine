@@ -1,4 +1,4 @@
-#include "..\include\BinomialTree.h"
+#include "BinomialTree.h"
 
 SimpleBinomialTree::SimpleBinomialTree(double Spot_, const double r_, const double d_, double Volatility_, unsigned long Steps_, double Time_) : Spot(Spot_), r(r_), d(d_), Volatility(Volatility_), Steps(Steps_), Time(Time_), Discounts(Steps_), p(0.5)
 {

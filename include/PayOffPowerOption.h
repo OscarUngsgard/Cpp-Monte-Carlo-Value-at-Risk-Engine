@@ -1,6 +1,6 @@
 #pragma once
 #define POWEROPTION_H
-#include "..\include\PayOff.h"
+#include "PayOff.h"
 
 class PayOffPowerOption : public PayOff
 {

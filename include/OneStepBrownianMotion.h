@@ -1,10 +1,10 @@
 #pragma once
 #define ONE_STEP_BROWNIAN_MOTION_ENGINE_H
-#include "..\include\MCStatistics.h"
-#include "..\include\Random.h"
-#include "..\include\MCEngine.h"
-#include "..\include\valuationFunction.h"
-#include "..\include\SimulationEngine.h"
+#include "MCStatistics.h"
+#include "Random.h"
+#include "MCEngine.h"
+#include "valuationFunction.h"
+#include "SimulationEngine.h"
 class OneStepBrownianMotionEngine : public SimulationEngine
 {
 public:

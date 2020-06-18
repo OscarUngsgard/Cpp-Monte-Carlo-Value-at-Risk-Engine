@@ -1,9 +1,9 @@
 #pragma once
 #define MC_STATISTICS_REL_VAR_H
 #include <vector>
-#include "..\include\Arrays.h"
+#include "Arrays.h"
 #include <numeric>  
-#include "..\include\MCStatistics.h"
+#include "MCStatistics.h"
 class StatisticsRelVaR : public StatisticsMC
 {
 public:

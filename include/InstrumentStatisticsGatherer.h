@@ -1,9 +1,9 @@
 #pragma once
 #define INSTRUMENT_STATISTICS_GATHERER_H
 #include <vector>
-#include "..\include\Arrays.h"
-#include "..\include\MCStatistics.h"
-#include "..\include\Wrapper.h"
+#include "Arrays.h"
+#include "MCStatistics.h"
+#include "Wrapper.h"
 class InstrumentStatisticsGatherer
 {
 public:

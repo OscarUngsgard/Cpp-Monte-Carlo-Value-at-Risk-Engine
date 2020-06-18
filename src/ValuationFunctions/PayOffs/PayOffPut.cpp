@@ -1,4 +1,4 @@
-#include "..\include\PayOffPut.h"
+#include "PayOffPut.h"
 #include <algorithm>
 
 PayOffPut::PayOffPut(double Strike_) : Strike(Strike_)

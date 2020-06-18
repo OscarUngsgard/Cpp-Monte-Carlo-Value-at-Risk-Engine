@@ -1,4 +1,4 @@
-#include "..\include\TreeProducts.h"
+#include "TreeProducts.h"
 
 TreeProduct::TreeProduct(double FinalTime_) : FinalTime(FinalTime_)
 {

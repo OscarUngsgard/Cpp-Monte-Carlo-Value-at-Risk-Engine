@@ -1,6 +1,6 @@
 #pragma once
 #define BSCALL_FUNCTION_H
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 class BSCallFunction : public valuationFunction
 {
 public:

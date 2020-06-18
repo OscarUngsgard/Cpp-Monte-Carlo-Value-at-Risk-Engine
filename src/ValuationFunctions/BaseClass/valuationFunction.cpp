@@ -1,4 +1,4 @@
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 #include <iostream>
 #include <algorithm>
 

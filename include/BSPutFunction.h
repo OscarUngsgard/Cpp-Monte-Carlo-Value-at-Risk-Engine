@@ -1,6 +1,6 @@
 #pragma once
 #define BSPUTFUNCTION_H
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 class BSPutFunction : public valuationFunction
 {
 public:

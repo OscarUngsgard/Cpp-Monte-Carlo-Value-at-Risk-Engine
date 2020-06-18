@@ -1,4 +1,4 @@
-#include "..\include\TreeEuropean.h"
+#include "TreeEuropean.h"
 
 TreeEuropean::TreeEuropean(double FinalTime, const Wrapper<PayOff>& ThePayOff_) : TreeProduct(FinalTime), ThePayOff(ThePayOff_)
 {

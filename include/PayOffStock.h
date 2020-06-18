@@ -1,5 +1,5 @@
 #pragma once
-#include "..\include\PayOff.h"
+#include "PayOff.h"
 #define PAYOFF_STOCK_H
 class PayOffStock : public PayOff
 {

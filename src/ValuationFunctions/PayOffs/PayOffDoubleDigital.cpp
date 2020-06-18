@@ -1,4 +1,4 @@
-#include "..\include\PayOffDoubleDigital.h"
+#include "PayOffDoubleDigital.h"
 PayOffDoubleDigital::PayOffDoubleDigital(double Strike1_, double Strike2_)
 										: Strike1(Strike1_), Strike2(Strike2_)
 {

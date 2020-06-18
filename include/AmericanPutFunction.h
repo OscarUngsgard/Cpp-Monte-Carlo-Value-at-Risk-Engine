@@ -1,6 +1,6 @@
 #pragma once
 #define AMERICAN_PUT_FUNCTION_H
-#include "..\include\valuationFunction.h"
+#include "valuationFunction.h"
 //Makes use of the binomial tree code provided in C++ Design Patterns, augmented to use risk neutral probabilities of up and down movements to make the implied discounted price a martingale
 class AmericanPutFunction : public valuationFunction
 {

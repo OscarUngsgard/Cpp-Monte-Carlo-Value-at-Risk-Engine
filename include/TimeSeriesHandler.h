@@ -1,7 +1,7 @@
 #pragma once
 #define TIME_SERIES_HANDLER_H
 #include <vector>
-#include "..\include\AbsOrRelReturns.h"
+#include "AbsOrRelReturns.h"
 class TimeSeriesHandler
 {
 public:

@@ -1,12 +1,12 @@
 #pragma once
 #define MCENGINE_H
-#include "..\include\Wrapper.h"
-#include "..\include\MCStatistics.h"
-#include "..\include\InstrumentStatisticsGatherer.h"
+#include "Wrapper.h"
+#include "MCStatistics.h"
+#include "InstrumentStatisticsGatherer.h"
 #include <vector>
-#include "..\include\Arrays.h"
-#include "..\include\SimulationEngine.h"
-#include "..\include\valuationFunction.h"
+#include "Arrays.h"
+#include "SimulationEngine.h"
+#include "valuationFunction.h"
 #include <string>
 
 class MCEngine

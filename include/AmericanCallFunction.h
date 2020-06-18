@@ -1,8 +1,8 @@
 #pragma once
 #define AMERICAN_CALL_FUNCTION_H
-#include "..\include\valuationFunction.h"
-#include "..\include\PayOff.h"
-#include "..\include\Wrapper.h"
+#include "valuationFunction.h"
+#include "PayOff.h"
+#include "Wrapper.h"
 class AmericanCallFunction : public valuationFunction
 {
 public:

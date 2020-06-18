@@ -1,8 +1,8 @@
 #pragma once
 #define AMERICAN_GENERAL_PAYOFF_FUNCTION_H
-#include "..\include\valuationFunction.h"
-#include "..\include\PayOff.h"
-#include "..\include\Wrapper.h"
+#include "valuationFunction.h"
+#include "PayOff.h"
+#include "Wrapper.h"
 
 class AmericanGeneralPayOffFunction : public valuationFunction
 {
