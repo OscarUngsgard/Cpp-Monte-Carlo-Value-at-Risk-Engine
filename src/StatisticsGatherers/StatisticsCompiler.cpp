@@ -1,4 +1,4 @@
-#include "StatisticsCompiler.h"
+#include "..\include\StatisticsCompiler.h"
 
 StatisticsCompiler::StatisticsCompiler(std::vector<Wrapper<StatisticsMC>> Inner_) : Inner(std::move(Inner_))
 {

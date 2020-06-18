@@ -1,5 +1,5 @@
-#include "OneStepMonteCarloValuation.h"
-#include "Random.h"
+#include "..\include\OneStepMonteCarloValuation.h"
+#include "..\include\Random.h"
 
 
 void OneStepMonteCarloValuation(const StandardExcerciseOption& TheOption, double Spot, double Vol, double r, double d, unsigned long NumberOfPaths, MJArray normVariates, StatisticsMC& gatherer)

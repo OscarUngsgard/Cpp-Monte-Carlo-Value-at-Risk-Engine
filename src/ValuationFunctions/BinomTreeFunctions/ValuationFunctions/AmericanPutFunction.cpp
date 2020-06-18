@@ -1,7 +1,7 @@
-#include "AmericanPutFunction.h"
-#include "TreeAmerican.h"
-#include "BinomialTree.h"
-#include "PayOffPut.h"
+#include "..\include\AmericanPutFunction.h"
+#include "..\include\TreeAmerican.h"
+#include "..\include\BinomialTree.h"
+#include "..\include\PayOffPut.h"
 
 AmericanPutFunction::AmericanPutFunction(std::string uniqueIdentifier_, int nominal_, double S0_, double r_, double d_, double impvol_, double TTM_, double strike_, unsigned long binomTreeSteps_) : r(r_), S(S0_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_), binomTreeSteps(binomTreeSteps_)
 {

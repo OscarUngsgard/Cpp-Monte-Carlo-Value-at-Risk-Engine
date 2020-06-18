@@ -1,4 +1,4 @@
-#include "PayOffStock.h"
+#include "..\include\PayOffStock.h"
 
 PayOffStock::PayOffStock()
 {

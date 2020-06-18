@@ -1,4 +1,4 @@
-#include "StatisticAllPaths.h"
+#include "..\include\StatisticAllPaths.h"
 #include <algorithm>
 #include <iostream>
 using namespace std;

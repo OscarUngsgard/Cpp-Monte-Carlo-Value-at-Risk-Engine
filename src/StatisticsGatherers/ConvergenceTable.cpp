@@ -1,4 +1,4 @@
-#include "ConvergenceTable.h"
+#include "..\include\ConvergenceTable.h"
 ConvergenceTable::ConvergenceTable(const Wrapper<StatisticsMC>& Inner_) : Inner(Inner_)
 {
 	StoppingPoint = 2;

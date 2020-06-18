@@ -1,4 +1,4 @@
-#include "StatisticsQuantiles.h"
+#include "..\include\StatisticsQuantiles.h"
 #include <algorithm>
 StatisticsQuantiles::StatisticsQuantiles(double p_, unsigned long minimumNumberOfPaths) : p(p_), PathsDone(0)
 {

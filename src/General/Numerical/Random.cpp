@@ -1,7 +1,7 @@
-#include "Random.h"
+#include "..\include\Random.h"
 #include <cstdlib>
 #include <cmath>
-#include "Cholezky.h"
+#include "..\include\Cholezky.h"
 // the basic math functions should be in namespace
 // std but aren’t in VCPP6
 #if !defined(_MSC_VER)

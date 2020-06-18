@@ -1,4 +1,4 @@
-#include "StandardExcerciseOption.h"
+#include "..\include\StandardExcerciseOption.h"
 StandardExcerciseOption::StandardExcerciseOption(const Wrapper<PayOff>& ThePayOff_, double Expiry_) : ThePayOff(ThePayOff_), Expiry(Expiry_)
 {
 }

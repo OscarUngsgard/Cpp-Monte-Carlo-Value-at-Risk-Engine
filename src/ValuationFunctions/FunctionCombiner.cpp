@@ -1,4 +1,4 @@
-#include "FunctionCombiner.h"
+#include "..\include\FunctionCombiner.h"
 #include <iostream>
 FunctionCombiner::FunctionCombiner(std::vector<std::shared_ptr<valuationFunction>> Inner_) : Inner(std::move(Inner_)), valuationFunction("", 0,0) //<- Needs to initalize itself even though it gets all data from inner functions.
 {

@@ -1,4 +1,4 @@
-#include "TreeAmerican.h"
+#include "..\include\TreeAmerican.h"
 #include <algorithm>
 
 TreeAmerican::TreeAmerican(double FinalTime_, const Wrapper<PayOff>& ThePayOff_) : TreeProduct(FinalTime_), ThePayOff(ThePayOff_)

@@ -4,54 +4,54 @@
 #include <chrono>
 #include <memory>
 //General classes and functions
-#include "ReadCSV.h"
-#include "Wrapper.h"
+#include "..\include\ReadCSV.h"
+#include "..\include\Wrapper.h"
 //Numerical calculations
-#include "TimeSeriesHandler.h"
-#include "Random.h"
-#include "Cholezky.h"
+#include "..\include\TimeSeriesHandler.h"
+#include "..\include\Random.h"
+#include "..\include\Cholezky.h"
 //enums
-#include "RiskFactors.h"
-#include "AbsOrRelReturns.h"
-#include "RainbowOptionTypes.h"
+#include "..\include\RiskFactors.h"
+#include "..\include\AbsOrRelReturns.h"
+#include "..\include\RainbowOptionTypes.h"
 //Statistics calculations e.g. VaR from quantile
-#include "MCStatistics.h"
-#include "StatisticsMean.h"
-#include "StatisticsRelVaR.h"
-#include "StatisticsAbsVaR.h"
-#include "StatisticsRelES.h"
-#include "StatisticsQuantiles.h"
-#include "ConvergenceTable.h"
-#include "StatisticsCompiler.h"
-#include "InstrumentStatisticsGatherer.h"
+#include "..\include\MCStatistics.h"
+#include "..\include\StatisticsMean.h"
+#include "..\include\StatisticsRelVaR.h"
+#include "..\include\StatisticsAbsVaR.h"
+#include "..\include\StatisticsRelES.h"
+#include "..\include\StatisticsQuantiles.h"
+#include "..\include\ConvergenceTable.h"
+#include "..\include\StatisticsCompiler.h"
+#include "..\include\InstrumentStatisticsGatherer.h"
 // Main monte carlo VaR simulations engine
-#include "MCEngine.h"
+#include "..\include\MCEngine.h"
 //Inner VaR simulation Engines. E.g. Geometric brownian motion for stocks and simple brownian motion for short rate
-#include "SimulationEngine.h"
-#include "OneStepBSEngine.h"
-#include "OneStepBrownianMotion.h"
+#include "..\include\SimulationEngine.h"
+#include "..\include\OneStepBSEngine.h"
+#include "..\include\OneStepBrownianMotion.h"
 //valuation functions used as input into the simulationengine
-#include "valuationFunction.h"
-#include "FunctionCombiner.h"
-#include "EquityForwardFunction.h"
-#include "FXForwardFunction.h"
-#include "BSCallFunction.h"
-#include "BSPutFunction.h"
-#include "AmericanGeneralPayOffFunction.h" // Note: Risk for American options are computed with a full revaluation using a binomial treeand hence will increase the computation time significantly if included in the portfolio
-#include "AmericanCallFunction.h" 
-#include "AmericanPutFunction.h"
-#include "StockPriceFunction.h"
-#include "BondFunction.h"
-#include "FRAFunction.h" 
-#include "InterestRateSwapFunction.h"
-#include "FixedForFixedFXSwapFunction.h"
+#include "..\include\valuationFunction.h"
+#include "..\include\FunctionCombiner.h"
+#include "..\include\EquityForwardFunction.h"
+#include "..\include\FXForwardFunction.h"
+#include "..\include\BSCallFunction.h"
+#include "..\include\BSPutFunction.h"
+#include "..\include\AmericanGeneralPayOffFunction.h" // Note: Risk for American options are computed with a full revaluation using a binomial treeand hence will increase the computation time significantly if included in the portfolio
+#include "..\include\AmericanCallFunction.h" 
+#include "..\include\AmericanPutFunction.h"
+#include "..\include\StockPriceFunction.h"
+#include "..\include\BondFunction.h"
+#include "..\include\FRAFunction.h" 
+#include "..\include\InterestRateSwapFunction.h"
+#include "..\include\FixedForFixedFXSwapFunction.h"
 //monte carlo option pricers
-#include "MonteCarloVanillaOptionFunction.h" //can be freely used to simulate any payoff 
-#include "MonteCarloRainbowOptionFunction.h" //Note: Monte Carlo valuations increase computation time significantly but are the only sensible alternative for rainbow options
-#include "MonteCarloBasketOptionFunction.h"
+#include "..\include\MonteCarloVanillaOptionFunction.h" //can be freely used to simulate any payoff 
+#include "..\include\MonteCarloRainbowOptionFunction.h" //Note: Monte Carlo valuations increase computation time significantly but are the only sensible alternative for rainbow options
+#include "..\include\MonteCarloBasketOptionFunction.h"
 //Payoffs
-#include "PayOffCall.h"
-#include "PayOffPut.h"
+#include "..\include\PayOffCall.h"
+#include "..\include\PayOffPut.h"
 
 using namespace std;
 

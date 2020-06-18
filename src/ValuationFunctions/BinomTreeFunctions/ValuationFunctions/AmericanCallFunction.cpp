@@ -1,7 +1,7 @@
-#include "AmericanCallFunction.h"
-#include "PayOffCall.h"
-#include "TreeAmerican.h"
-#include "BinomialTree.h"
+#include "..\include\AmericanCallFunction.h"
+#include "..\include\PayOffCall.h"
+#include "..\include\TreeAmerican.h"
+#include "..\include\BinomialTree.h"
 #include <iostream>
 //Makes use of the binomial tree code provided in C++ Design Patterns, augmented to use risk neutral probabilities of up and down movements to make the implied discounted price a martingale
 AmericanCallFunction::AmericanCallFunction(std::string uniqueIdentifier_, int nominal_, double S_, double r_, double d_, double impvol_, double TTM_, double strike_, unsigned long binomTreeSteps_) : r(r_), S(S_), d(d_), impvol(impvol_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), strike(strike_), binomTreeSteps(binomTreeSteps_)

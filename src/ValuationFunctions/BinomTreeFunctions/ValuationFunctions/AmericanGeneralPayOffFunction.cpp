@@ -1,7 +1,7 @@
-#include "AmericanGeneralPayOffFunction.h"
-#include "PayOffCall.h"
-#include "TreeAmerican.h"
-#include "BinomialTree.h"
+#include "..\include\AmericanGeneralPayOffFunction.h"
+#include "..\include\PayOffCall.h"
+#include "..\include\TreeAmerican.h"
+#include "..\include\BinomialTree.h"
 #include <iostream>
 //Makes use of the binomial tree code provided in C++ Design Patterns, augmented to use risk neutral probabilities of up and down movements to make the implied discounted price a martingale
 

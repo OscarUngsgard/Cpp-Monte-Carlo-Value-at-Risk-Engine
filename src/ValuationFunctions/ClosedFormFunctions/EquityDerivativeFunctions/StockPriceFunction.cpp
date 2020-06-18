@@ -1,4 +1,4 @@
-#include "StockPriceFunction.h"
+#include "..\include\StockPriceFunction.h"
 #include <iostream>
 #include <string>
 
