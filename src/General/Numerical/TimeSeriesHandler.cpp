@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <assert.h>
+#include <algorithm>
 
 TimeSeriesHandler::TimeSeriesHandler(std::vector<std::vector<double>> riskFactorTimeSeries_, std::vector<AbsOrRel> absOrRelReturnsVector_) : riskFactorTimeSeries(riskFactorTimeSeries_), absOrRelReturnsVector(absOrRelReturnsVector_)
 {
@@ -53,7 +54,7 @@ void TimeSeriesHandler::transformToReturns()
 
 double TimeSeriesHandler::compute_covariance(std::vector<std::vector<double>> d, int i, int j) {
 	double cov = 0;
-	for (int k = 0; k < d.size(); ++k) {
+	for (unsigned long k = 0; k < d.size(); ++k) {
 		cov += d[k][i] * d[k][j];
 	}
 

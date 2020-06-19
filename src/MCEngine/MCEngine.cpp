@@ -4,9 +4,10 @@
 #include <string>
 #include <iostream>
 #include <chrono>
+#include <algorithm>
 
 MCEngine::MCEngine(std::vector<Wrapper<SimulationEngine>> EngineVector_, std::vector<std::vector<double>> covMatrix_)
-	: covMatrix(covMatrix_), cholMatrix(Cholesky_Decomposition(covMatrix_)), EngineVector(EngineVector_), V(0)
+	: V(0), EngineVector(EngineVector_), covMatrix(covMatrix_), cholMatrix(Cholesky_Decomposition(covMatrix_))
 {
 	//Includes all the unique functions in the portfolio to be valued.
 	for (unsigned long i = 0; i < EngineVector.size(); ++i)
@@ -73,12 +74,12 @@ void MCEngine::ValuePortfolio()
 	return;
 }
 
-const double MCEngine::GetPortfolioValue()
+double MCEngine::GetPortfolioValue() const
 {
 	return V;
 }
 
-const MJArray MCEngine::GetInstrumentValues()
+MJArray MCEngine::GetInstrumentValues() const
 {
 	MJArray instrumentValues(functionReferences.size());
 	for (unsigned long i = 0; i < functionReferences.size(); ++i)
@@ -88,12 +89,12 @@ const MJArray MCEngine::GetInstrumentValues()
 	return instrumentValues;
 }
 
-const std::vector<std::string> MCEngine::GetInstrumentIdentifiers()
+std::vector<std::string> MCEngine::GetInstrumentIdentifiers() const
 {
 	return functionIdentifiers;
 }
 
-const std::vector<int> MCEngine::GetInstrumentNominals()
+std::vector<int> MCEngine::GetInstrumentNominals() const
 {
 	std::vector<int> instrumentNominals(functionReferences.size());
 	for (unsigned long i = 0; i < functionReferences.size(); ++i)

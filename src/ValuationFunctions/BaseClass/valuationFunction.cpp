@@ -24,12 +24,12 @@ void valuationFunction::UpdateTTM(double timeStep)
 	return;
 }
 
-const int valuationFunction::GetNominal() const
+int valuationFunction::GetNominal() const
 {
 	return nominal;
 }
 
-const double valuationFunction::GetOrigTTM() const
+double valuationFunction::GetOrigTTM() const
 {
 	return origTTM;
 }

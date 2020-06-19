@@ -149,7 +149,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.cpp" />
-    <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp" />
+    <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp">
+      <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ShowIncludes>
+    </ClCompile>
     <ClCompile Include="src\StatisticsGatherers\StatisticsAbsVaR.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticsMean.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticsQuantiles.cpp" />

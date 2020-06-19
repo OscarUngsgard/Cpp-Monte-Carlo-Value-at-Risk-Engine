@@ -17,8 +17,8 @@ public:
 	virtual void RiskFactorMultiply(double factor, RiskFactor simulatedRiskFactor) = 0;
 	virtual std::vector<std::reference_wrapper<valuationFunction>> GetInnerReference() = 0;
 	virtual void UpdateTTM(double timeStep);
-	const virtual int GetNominal() const;
-	const virtual double GetOrigTTM() const;
+	virtual int GetNominal() const;
+	virtual double GetOrigTTM() const;
 	virtual valuationFunction* clone() const = 0;
 	virtual ~valuationFunction() {}
 private:
