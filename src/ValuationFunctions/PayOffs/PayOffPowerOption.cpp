@@ -7,7 +7,7 @@ PayOffPowerOption::PayOffPowerOption(double Strike_, double Power_) : Strike(Str
 
 double PayOffPowerOption::operator()(double Spot) const
 {
-	return std::max(pow(Spot,Power),0.0);
+	return std::max(pow(Spot,Power) - Strike ,0.0);
 }
 
 PayOffPowerOption* PayOffPowerOption::clone() const
