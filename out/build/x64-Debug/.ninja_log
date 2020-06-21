@@ -106,3 +106,5 @@
 3040	3557	614458531	CMakeFiles/monte_carlo.dir/src/SimulationEngines/OneStepBSEngine.cpp.obj	7cdea49090192b63
 3557	3777	614458532	monte_carlo.exe	39d0ddbfe64d7a57
 1	174	614458740	build.ninja	b53361e0a5e7812a
+2	694	614459053	CMakeFiles/monte_carlo.dir/src/Main_MCValueAtRisk.cpp.obj	6323b048f5e7962c
+694	845	614459053	monte_carlo.exe	39d0ddbfe64d7a57

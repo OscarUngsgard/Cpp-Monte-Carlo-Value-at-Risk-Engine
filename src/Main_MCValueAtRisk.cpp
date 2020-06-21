@@ -72,7 +72,7 @@ int main()
     double zeroDrift = 0;    double r = 0.0035;
 
     //Read in file of prices to get most recent prices and covariance matrix
-    vector<vector<double>> myTimeSeries = parse2DCsvFile("riskFactorsnew.csv");
+    vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactors.csv");
     vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
     TimeSeriesHandler myTimeSeriesHandlder(myTimeSeries, AbsOrRelReturns);
     myTimeSeriesHandlder.createCovarianceMatrix();
