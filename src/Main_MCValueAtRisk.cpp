@@ -64,7 +64,7 @@ int main()
 
     //Declare variables and set some constants
     const unsigned long binomialTreeSteps = 10; //for american options
-    const unsigned long NumberOfPaths = pow(10, 4);
+    const unsigned long NumberOfPaths = pow(10, 3);
     const unsigned long MCValuationNumberOfPaths = 5 * pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
     double timeHorizon = 20.0 / 252.0;
     double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
