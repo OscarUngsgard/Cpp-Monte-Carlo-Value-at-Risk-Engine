@@ -63,9 +63,9 @@ int main()
     srand(1);
 
     //Declare variables and set some constants
+    const unsigned long NumberOfPaths = pow(10, 3); //For the Monte-Carlo value at risk simmulation
     const unsigned long binomialTreeSteps = 10; //for american options
-    const unsigned long NumberOfPaths = pow(10, 3);
-    const unsigned long MCValuationNumberOfPaths = 5 * pow(10, 3); //For monte-carlo option valuations of e.g. for Best-of/worst-of options
+    const unsigned long MCValuationNumberOfPaths = 5 * pow(10, 3); //For the Monte-Carlo option valuations of e.g. for Best-of/worst-of options
     double timeHorizon = 20.0 / 252.0;
     double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
@@ -188,6 +188,8 @@ int main()
         std::cout <<"\n     Value at risk simulation \n\n";
         std::cout << "Number of paths: " << NumberOfPaths << "\n";
         std::cout << "Time horizon: " << (timeHorizon * 252) << " day(s)" << "\n";
+        std::cout << "Number of paths for Monte-Carlo option valuations: " << MCValuationNumberOfPaths << "\n";
+        std::cout << "Number of steps for binomial tree option valuations: " << binomialTreeSteps << "\n" << "\n";
         VAREngine.DoSimulation(gathererCombiner, instrumentGatherer, NumberOfPaths, timeHorizon);
         //Printing the resulsts from the statisticsgatheres
         vector<vector<double> > VARresults = gathererCombiner.GetResultsSoFar();
