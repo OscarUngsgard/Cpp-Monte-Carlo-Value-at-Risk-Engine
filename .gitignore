@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#Incomplete/abondoned files
+src/BackTest.cpp
+include/BackTest.h
+
 # User-specific files
 *.rsuser
 *.suo

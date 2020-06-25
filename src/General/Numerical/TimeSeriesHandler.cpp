@@ -3,18 +3,19 @@
 #include <cmath>
 #include <assert.h>
 #include <algorithm>
+#include <list>
 
 TimeSeriesHandler::TimeSeriesHandler(std::vector<std::vector<double>> riskFactorTimeSeries_, std::vector<AbsOrRel> absOrRelReturnsVector_) : riskFactorTimeSeries(riskFactorTimeSeries_), absOrRelReturnsVector(absOrRelReturnsVector_)
 {
 	transformedToReturns = false;
 }
 
-std::vector<double> TimeSeriesHandler::GetMostRecentValues()
+std::vector<double> TimeSeriesHandler::GetMostRecentValues(unsigned long startingDaysBack)
 {
 	std::vector<double> mostRecentValues(riskFactorTimeSeries.back().size());
 	for (unsigned long j = 0; j < mostRecentValues.size(); j++)
 	{
-		mostRecentValues[j] = riskFactorTimeSeries.back()[j];
+		mostRecentValues[j] = riskFactorTimeSeries[riskFactorTimeSeries.size()-1-startingDaysBack][j];
 	}
 	return mostRecentValues;
 }
@@ -61,17 +62,25 @@ double TimeSeriesHandler::compute_covariance(std::vector<std::vector<double>> d,
 	return cov / (d.size() - 1);
 }
 
-void TimeSeriesHandler::createCovarianceMatrix()
+void TimeSeriesHandler::createCovarianceMatrix(unsigned long daysBackUsed, unsigned long startingDaysBack)
 {
 	if (!transformedToReturns)
 		transformToReturns();
+	if (returns.size() < (daysBackUsed + startingDaysBack))
+	{
+		daysBackUsed = returns.size() - startingDaysBack;
+		std::cout << "Warning: short time series. Only using " << daysBackUsed << " number of days back. \n";
+	}
+	std::vector<std::vector<double>>::const_iterator first = returns.end() - startingDaysBack - daysBackUsed;
+	std::vector<std::vector<double>>::const_iterator last = returns.end() - startingDaysBack;
+	std::vector<std::vector<double>> reSizedReturns(first, last);
 
-	int dim = returns[0].size();
+	int dim = reSizedReturns[0].size();
 	covMatrix.resize(dim);
 	for (int i = 0; i < dim; ++i) {
 		covMatrix[i].resize(dim);
 		for (int j = i; j < dim; ++j) {
-			covMatrix[i][j] = compute_covariance(returns, i, j) * 252; //*252 to scale to yearly measurment
+			covMatrix[i][j] = compute_covariance(reSizedReturns, i, j) * 252; //*252 to scale to yearly measurment
 		}
 	}
 	// fill the Left triangular matrix

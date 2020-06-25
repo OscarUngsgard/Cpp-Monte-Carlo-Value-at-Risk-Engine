@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BackTest.cpp" />
     <ClCompile Include="src\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp">
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ShowIncludes>
@@ -256,6 +257,7 @@
     <ClInclude Include="include\Wrapper.h" />
     <ClInclude Include="include\PayOffPut.h" />
     <ClInclude Include="include\PayOffStock.h" />
+    <ClInclude Include="include\BackTest.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

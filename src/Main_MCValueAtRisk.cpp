@@ -81,12 +81,24 @@ int main()
     vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactors.csv");
     vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
     TimeSeriesHandler myTimeSeriesHandlder(myTimeSeries, AbsOrRelReturns);
-    myTimeSeriesHandlder.createCovarianceMatrix();
+    myTimeSeriesHandlder.createCovarianceMatrix(252, 0);
     vector<vector<double>> myCovMatrix = myTimeSeriesHandlder.GetCovarianceMatrix();
     vector<double> spotRates = myTimeSeriesHandlder.GetMostRecentValues();
   
+
+
+    ///output the returns used
+    //vector<vector<double>> myReturns = myTimeSeriesHandlder.GetReturns();
+    //for (unsigned long i = 0; i < myReturns.size(); i++)
+    //{
+    //    for (unsigned long j = 0; j < myReturns[i].size(); j++)
+    //    {
+    //        std::cout << myReturns[i][j] << ", ";
+    //    }
+    //    std::cout << "\n";
+    //}
     ///output the covariance matrix and spot rates used  
-    //vector<vector<double>>  myReturns = myTimeSeriesHandlder.GetReturns();
+    //vector<double>  currentPrices = myTimeSeriesHandlder.GetMostRecentValues();
     //for (unsigned long i = 0; i < currentPrices.size(); i++)
     //{
     //    std::cout << "Current prices: " << currentPrices[i] << "\n";
@@ -245,6 +257,8 @@ int main()
                 std::cout << InstrumentVARresults[i][3][j] * 100 << "% " << "\n";
             std::cout << "\n";
         }
+
+
     }
     catch (const std::exception& e)
     {
