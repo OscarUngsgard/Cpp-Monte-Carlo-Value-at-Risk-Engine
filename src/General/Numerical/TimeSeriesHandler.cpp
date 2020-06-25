@@ -69,7 +69,7 @@ void TimeSeriesHandler::createCovarianceMatrix(unsigned long daysBackUsed, unsig
 	if (returns.size() < (daysBackUsed + startingDaysBack))
 	{
 		daysBackUsed = returns.size() - startingDaysBack;
-		std::cout << "Warning: short time series. Only using " << daysBackUsed << " number of days back. \n";
+		std::cout << "Warning: short time series. Only using " << daysBackUsed << " number of days back. \n \n";
 	}
 	std::vector<std::vector<double>>::const_iterator first = returns.end() - startingDaysBack - daysBackUsed;
 	std::vector<std::vector<double>>::const_iterator last = returns.end() - startingDaysBack;

@@ -65,7 +65,7 @@ int main()
     //Declare variables and set some constants
     unsigned long NumberOfPaths;// = pow(10, 3); //For the Monte-Carlo value at risk simmulation
     unsigned long binomialTreeSteps;// = 10; //for american options
-    unsigned long MCValuationNumberOfPaths;// = 5 * pow(10, 3); //For the Monte-Carlo option valuations of e.g. for Best-of/worst-of options
+    unsigned long MCValuationNumberOfPaths;// = 5 * pow(10, 3); //For Monte-Carlo option valuations of e.g. for Best-of/worst-of options
     double timeHorizon; // = 20.0 / 252.0;
     double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
@@ -81,7 +81,7 @@ int main()
     vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactors.csv");
     vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
     TimeSeriesHandler myTimeSeriesHandlder(myTimeSeries, AbsOrRelReturns);
-    myTimeSeriesHandlder.createCovarianceMatrix(252, 0);
+    myTimeSeriesHandlder.createCovarianceMatrix(244, 0);
     vector<vector<double>> myCovMatrix = myTimeSeriesHandlder.GetCovarianceMatrix();
     vector<double> spotRates = myTimeSeriesHandlder.GetMostRecentValues();
   
