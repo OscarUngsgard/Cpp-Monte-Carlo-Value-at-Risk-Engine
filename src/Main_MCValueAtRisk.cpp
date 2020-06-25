@@ -63,14 +63,20 @@ int main()
     srand(1);
 
     //Declare variables and set some constants
-    const unsigned long NumberOfPaths = pow(10, 3); //For the Monte-Carlo value at risk simmulation
-    const unsigned long binomialTreeSteps = 10; //for american options
-    const unsigned long MCValuationNumberOfPaths = 5 * pow(10, 3); //For the Monte-Carlo option valuations of e.g. for Best-of/worst-of options
-    double timeHorizon = 20.0 / 252.0;
+    unsigned long NumberOfPaths;// = pow(10, 3); //For the Monte-Carlo value at risk simmulation
+    unsigned long binomialTreeSteps;// = 10; //for american options
+    unsigned long MCValuationNumberOfPaths;// = 5 * pow(10, 3); //For the Monte-Carlo option valuations of e.g. for Best-of/worst-of options
+    double timeHorizon; // = 20.0 / 252.0;
     double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
     double zeroDrift = 0;    double r = 0.0035;
 
+    std::cout << "Input Time horizon (days): "; std::cin >> timeHorizon; timeHorizon /= 252.0;
+    std::cout << "Input number of paths: ";   std::cin >> NumberOfPaths;   
+    std::cout << "Input number of simulations for Monte-Carlo option valuations: "; std::cin >> MCValuationNumberOfPaths; 
+    std::cout << "Input number of steps for binomial tree option valuations: "; std::cin >> binomialTreeSteps;
+    std::cout << "\n";
+    
     //Read in file of prices to get most recent prices and covariance matrix
     vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactors.csv");
     vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
