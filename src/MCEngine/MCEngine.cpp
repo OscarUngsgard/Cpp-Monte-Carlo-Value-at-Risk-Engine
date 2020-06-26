@@ -48,7 +48,7 @@ void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, Instrumen
 		InstrumentStatisticsGatherer.DumpOneSetOfResult(theseInstrumentValues);
 		for (unsigned long j = 0; j < EngineVector.size(); ++j)
 		{
-			EngineVector[j]->UnDoOnePath(timeHorizon, sqrt(covMatrix[j][j]), correlatedNormVariates[j][i]); //resets the riskfactors for the positions.
+			EngineVector[j]->UnDoOnePath(timeHorizon, sqrt(covMatrix[j][j]), correlatedNormVariates[j][i]); //resets the riskfactors for the positions for next path.
 		}
 
 		if (i == (numberOfPaths/10) -1)
@@ -59,8 +59,8 @@ void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, Instrumen
 		}
 		if (((i+1) % (numberOfPaths / 10) == 0))
 			std::cout << 100 * ((i+1UL) / (double)numberOfPaths) << " "; //progress bar
-
 	}
+	UpdateTTM(-timeHorizon); //reset time horizon for next simulation (backtest)
 }
 
 void MCEngine::ValuePortfolio()

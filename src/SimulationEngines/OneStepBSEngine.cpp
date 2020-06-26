@@ -6,6 +6,26 @@ OneStepBSEngine::OneStepBSEngine(double drift_, std::shared_ptr<valuationFunctio
 {
 }
 
+void OneStepBSEngine::ApplyReturns(double returns)
+{
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        innerReferences[i].get().RiskFactorMultiply(returns, simulatedRiskFactor);
+    }
+    return;
+}
+
+void OneStepBSEngine::ApplyInverseReturns(double returns)
+{
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        innerReferences[i].get().RiskFactorMultiply(1 / returns, simulatedRiskFactor);
+    }
+    return;
+}
+
 void OneStepBSEngine::DoOnePath(double horizon, double vol, double normvariate)
 {
     auto innerReferences = theFunction->GetInnerReference();

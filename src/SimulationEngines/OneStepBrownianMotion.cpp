@@ -40,3 +40,23 @@ SimulationEngine* OneStepBrownianMotionEngine::clone() const
     return new OneStepBrownianMotionEngine(*this);
 }
 
+void OneStepBrownianMotionEngine::ApplyReturns(double returns)
+{
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        innerReferences[i].get().RiskFactorAdd(returns, simulatedRiskFactor);
+    }
+    return;
+}
+
+void OneStepBrownianMotionEngine::ApplyInverseReturns(double returns)
+{
+    auto innerReferences = theFunction->GetInnerReference();
+    for (unsigned long i = 0; i < innerReferences.size(); ++i)
+    {
+        innerReferences[i].get().RiskFactorAdd(-returns, simulatedRiskFactor);
+    }
+    return;
+}
+

@@ -52,6 +52,8 @@
 //Payoffs
 #include "PayOffCall.h"
 #include "PayOffPut.h"
+//Backtest
+#include "BackTest.h"
 
 using namespace std;
 
@@ -63,25 +65,29 @@ int main()
     srand(1);
 
     //Declare variables and set some constants
+    unsigned long riskFactorDaysUsed = 240;
     unsigned long NumberOfPaths;// = pow(10, 3); //For the Monte-Carlo value at risk simmulation
     unsigned long binomialTreeSteps;// = 10; //for american options
     unsigned long MCValuationNumberOfPaths;// = 5 * pow(10, 3); //For Monte-Carlo option valuations of e.g. for Best-of/worst-of options
     double timeHorizon; // = 20.0 / 252.0;
+    unsigned long daysBack;// = 20;
     double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
-    double zeroDrift = 0;    double r = 0.0035;
+    double zeroDrift = 0;    double r = 0.0035; double p;
 
     std::cout << "Input Time horizon (days): "; std::cin >> timeHorizon; timeHorizon /= 252.0;
+    std::cout << "Input VaR confidence factor: "; std::cin >> p;
     std::cout << "Input number of paths: ";   std::cin >> NumberOfPaths;   
     std::cout << "Input number of simulations for Monte-Carlo option valuations: "; std::cin >> MCValuationNumberOfPaths; 
     std::cout << "Input number of steps for binomial tree option valuations: "; std::cin >> binomialTreeSteps;
+    //std::cout << "Input number of days looked back for backtest: "; std::cin >> daysBack; 
     std::cout << "\n";
     
     //Read in file of prices to get most recent prices and covariance matrix
     vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactors.csv");
     vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
-    TimeSeriesHandler myTimeSeriesHandlder(myTimeSeries, AbsOrRelReturns);
-    myTimeSeriesHandlder.createCovarianceMatrix(244, 0);
+    TimeSeriesHandler myTimeSeriesHandlder(myTimeSeries, AbsOrRelReturns, riskFactorDaysUsed);
+    myTimeSeriesHandlder.createCovarianceMatrix(0);
     vector<vector<double>> myCovMatrix = myTimeSeriesHandlder.GetCovarianceMatrix();
     vector<double> spotRates = myTimeSeriesHandlder.GetMostRecentValues();
   
@@ -97,13 +103,15 @@ int main()
     //    }
     //    std::cout << "\n";
     //}
-    ///output the covariance matrix and spot rates used  
+    //std::cout << "\n";
+    //std::cout << "\n";
+    /////output the covariance matrix and spot rates used  
     //vector<double>  currentPrices = myTimeSeriesHandlder.GetMostRecentValues();
     //for (unsigned long i = 0; i < currentPrices.size(); i++)
     //{
     //    std::cout << "Current prices: " << currentPrices[i] << "\n";
     //}
-    //
+    
     //for (unsigned long i = 0; i < myCovMatrix.size(); i++)
     //{
     //    for (unsigned long j = 0; j < myCovMatrix[i].size(); j++)
@@ -191,7 +199,6 @@ int main()
         }
         std::cout << "\n";
         //Creating the statistics gatherers for the simulation
-        double p = 0.95;
         StatisticsMean meanGatherer;
         StatisticsAbsVaR absVarGatherer(p, NumberOfPaths);
         StatisticsRelVaR relVaRGatherer(p, NumberOfPaths);
@@ -203,7 +210,7 @@ int main()
         StatisticsCompiler InstrumentgathererCombiner({ meanGatherer, absVarGatherer, relVaRGatherer, relESGatherer });
         InstrumentStatisticsGatherer instrumentGatherer(InstrumentgathererCombiner, totalNumberOfInstruments);
         //Running the Monte-Carlo Value at Risk simulation
-        std::cout <<"\n     Value at risk simulation \n\n";
+        std::cout << "\n     Value at risk simulation \n\n";
         std::cout << "Number of paths: " << NumberOfPaths << "\n";
         std::cout << "Time horizon: " << (timeHorizon * 252) << " day(s)" << "\n";
         std::cout << "Number of paths for Monte-Carlo option valuations: " << MCValuationNumberOfPaths << "\n";
@@ -247,17 +254,35 @@ int main()
                 std::cout << InstrumentVARresults[i][0][j] << " " << "\n";
             std::cout << 100 * p << "% absolute VaR: ";
             for (unsigned long j = 0; j < InstrumentVARresults[i][1].size(); j++)
-                std::cout << InstrumentVARresults[i][1][j]<< " ";
+                std::cout << InstrumentVARresults[i][1][j] << " ";
             std::cout << "\n";
             std::cout << 100 * p << "% relative VaR: ";
             for (unsigned long j = 0; j < InstrumentVARresults[i][2].size(); j++)
-                std::cout << InstrumentVARresults[i][2][j]*100 << "% " << "\n";
+                std::cout << InstrumentVARresults[i][2][j] * 100 << "% " << "\n";
             std::cout << 100 * p << "% relative ES: ";
             for (unsigned long j = 0; j < InstrumentVARresults[i][3].size(); j++)
                 std::cout << InstrumentVARresults[i][3][j] * 100 << "% " << "\n";
             std::cout << "\n";
         }
 
+
+        /// Backtestin functionality - Work in progress
+        //BackTest thisBackTest(EngineVector, myTimeSeriesHandlder);        
+        //thisBackTest.RunBackTest(p, timeHorizon, NumberOfPaths, daysBack);
+        //vector<vector<vector<double>>> backTestResults = thisBackTest.GetResultsSoFar();
+        //std::cout << "\n";
+        //std::cout << "\n";
+        //for (unsigned long i = 0; i < backTestResults.size(); i++)
+        //{
+        //    for (unsigned long j = 0; j < backTestResults[i].size(); j++)
+        //    {
+        //        for (unsigned long k = 0; k < backTestResults[i][j].size(); k++)
+        //        {
+        //            std::cout << backTestResults[i][j][k] << " , ";
+        //        }
+        //        std::cout << "\n";
+        //    }
+        //}  
 
     }
     catch (const std::exception& e)
@@ -271,5 +296,11 @@ int main()
     std::cout << "Operation took: " << time_span.count() << " seconds.";
     double tmp;
     std::cin >> tmp;
+
+
+    
+
     return 0;
+
+
 }

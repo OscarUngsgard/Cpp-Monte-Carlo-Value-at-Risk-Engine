@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <list>
 
-TimeSeriesHandler::TimeSeriesHandler(std::vector<std::vector<double>> riskFactorTimeSeries_, std::vector<AbsOrRel> absOrRelReturnsVector_) : riskFactorTimeSeries(riskFactorTimeSeries_), absOrRelReturnsVector(absOrRelReturnsVector_)
+TimeSeriesHandler::TimeSeriesHandler(std::vector<std::vector<double>> riskFactorTimeSeries_, std::vector<AbsOrRel> absOrRelReturnsVector_, unsigned long daysBackUsed_) : riskFactorTimeSeries(riskFactorTimeSeries_), absOrRelReturnsVector(absOrRelReturnsVector_), daysBackUsed(daysBackUsed_)
 {
 	transformedToReturns = false;
 }
@@ -62,7 +62,7 @@ double TimeSeriesHandler::compute_covariance(std::vector<std::vector<double>> d,
 	return cov / (d.size() - 1);
 }
 
-void TimeSeriesHandler::createCovarianceMatrix(unsigned long daysBackUsed, unsigned long startingDaysBack)
+void TimeSeriesHandler::createCovarianceMatrix(unsigned long startingDaysBack)
 {
 	if (!transformedToReturns)
 		transformToReturns();
