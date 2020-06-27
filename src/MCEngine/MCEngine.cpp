@@ -57,8 +57,11 @@ void MCEngine::DoSimulation(StatisticsMC& PortfolioStatisticsGatherer, Instrumen
 			std::cout << "Estimated reamining computation time: " << (1 / 60.0) * time_span.count() * (((double)numberOfPaths-i) / i) << "minutes." << "\n";
 			std::cout << "% Completed:";
 		}
-		if (((i+1) % (numberOfPaths / 10) == 0))
-			std::cout << 100 * ((i+1UL) / (double)numberOfPaths) << " "; //progress bar
+		if (numberOfPaths > 9)
+		{
+			if (((i + 1) % (numberOfPaths / 10) == 0))
+				std::cout << 100 * ((i + 1UL) / (double)numberOfPaths) << " "; //progress bar
+		}
 	}
 	UpdateTTM(-timeHorizon); //reset time horizon for next simulation (backtest)
 }

@@ -150,6 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\General\Numerical\BinomialTest.cpp" />
+    <ClCompile Include="src\General\Numerical\Combinatorics.cpp" />
     <ClCompile Include="src\BackTest.cpp" />
     <ClCompile Include="src\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp">
@@ -203,6 +205,8 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffStock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BinomialTest.h" />
+    <ClInclude Include="include\Combinatorics.h" />
     <ClInclude Include="include\AbsOrRelReturns.h" />
     <ClInclude Include="include\StatisticAllPaths.h" />
     <ClInclude Include="include\StatisticsAbsVaR.h" />

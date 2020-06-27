@@ -10,7 +10,7 @@ TimeSeriesHandler::TimeSeriesHandler(std::vector<std::vector<double>> riskFactor
 	transformedToReturns = false;
 }
 
-std::vector<double> TimeSeriesHandler::GetMostRecentValues(unsigned long startingDaysBack)
+std::vector<double> TimeSeriesHandler::GetMostRecentValues(unsigned long startingDaysBack) const
 {
 	std::vector<double> mostRecentValues(riskFactorTimeSeries.back().size());
 	for (unsigned long j = 0; j < mostRecentValues.size(); j++)
@@ -20,7 +20,7 @@ std::vector<double> TimeSeriesHandler::GetMostRecentValues(unsigned long startin
 	return mostRecentValues;
 }
 
-std::vector<std::vector<double>> TimeSeriesHandler::GetReturns()
+std::vector<std::vector<double>> TimeSeriesHandler::GetReturns() const
 {
 	return returns;
 }
@@ -92,12 +92,12 @@ void TimeSeriesHandler::createCovarianceMatrix(unsigned long startingDaysBack)
 
 }
 
-std::vector<std::vector<double>> TimeSeriesHandler::GetCovarianceMatrix()
+std::vector<std::vector<double>> TimeSeriesHandler::GetCovarianceMatrix() const
 {
 	return covMatrix;
 }
 
-std::vector<std::vector<double>> TimeSeriesHandler::GetPartsOfCovarianceMatrix(std::vector<unsigned long> diagonalIndices)
+std::vector<std::vector<double>> TimeSeriesHandler::GetPartsOfCovarianceMatrix(std::vector<unsigned long> diagonalIndices) const
 {
 	std::vector<std::vector<double>> smallerCovMatrix;
 	smallerCovMatrix.resize(diagonalIndices.size());

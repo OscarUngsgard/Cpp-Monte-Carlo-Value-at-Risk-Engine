@@ -35,10 +35,6 @@ void OneStepBrownianMotionEngine::UnDoOnePath(double horizon, double vol, double
     return;
 }
 
-SimulationEngine* OneStepBrownianMotionEngine::clone() const
-{
-    return new OneStepBrownianMotionEngine(*this);
-}
 
 void OneStepBrownianMotionEngine::ApplyReturns(double returns)
 {
@@ -60,3 +56,7 @@ void OneStepBrownianMotionEngine::ApplyInverseReturns(double returns)
     return;
 }
 
+SimulationEngine* OneStepBrownianMotionEngine::clone() const
+{
+    return new OneStepBrownianMotionEngine(*this);
+}

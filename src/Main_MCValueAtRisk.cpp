@@ -10,6 +10,8 @@
 #include "TimeSeriesHandler.h"
 #include "Random.h"
 #include "Cholezky.h"
+#include "BinomialTest.h"
+#include "Combinatorics.h"
 //enums
 #include "RiskFactors.h"
 #include "AbsOrRelReturns.h"
@@ -55,6 +57,8 @@
 //Backtest
 #include "BackTest.h"
 
+
+
 using namespace std;
 
 int main()
@@ -63,6 +67,10 @@ int main()
     chrono::steady_clock sc;   
     auto start = sc.now();
     srand(1);
+
+    //std::pair<unsigned long, unsigned long> binomiConfInterval = BinomialConfidenceInterval(0.05, 40, 0.05);
+    //double lowerBound = get<0>(binomiConfInterval); double upperBound = get<1>(binomiConfInterval); double pValue = (1 - CumulativeBinomProbability(lowerBound, upperBound, 0.05, 1));
+    //std::cout << lowerBound << "    " << upperBound;
 
     //Declare variables and set some constants
     unsigned long riskFactorDaysUsed = 240;
@@ -73,14 +81,18 @@ int main()
     unsigned long daysBack;// = 20;
     double S0;    double TTM;    double Strike;    double d;    double contractRate;    double facevalue;
     double yield;    signed long nominal;    unsigned long couponFreq;    unsigned long freq;    double couponRate;
-    double zeroDrift = 0;    double r = 0.0035; double p;
-
+    double p; double alpha; //binom test statistic for backtesting
+    double r = 0.0035;
+    double zeroDrift = 0;
+    
+    
     std::cout << "Input Time horizon (days): "; std::cin >> timeHorizon; timeHorizon /= 252.0;
     std::cout << "Input VaR confidence factor: "; std::cin >> p;
     std::cout << "Input number of paths: ";   std::cin >> NumberOfPaths;   
     std::cout << "Input number of simulations for Monte-Carlo option valuations: "; std::cin >> MCValuationNumberOfPaths; 
     std::cout << "Input number of steps for binomial tree option valuations: "; std::cin >> binomialTreeSteps;
-    //std::cout << "Input number of days looked back for backtest: "; std::cin >> daysBack; 
+    std::cout << "Input number of days looked back for backtest: "; std::cin >> daysBack; 
+    std::cout << "Input signficance level (alpha) used in backtest: "; std::cin >> alpha;
     std::cout << "\n";
     
     //Read in file of prices to get most recent prices and covariance matrix
@@ -165,8 +177,8 @@ int main()
     std::shared_ptr<valuationFunction> EURUSDFXSwap = std::make_shared<FixedForFixedFXSwapFunction>("EUR/USD fixed for fixed FX Swap", notional_d, notional_f, FXrate, r_domestic, r_foreign, r_contract_d, r_contract_f, freq, TTM);
     
     //Combining the positions into new groups that will be stressed for each risk factor. Note that the same position can be stressed for any number of its risk factors
-    std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{stillFrontEuropeanCall, stillFrontEuropeanPut, stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption }); //Several different instruments are simulated with the process for this risk factor 
-    std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ storytelStock, StorytelAmericanCall, stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption }); //Note how the rainbow options are simulated for both underylings
+    std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , stillFrontEuropeanCall, stillFrontEuropeanPut}); //Several different instruments are simulated with the process for this risk factor
+    std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings //storytelStock, StorytelAmericanCall, 
     std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ USTreasuryBond, USDIRS, EURUSDForward,  StorytelAmericanCall }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
     std::shared_ptr<valuationFunction> USDEURFXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward });
     
@@ -180,8 +192,8 @@ int main()
     vector<Wrapper<SimulationEngine>>EngineVector; 
     EngineVector.push_back(StockSimulation);
     EngineVector.push_back(StockSimulation2);
-    EngineVector.push_back(ShortRateSimulation);
-    EngineVector.push_back(FXSimulation);
+    //EngineVector.push_back(ShortRateSimulation);
+    //EngineVector.push_back(FXSimulation);
 
     try {
         //Setting up the engine and calculating the present value of the portfolio and positions
@@ -211,8 +223,9 @@ int main()
         InstrumentStatisticsGatherer instrumentGatherer(InstrumentgathererCombiner, totalNumberOfInstruments);
         //Running the Monte-Carlo Value at Risk simulation
         std::cout << "\n     Value at risk simulation \n\n";
-        std::cout << "Number of paths: " << NumberOfPaths << "\n";
         std::cout << "Time horizon: " << (timeHorizon * 252) << " day(s)" << "\n";
+        std::cout << "Confidence Factor: " << p << "\n";
+        std::cout << "Number of paths: " << NumberOfPaths << "\n";
         std::cout << "Number of paths for Monte-Carlo option valuations: " << MCValuationNumberOfPaths << "\n";
         std::cout << "Number of steps for binomial tree option valuations: " << binomialTreeSteps << "\n" << "\n";
         VAREngine.DoSimulation(gathererCombiner, instrumentGatherer, NumberOfPaths, timeHorizon);
@@ -265,25 +278,46 @@ int main()
             std::cout << "\n";
         }
 
+        std::cout << "\n";
+        std::cout << "     Backtesting " << "\n";
+        std::cout << "\n \n";
+        std::cout << "Number of days to run backtest: " << daysBack << "\n";
 
-        /// Backtestin functionality - Work in progress
-        //BackTest thisBackTest(EngineVector, myTimeSeriesHandlder);        
-        //thisBackTest.RunBackTest(p, timeHorizon, NumberOfPaths, daysBack);
+        /// Backtesting functionality
+        BackTest thisBackTest(EngineVector, myTimeSeriesHandlder);        
+        thisBackTest.RunBackTest(p, timeHorizon, NumberOfPaths, daysBack);
         //vector<vector<vector<double>>> backTestResults = thisBackTest.GetResultsSoFar();
-        //std::cout << "\n";
-        //std::cout << "\n";
-        //for (unsigned long i = 0; i < backTestResults.size(); i++)
-        //{
-        //    for (unsigned long j = 0; j < backTestResults[i].size(); j++)
-        //    {
-        //        for (unsigned long k = 0; k < backTestResults[i][j].size(); k++)
-        //        {
-        //            std::cout << backTestResults[i][j][k] << " , ";
-        //        }
-        //        std::cout << "\n";
-        //    }
-        //}  
-
+        std::tuple<std::vector<double>, std::vector<std::vector<double>>> backTestResults = thisBackTest.GetResultsSoFar();
+        std::cout << "\n";
+        std::cout << "\n";
+        std::cout << "     Backtesting results " << "\n";
+        std::cout << "\n";
+        std::vector<double> results = get<0>(backTestResults);
+        std::vector<std::vector<double>> detailedResults = get<1>(backTestResults);
+        double trials = results[0]; double exceedances = results[1]; double ExceedancePerTrial = results[2];
+        std::cout << "Number of backtested days: " << trials << " \n";
+        std::cout << "Number of exceedance: " << exceedances << " \n";
+        std::cout << "Exceedances / backtested days: " << ExceedancePerTrial << " \n\n";
+        std::cout << "     Binomial test results \n\n";
+        std::pair<unsigned long, unsigned long> binomiConfInterval = BinomialConfidenceInterval( (1-p), trials, alpha);
+        double lowerBound = get<0>(binomiConfInterval); double upperBound = get<1>(binomiConfInterval); double pValue = (1 - CumulativeBinomProbability(lowerBound, upperBound, (1 - p), trials));
+        std::cout << "alpha: " << alpha << "\n"  << "lower bound: " << lowerBound << "\n" << "upper bound: " << upperBound << "\n\n";
+        std::cout << "p value: " << pValue << "\n";
+        bool passedTest = (lowerBound <= results[1] <= upperBound);
+        if (passedTest)
+            std::cout << "The null hypothesis that the Value at Risk model is correct can not be rejected at the " << pValue << " confidence level.";
+        std::cout << "\n \n";
+        std::cout << "     Detailed backtesting results " << "\n";
+        std::cout << "\n \n";
+        std::cout << "Days back, Portfolio value, VaR, Realized loss, VaR Exceedance" << "\n";
+        for (unsigned long i = 0; i < detailedResults.size(); i++)
+        {
+            for (unsigned long j = 0; j < detailedResults[i].size(); j++)
+            {
+                std::cout << detailedResults[i][j] << " , ";
+            }
+            std::cout << "\n";
+        }
     }
     catch (const std::exception& e)
     {
@@ -296,9 +330,6 @@ int main()
     std::cout << "Operation took: " << time_span.count() << " seconds.";
     double tmp;
     std::cin >> tmp;
-
-
-    
 
     return 0;
 
