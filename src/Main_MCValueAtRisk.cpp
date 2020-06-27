@@ -178,8 +178,8 @@ int main()
     
     //Combining the positions into new groups that will be stressed for each risk factor. Note that the same position can be stressed for any number of its risk factors
     std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , stillFrontEuropeanCall, stillFrontEuropeanPut}); //Several different instruments are simulated with the process for this risk factor
-    std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings //storytelStock, StorytelAmericanCall, 
-    std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ USTreasuryBond, USDIRS, EURUSDForward,  StorytelAmericanCall }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
+    std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings
+    std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
     std::shared_ptr<valuationFunction> USDEURFXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward });
     
     //Selecting the stochastic processes and risk factors to simulate for each position
@@ -192,8 +192,8 @@ int main()
     vector<Wrapper<SimulationEngine>>EngineVector; 
     EngineVector.push_back(StockSimulation);
     EngineVector.push_back(StockSimulation2);
-    //EngineVector.push_back(ShortRateSimulation);
-    //EngineVector.push_back(FXSimulation);
+    EngineVector.push_back(ShortRateSimulation);
+    EngineVector.push_back(FXSimulation);
 
     try {
         //Setting up the engine and calculating the present value of the portfolio and positions
@@ -303,7 +303,7 @@ int main()
         double lowerBound = get<0>(binomiConfInterval); double upperBound = get<1>(binomiConfInterval); double pValue = (1 - CumulativeBinomProbability(lowerBound, upperBound, (1 - p), trials));
         std::cout << "alpha: " << alpha << "\n"  << "lower bound: " << lowerBound << "\n" << "upper bound: " << upperBound << "\n\n";
         std::cout << "p value: " << pValue << "\n";
-        bool passedTest = (lowerBound <= results[1] <= upperBound);
+        bool passedTest = (lowerBound <= results[1] && results[1] <= upperBound);
         if (passedTest)
             std::cout << "The null hypothesis that the Value at Risk model is correct can not be rejected at the " << pValue << " confidence level.";
         std::cout << "\n \n";
