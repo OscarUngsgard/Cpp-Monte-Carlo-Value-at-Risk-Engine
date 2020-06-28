@@ -85,8 +85,7 @@ int main()
     double p; double alpha; //binom test statistic for backtesting
     double r = 0.0035;
     double zeroDrift = 0;
-    
-    
+
     std::cout << "Input Time horizon (days): "; std::cin >> timeHorizon; timeHorizon /= 252.0;
     std::cout << "Input VaR confidence factor: "; std::cin >> p;
     std::cout << "Input number of paths: ";   std::cin >> NumberOfPaths;   
@@ -103,10 +102,8 @@ int main()
     myTimeSeriesHandlder.createCovarianceMatrix(0);
     vector<vector<double>> myCovMatrix = myTimeSeriesHandlder.GetCovarianceMatrix();
     vector<double> spotRates = myTimeSeriesHandlder.GetMostRecentValues();
-  
 
-
-    ///output the returns used
+    ///output the returns and covariance matrix used
     //vector<vector<double>> myReturns = myTimeSeriesHandlder.GetReturns();
     //for (unsigned long i = 0; i < myReturns.size(); i++)
     //{
@@ -133,14 +130,6 @@ int main()
     //    }
     //    std::cout << "\n";
     //}
-
-    ///Functionality to manually create Covariance matrix and set current prices///
-    //vector<double> spotRates{ 690, 196.4, 0.00648, 1.1079 };
-    //std::vector<double> covmatrow1{ 0.24011, 0.0699455, 0.000565568, -7.56869e-05 };
-    //std::vector<double> covmatrow2{ 0.0699455, 0.241647, 0.000646747, -0.000195283 };
-    //std::vector<double> covmatrow3{ 0.000565568, 0.000646747, 0.000103739, -5.52115e-05 };
-    //std::vector<double> covmatrow4{ -7.56869e-05, -0.000195283, -5.52115e-05, 0.00492995 };
-    //std::vector<std::vector<double>> myCovMatrix{ covmatrow1, covmatrow2, covmatrow3, covmatrow4 };
 
     //Creating the positions//
     //RiskFactor 1 derivatives - A straddle
@@ -295,18 +284,20 @@ int main()
         std::vector<double> results = get<0>(backTestResults);
         std::vector<std::vector<double>> detailedResults = get<1>(backTestResults);
         std::pair<unsigned long, unsigned long> binomConfInterval = get<2>(backTestResults);
-        double trials = results[0]; double exceedances = results[1]; double ExceedancePerTrial = results[2];
+        double trials = results[0]; 
+        double exceedances = results[1]; 
+        double ExceedancePerTrial = results[2];
         std::cout << "Number of backtested days: " << trials << " \n";
         std::cout << "Number of exceedance: " << exceedances << " \n";
         std::cout << "Exceedances / backtested days: " << ExceedancePerTrial << " \n\n";
         std::cout << "     Binomial test results \n\n";
-        double lowerBound = get<0>(binomConfInterval); double upperBound = get<1>(binomConfInterval);
+        double lowerBound = get<0>(binomConfInterval); 
+        double upperBound = get<1>(binomConfInterval);
         double singifinanceLevel = CumulativeBinomProbability(lowerBound, upperBound, (1 - p), trials);
-        double pValue =  std::min(CumulativeBinomProbability(0, exceedances, (1 - p), trials), 1 - CumulativeBinomProbability(0, exceedances, (1 - p), trials));
+        double pValue = BinomTestTwoSidedPValue(1-p, trials, exceedances);
         std::cout << "alpha: " << alpha << "\n"  << "lower bound: " << lowerBound << "\n" << "upper bound: " << upperBound << "\n\n";
         std::cout << "p value: " << pValue << "\n";
-        bool passedTest = (lowerBound <= exceedances && exceedances <= upperBound);
-        if (passedTest)
+        if (lowerBound <= exceedances && exceedances <= upperBound)
             std::cout << "The null hypothesis that the Value at Risk model is correct can not be rejected at the " << singifinanceLevel << " confidence level.";
         std::cout << "\n \n";
         std::cout << "     Detailed backtesting results " << "\n";

@@ -44,3 +44,15 @@ std::pair<unsigned long, unsigned long> BinomialConfidenceInterval(double p, uns
 	std::pair<unsigned long, unsigned long> interval{ currentLowerBound , currentUpperBound };
 	return interval;
 }
+
+double BinomTestTwoSidedPValue(double p, unsigned long trials, unsigned long numberOfSuccesses)
+{
+	//Explaination: https://stats.stackexchange.com/questions/284641/computing-a-two-sided-p-value-when-the-binomial-dist-is-not-symmetric/284666
+	double pValue = 0;
+	for (unsigned long i = 0; i < trials + 1; i++)
+	{
+		if (BinomProbability(i, p, trials) <= BinomProbability(numberOfSuccesses, p, trials))
+			pValue += BinomProbability(i, p, trials);
+	}
+	return pValue;
+}
