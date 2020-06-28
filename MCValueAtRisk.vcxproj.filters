@@ -252,14 +252,14 @@
     <ClCompile Include="src\ValuationFunctions\ClosedFormFunctions\FXDerivativeFunctions\FixedForFixedFXSwapFunction.cpp">
       <Filter>Source Files\ValuationFunctions\ClosedFormFunctions\FXDerivativeFunctions</Filter>
     </ClCompile>
-    <ClCompile Include="src\BackTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\General\Numerical\Combinatorics.cpp">
       <Filter>Source Files\GeneralClassesAndFunctions</Filter>
     </ClCompile>
     <ClCompile Include="src\General\Numerical\BinomialTest.cpp">
       <Filter>Source Files\GeneralClassesAndFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BackTest\BackTest.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

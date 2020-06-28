@@ -3,6 +3,7 @@
 #include <cmath>
 #include <chrono>
 #include <memory>
+#include <algorithm>
 //General classes and functions
 #include "ReadCSV.h"
 #include "Wrapper.h"
@@ -285,27 +286,28 @@ int main()
 
         /// Backtesting functionality
         BackTest thisBackTest(EngineVector, myTimeSeriesHandlder);        
-        thisBackTest.RunBackTest(p, timeHorizon, NumberOfPaths, daysBack);
-        //vector<vector<vector<double>>> backTestResults = thisBackTest.GetResultsSoFar();
-        std::tuple<std::vector<double>, std::vector<std::vector<double>>> backTestResults = thisBackTest.GetResultsSoFar();
+        thisBackTest.RunBackTest(p, timeHorizon, NumberOfPaths, daysBack, alpha);
+        std::tuple<std::vector<double>, std::vector<std::vector<double>>, std::pair<unsigned long, unsigned long>> backTestResults = thisBackTest.GetResultsSoFar();
         std::cout << "\n";
         std::cout << "\n";
         std::cout << "     Backtesting results " << "\n";
         std::cout << "\n";
         std::vector<double> results = get<0>(backTestResults);
         std::vector<std::vector<double>> detailedResults = get<1>(backTestResults);
+        std::pair<unsigned long, unsigned long> binomConfInterval = get<2>(backTestResults);
         double trials = results[0]; double exceedances = results[1]; double ExceedancePerTrial = results[2];
         std::cout << "Number of backtested days: " << trials << " \n";
         std::cout << "Number of exceedance: " << exceedances << " \n";
         std::cout << "Exceedances / backtested days: " << ExceedancePerTrial << " \n\n";
         std::cout << "     Binomial test results \n\n";
-        std::pair<unsigned long, unsigned long> binomiConfInterval = BinomialConfidenceInterval( (1-p), trials, alpha);
-        double lowerBound = get<0>(binomiConfInterval); double upperBound = get<1>(binomiConfInterval); double pValue = (1 - CumulativeBinomProbability(lowerBound, upperBound, (1 - p), trials));
+        double lowerBound = get<0>(binomConfInterval); double upperBound = get<1>(binomConfInterval);
+        double singifinanceLevel = CumulativeBinomProbability(lowerBound, upperBound, (1 - p), trials);
+        double pValue =  std::min(CumulativeBinomProbability(0, exceedances, (1 - p), trials), 1 - CumulativeBinomProbability(0, exceedances, (1 - p), trials));
         std::cout << "alpha: " << alpha << "\n"  << "lower bound: " << lowerBound << "\n" << "upper bound: " << upperBound << "\n\n";
         std::cout << "p value: " << pValue << "\n";
-        bool passedTest = (lowerBound <= results[1] && results[1] <= upperBound);
+        bool passedTest = (lowerBound <= exceedances && exceedances <= upperBound);
         if (passedTest)
-            std::cout << "The null hypothesis that the Value at Risk model is correct can not be rejected at the " << pValue << " confidence level.";
+            std::cout << "The null hypothesis that the Value at Risk model is correct can not be rejected at the " << singifinanceLevel << " confidence level.";
         std::cout << "\n \n";
         std::cout << "     Detailed backtesting results " << "\n";
         std::cout << "\n \n";

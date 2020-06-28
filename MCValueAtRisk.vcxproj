@@ -152,7 +152,7 @@
   <ItemGroup>
     <ClCompile Include="src\General\Numerical\BinomialTest.cpp" />
     <ClCompile Include="src\General\Numerical\Combinatorics.cpp" />
-    <ClCompile Include="src\BackTest.cpp" />
+    <ClCompile Include="src\BackTest\BackTest.cpp" />
     <ClCompile Include="src\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.cpp" />
     <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp">
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ShowIncludes>
