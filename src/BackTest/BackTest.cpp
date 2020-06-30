@@ -28,9 +28,9 @@ void BackTest::RunBackTest(double confidenceLevel, double timeHorizon, unsigned 
 		std::cout.setstate(std::ios_base::failbit); //Supress output of DoSimulation function
 		thisVarEngine.DoSimulation(thisRelVarGatherer, instrumentGatherer, numberOfPaths, timeHorizon);
 		std::cout.clear(); //Show output again	
-		backTestResults[i].push_back(thisRelVarGatherer.GetResultsSoFar()[0][0]); //third element in result contains value at risk at day
+		backTestResults[i].push_back(thisRelVarGatherer.GetResultsSoFar()[0][0]); //third element in result contains Value at Risk at day
 
-		MoveBackOneDay(currentDaysBack);	
+		MoveBackOneDay(currentDaysBack); //Apply inverse returns to underlying risk factors
 		currentDaysBack++;
 		if (i == (daysBack / 10) - 1)
 		{
