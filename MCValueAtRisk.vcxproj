@@ -150,6 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffPutRelative.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffCallRelative.cpp" />
     <ClCompile Include="src\General\Numerical\BinomialTest.cpp" />
     <ClCompile Include="src\General\Numerical\Combinatorics.cpp" />
     <ClCompile Include="src\BackTest\BackTest.cpp" />
@@ -208,6 +210,8 @@
     <ClInclude Include="include\BinomialTest.h" />
     <ClInclude Include="include\Combinatorics.h" />
     <ClInclude Include="include\AbsOrRelReturns.h" />
+    <ClInclude Include="include\PayOffCallRelative.h" />
+    <ClInclude Include="include\PayOffPutRelative.h" />
     <ClInclude Include="include\StatisticAllPaths.h" />
     <ClInclude Include="include\StatisticsAbsVaR.h" />
     <ClInclude Include="include\StatisticsMean.h" />

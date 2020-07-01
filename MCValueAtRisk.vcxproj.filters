@@ -261,6 +261,12 @@
     <ClCompile Include="src\BackTest\BackTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffCallRelative.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffPutRelative.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RiskFactors.h">
@@ -433,6 +439,12 @@
     </ClInclude>
     <ClInclude Include="include\Combinatorics.h">
       <Filter>Header Files\GeneralClassesAndFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffCallRelative.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffPutRelative.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

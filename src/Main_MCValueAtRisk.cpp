@@ -55,6 +55,8 @@
 //Payoffs
 #include "PayOffCall.h"
 #include "PayOffPut.h"
+#include "PayOffCallRelative.h"
+#include "PayOffPutRelative.h"
 //Backtest
 #include "BackTest.h"
 
@@ -96,14 +98,15 @@ int main()
     std::cout << "\n";
     
     //Read in file of prices to get most recent prices and covariance matrix
-    vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactors.csv");
-    vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
+    vector<vector<double>> myTimeSeries = parse2DCsvFile("RiskFactorsnew.csv");
+    vector<AbsOrRel> AbsOrRelReturns{ AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::abs, AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::rel, AbsOrRel::rel }; //Specifiy if the relative returns or absolute returns are normally distributed for the time series 
     TimeSeriesHandler myTimeSeriesHandlder(myTimeSeries, AbsOrRelReturns, riskFactorDaysUsed);
     myTimeSeriesHandlder.createCovarianceMatrix(0);
     vector<vector<double>> myCovMatrix = myTimeSeriesHandlder.GetCovarianceMatrix();
     vector<double> spotRates = myTimeSeriesHandlder.GetMostRecentValues();
 
     ///output the returns and covariance matrix used
+
     //vector<vector<double>> myReturns = myTimeSeriesHandlder.GetReturns();
     //for (unsigned long i = 0; i < myReturns.size(); i++)
     //{
@@ -121,7 +124,7 @@ int main()
     //{
     //    std::cout << "Current prices: " << currentPrices[i] << "\n";
     //}
-    
+    //
     //for (unsigned long i = 0; i < myCovMatrix.size(); i++)
     //{
     //    for (unsigned long j = 0; j < myCovMatrix[i].size(); j++)
@@ -136,17 +139,19 @@ int main()
     nominal = 100; d = 0; S0 = spotRates[0]; Strike = spotRates[0]; double stilfrontImpvol = 0.5; TTM =  3.0 / 12.0;
     std::shared_ptr<valuationFunction> stillFrontEuropeanCall = std::make_shared<BSCallFunction>("StillFront 3 month ATM European call", nominal, S0, r, d, stilfrontImpvol, TTM, Strike);
     std::shared_ptr<valuationFunction> stillFrontEuropeanPut = std::make_shared<BSPutFunction>("StillFront 3 month ATM European put", nominal, S0, r, d, stilfrontImpvol, TTM, Strike);
+    PayOffPut storytelATMPutPayOff(S0);
+    std::shared_ptr<valuationFunction> stillFrontEuropeanPutMonteCarlo = std::make_shared<MonteCarloVanillaOptionFunction>("StillFront 3 month ATM European put Monte Carlo", nominal, S0, r, d, stilfrontImpvol, TTM, storytelATMPutPayOff, MCValuationNumberOfPaths);
     //RiskFactor 2 derivatives - A covered calll
     nominal = 140; S0 = spotRates[1];
     std::shared_ptr<valuationFunction> storytelStock = std::make_shared<StockPriceFunction>("Storytel", nominal, S0);
-    nominal = -200; double storytelDivYield = 0.03; Strike = 0.9 * spotRates[1]; double storytelImpvol = 0.5; TTM = 3.0 / 12.0;
+    nominal = -200; double storytelDivYield = 0.03; Strike = 0.9 * spotRates[1]; double storytelImpvol = 0.5; TTM = 12.0 / 12.0;
     PayOffCall StorytelITMCallPayOff(0.9 * spotRates[1]);
     std::shared_ptr<valuationFunction> StorytelAmericanCall = std::make_shared<AmericanGeneralPayOffFunction>("Storytel 3 month In-the-money American call", nominal, S0, r, storytelDivYield, storytelImpvol, TTM, StorytelITMCallPayOff, binomialTreeSteps);
     //RiskFactor 2 and 3 Derivatives - Some sexy exotics
     nominal = 100;
     vector<vector<double>> rainBowCovMatrix = myTimeSeriesHandlder.GetPartsOfCovarianceMatrix(vector<unsigned long>{0, 1});
     vector<double> S0_vect{ spotRates[0], spotRates[1] }; vector<double> impvol_vect{ stilfrontImpvol, storytelImpvol }; vector<double> div_vect{ 0, storytelDivYield };
-    PayOffCall StillfrontATMCallPayOff(S0_vect[0]); PayOffCall storytelATMCallPayOff(S0_vect[1]);
+    PayOffCallRelative StillfrontATMCallPayOff(S0_vect[0]); PayOffCallRelative storytelATMCallPayOff(S0_vect[1]);
     vector<Wrapper<PayOff>> rainbowPayoffs{ StillfrontATMCallPayOff, storytelATMCallPayOff };
     std::shared_ptr<valuationFunction> stillFrontStoryTelWorstOfCallOption = std::make_shared<MonteCarloRainbowOptionFunction>("Worst-Of Call Option StilFront/StoryTel", nominal, S0_vect, r, div_vect, impvol_vect, rainBowCovMatrix, TTM, rainbowPayoffs, MCValuationNumberOfPaths, RainbowOptionType::worst_of);
     nominal = 100;
@@ -165,26 +170,41 @@ int main()
     std::shared_ptr<valuationFunction> EURUSDForward = std::make_shared<FXForwardFunction>("EUR/USD FX forward", nominal, FXrate, r, r_foreign, TTM, F0);
     double notional_d = 1110000; double notional_f = 1000000; FXrate = (spotRates[3]); double r_domestic = r; double r_contract_d = 0.03; double r_contract_f = 0.03; TTM = 3; freq = 1;
     std::shared_ptr<valuationFunction> EURUSDFXSwap = std::make_shared<FixedForFixedFXSwapFunction>("EUR/USD fixed for fixed FX Swap", notional_d, notional_f, FXrate, r_domestic, r_foreign, r_contract_d, r_contract_f, freq, TTM);
-    
+    //RiskFactor 5/6/7 derivatives - Derivatives on SPX,SX5E and OMX indices.
+    nominal = 10000; TTM = 1.97;
+    vector<vector<double>> indicesRainBowCovMatrix = myTimeSeriesHandlder.GetPartsOfCovarianceMatrix(vector<unsigned long>{4, 5, 6});
+    vector<double> indices_S0_vect{ spotRates[4], spotRates[5], spotRates[6] }; 
+    vector<double> indices_impvol_vect{ 0.2434175,0.215258, 0.2267145  }; vector<double> indices_div_vect{ 0.02007, 0.02313, 0.03825 };
+    PayOffCallRelative SPXPayOff(3055.73); PayOffCallRelative OMXPayoff(1649.38); PayOffCallRelative SX5EPayoff(3077.92);
+    vector<Wrapper<PayOff>> indicesRainbowPayoffs{ SPXPayOff, OMXPayoff, SX5EPayoff };
+    std::shared_ptr<valuationFunction> indicesBestOfCallOption = std::make_shared<MonteCarloRainbowOptionFunction>("Best-Of Call Option SPY/OMX/SX5E", nominal, indices_S0_vect, r, indices_div_vect, indices_impvol_vect, indicesRainBowCovMatrix, TTM, indicesRainbowPayoffs, MCValuationNumberOfPaths, RainbowOptionType::best_of);
+
     //Combining the positions into new groups that will be stressed for each risk factor. Note that the same position can be stressed for any number of its risk factors
-    std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , stillFrontEuropeanCall, stillFrontEuropeanPut}); //Several different instruments are simulated with the process for this risk factor
+    std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , stillFrontEuropeanCall, stillFrontEuropeanPut}); //Several different instruments are simulated with the process for this risk factor //stillFrontEuropeanPutMonteCarlo
     std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption , storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings
     std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
     std::shared_ptr<valuationFunction> USDEURFXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward });
-    
+    std::shared_ptr<valuationFunction> SPYFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption });
+    std::shared_ptr<valuationFunction> OMXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption });
+    std::shared_ptr<valuationFunction> SX5EFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption });
     //Selecting the stochastic processes and risk factors to simulate for each position
     OneStepBSEngine StockSimulation(zeroDrift, StillFrontFunctions, RiskFactor::equity1);
     OneStepBSEngine StockSimulation2(zeroDrift, StorytelFunctions, RiskFactor::equity2);
     OneStepBrownianMotionEngine ShortRateSimulation(zeroDrift, USTreasuryFunctions, RiskFactor::interest_rate);
     double FXDrift = r_domestic - r_foreign;
     OneStepBSEngine FXSimulation(FXDrift, USDEURFXFunctions, RiskFactor::FX_rate);
+    OneStepBSEngine SPYSimulation(zeroDrift, SPYFunctions, RiskFactor::equity1);
+    OneStepBSEngine OMXSimulation(zeroDrift, OMXFunctions, RiskFactor::equity2);
+    OneStepBSEngine SX5ESimulation(zeroDrift, SX5EFunctions, RiskFactor::equity3);
     //create vector of the engines that will be used in MC simulation. NOTE: Make sure to add in same order as covariance matrix was created
     vector<Wrapper<SimulationEngine>>EngineVector; 
     EngineVector.push_back(StockSimulation);
     EngineVector.push_back(StockSimulation2);
     EngineVector.push_back(ShortRateSimulation);
     EngineVector.push_back(FXSimulation);
-
+    EngineVector.push_back(SPYSimulation);
+    EngineVector.push_back(OMXSimulation);
+    EngineVector.push_back(SX5ESimulation);
     try {
         //Setting up the engine and calculating the present value of the portfolio and positions
         MCEngine VAREngine(EngineVector, myCovMatrix);
