@@ -262,10 +262,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffCallRelative.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
     </ClCompile>
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffPutRelative.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -441,10 +441,10 @@
       <Filter>Header Files\GeneralClassesAndFunctions</Filter>
     </ClInclude>
     <ClInclude Include="include\PayOffCallRelative.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ValuationFunctions\Payoffs</Filter>
     </ClInclude>
     <ClInclude Include="include\PayOffPutRelative.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ValuationFunctions\Payoffs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
