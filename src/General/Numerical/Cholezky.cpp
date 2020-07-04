@@ -1,7 +1,7 @@
 #include "Cholezky.h"
 std::vector<std::vector<double>> Cholesky_Decomposition(std::vector<std::vector<double>> matrix) //, const int n)
 {
-    int n = matrix.size();
+    double n = matrix.size();
     std::vector<double> inner(n);
     std::vector<std::vector<double>> lower(n, inner);
     for (int i = 0; i < n; i++) {

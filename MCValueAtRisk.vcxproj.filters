@@ -267,6 +267,15 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffPutRelative.cpp">
       <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
     </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffRelPerformance.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions\OutPerformanceFunction.cpp">
+      <Filter>Source Files\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloOutPerformanceOptionFunction.cpp">
+      <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RiskFactors.h">
@@ -445,6 +454,15 @@
     </ClInclude>
     <ClInclude Include="include\PayOffPutRelative.h">
       <Filter>Header Files\ValuationFunctions\Payoffs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffRelPerformance.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OutPerformanceFunction.h">
+      <Filter>Header Files\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MonteCarloOutPerformanceOptionFunction.h">
+      <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

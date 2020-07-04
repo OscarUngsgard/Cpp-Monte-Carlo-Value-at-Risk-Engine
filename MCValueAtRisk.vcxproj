@@ -150,6 +150,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloOutPerformanceOptionFunction.cpp" />
+    <ClCompile Include="src\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions\OutPerformanceFunction.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffRelPerformance.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffPutRelative.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffCallRelative.cpp" />
     <ClCompile Include="src\General\Numerical\BinomialTest.cpp" />
@@ -266,6 +269,9 @@
     <ClInclude Include="include\PayOffPut.h" />
     <ClInclude Include="include\PayOffStock.h" />
     <ClInclude Include="include\BackTest.h" />
+    <ClInclude Include="include\MonteCarloOutPerformanceOptionFunction.h" />
+    <ClInclude Include="include\OutPerformanceFunction.h" />
+    <ClInclude Include="include\PayOffRelPerformance.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
