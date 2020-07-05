@@ -6,7 +6,7 @@ std::vector<std::vector<double>> Cholesky_Decomposition(std::vector<std::vector<
     std::vector<std::vector<double>> lower(n, inner);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j <= i; j++) {
-            int sum = 0;
+            double sum = 0;
 
             if (j == i) // summation for diagnols 
             {

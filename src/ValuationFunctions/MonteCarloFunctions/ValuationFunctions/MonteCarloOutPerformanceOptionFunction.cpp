@@ -9,7 +9,8 @@
 #include <iostream>
 #include <algorithm>
 
-MonteCarloOutPerformanceOptionFunction::MonteCarloOutPerformanceOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<Wrapper<PayOff>> ThePayOffVect_, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, unsigned long numberOfPaths_) : r(r_), S_vect(S0_vect), ThePayOffVect(ThePayOffVect_), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), numberOfPaths(numberOfPaths_), impvol_vect(impvol_vect_)
+MonteCarloOutPerformanceOptionFunction::MonteCarloOutPerformanceOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<Wrapper<PayOff>> ThePayOffVect_, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, unsigned long numberOfPaths_)
+	: r(r_), S_vect(S0_vect), ThePayOffVect(ThePayOffVect_), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), numberOfPaths(numberOfPaths_), impvol_vect(impvol_vect_)
 {
 	if (covMatrix.size() != S_vect.size())
 		throw("Missmatched Covariance matrix and initial spot values array sizes in OutPerformance Option");

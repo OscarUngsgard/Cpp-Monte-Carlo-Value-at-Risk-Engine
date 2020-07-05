@@ -53,15 +53,15 @@ std::vector<MJArray> GetArraysOfCorrelatedGauassiansByBoxMuller(unsigned long nu
 		corrNormVariatesVector[j] = 0;
 	}
 	//calculate correlated normal variates and fill the arrays with values
-	MJArray NormVariates(cholezkyMatrix.size());
 	for (unsigned long k = 0; k < numberOfVariates; k++) {
+		MJArray NormVariates(cholezkyMatrix.size());
 		for (unsigned long i = 0; i < cholezkyMatrix.size(); i++)
 		{
 			NormVariates[i] = GetOneGaussianByBoxMuller();
 			for (unsigned long j = 0; j < cholezkyMatrix[i].size(); j++) {
-				corrNormVariatesVector[i][k] += cholezkyMatrix[i][j] * NormVariates[j];
+				corrNormVariatesVector[i][k] += (cholezkyMatrix[i][j] * NormVariates[j]);
 			}
-			corrNormVariatesVector[i][k] /= cholezkyMatrix[i][i]; //normalize the random variates
+			corrNormVariatesVector[i][k] /= sqrt(covMatrix[i][i]);; //normalize the random variates
 		}
 	}
 	return corrNormVariatesVector;

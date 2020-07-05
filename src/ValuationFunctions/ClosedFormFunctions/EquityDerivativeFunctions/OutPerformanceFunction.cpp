@@ -14,6 +14,7 @@ OutPerformanceFunction::OutPerformanceFunction(std::string uniqueIdentifier_, in
 
 void OutPerformanceFunction::ValueInstrument()
 {
+	/// Using the Margrabe formula for the relative price path
 	double sigma = sqrt(pow(impvol_vect[0],2) + pow(impvol_vect[1],2) - 2.0 * impvol_vect[0] * impvol_vect[1] * corr);
 	double d1 = log(((S_vect[0] / S_start_vect[0]) / (S_vect[1] / S_start_vect[1])) + (d_vect[1] - d_vect[0] + (pow(sigma, 2) / 2.0) * TTM)) / (sigma * sqrt(TTM));
 	double d2 = d1 - sigma * sqrt(TTM);
