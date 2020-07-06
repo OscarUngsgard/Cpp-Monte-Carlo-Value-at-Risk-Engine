@@ -154,10 +154,6 @@ int main()
     //RiskFactor 3 derivatives - Derivatives on the US 10 year treasury yield
     nominal = 100; yield = spotRates[2]/100.0;  facevalue = 100; couponFreq = 2; couponRate = 0.01; TTM = 2;
     std::shared_ptr<valuationFunction> USTreasuryBond = std::make_shared<BondFunction>("10 year US treasury bond", nominal, yield, facevalue, couponRate, couponFreq, TTM);
-    nominal = 100000;  MJArray riskFreeRates(3); MJArray forwardRates(3); contractRate = 0.006; freq = 2; TTM = 1.25;
-    riskFreeRates[0] = 0.0050; riskFreeRates[1] = 0.0055; riskFreeRates[2] = 0.006; 
-    forwardRates[0] = 0.055; forwardRates[1] = 0.0062; forwardRates[2] = 0.007;
-    std::shared_ptr<valuationFunction> USDIRS = std::make_shared<InterestRateSwapFunction>("Interest rate swap on US 10 year yield", nominal, r, contractRate, forwardRates, freq, TTM);
     //RiskFactor 4 derivatives - Derivatives on the EUR/USD exchange rate
     nominal = 100000; double F0 = 1.15; double r_foreign = -0.003; double FXrate = (spotRates[3]); TTM = 1;
     std::shared_ptr<valuationFunction> EURUSDForward = std::make_shared<FXForwardFunction>("EUR/USD FX forward", nominal, FXrate, r, r_foreign, TTM, F0);
@@ -188,7 +184,7 @@ int main()
     //Combining the positions into new groups that will be stressed for each risk factor. Note that the same position can be stressed for any number of its risk factors
     std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ stillFrontEuropeanCallButterflySpread1, stillFrontEuropeanCallButterflySpread2, stillFrontEuropeanCallButterflySpread3}); //Several different instruments are simulated with the process for this risk factor //stillFrontEuropeanPutMonteCarlo //stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption ,
     std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{  storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings //stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption 
-    std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
+    std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ USTreasuryBond, EURUSDForward }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
     std::shared_ptr<valuationFunction> USDEURFXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward, EURUSDFXSwap});
     std::shared_ptr<valuationFunction> SPYFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption,  SPYOMXOutPerformanceOptionMC});
     std::shared_ptr<valuationFunction> OMXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption , SPYOMXOutPerformanceOptionMC});

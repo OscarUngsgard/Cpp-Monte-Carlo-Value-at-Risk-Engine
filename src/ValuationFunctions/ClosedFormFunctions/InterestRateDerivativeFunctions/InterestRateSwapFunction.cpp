@@ -86,3 +86,9 @@ valuationFunction* InterestRateSwapFunction::clone() const
 {
 	return new InterestRateSwapFunction(*this);
 }
+
+//Position config example
+//nominal = 100000;  MJArray riskFreeRates(3); MJArray forwardRates(3); contractRate = 0.006; freq = 2; TTM = 1.25;
+//riskFreeRates[0] = 0.0050; riskFreeRates[1] = 0.0055; riskFreeRates[2] = 0.006;
+//forwardRates[0] = 0.055; forwardRates[1] = 0.0062; forwardRates[2] = 0.007;
+//std::shared_ptr<valuationFunction> USDIRS = std::make_shared<InterestRateSwapFunction>("Interest rate swap on US 10 year yield", nominal, r, contractRate, forwardRates, freq, TTM);
