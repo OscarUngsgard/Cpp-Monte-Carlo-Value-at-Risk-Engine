@@ -150,7 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\MonteCarloPathDependantOption.cpp" />
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloPathDependantOptionFunction.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffCallPathDependant.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\DiscretizedPathMonteCarloValuation.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\PathDependantOption.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffAirthmeticMean.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="include\PathDependantPayOff.h" />
     <ClInclude Include="include\PayOffAirthmeticMean.h" />
     <ClInclude Include="include\MonteCarloPathDependantOption.h" />
+    <ClInclude Include="include\PayOffCallPathDependant.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

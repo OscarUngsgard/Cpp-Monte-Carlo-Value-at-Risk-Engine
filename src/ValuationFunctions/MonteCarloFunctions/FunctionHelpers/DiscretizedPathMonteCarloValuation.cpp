@@ -20,10 +20,12 @@ void DiscretizedPathMonteCarloValuation(const PathDependantOption& TheOption, do
         for (unsigned long j = 0; j < numberOfSteps; j++)
         {       
         CurrentLogSpot += logDrift;
-        CurrentLogSpot += logDifussion * normVariates[numberOfSteps * i + j];
+        CurrentLogSpot += (logDifussion * normVariates[numberOfSteps * i + j]);
         SpotValues[j] = exp(CurrentLogSpot);
+        //std::cout << "spot value " << j << " = " << SpotValues[j] << "\n";
         }
         double thisPayoff = TheOption.OptionPayOff(SpotValues);
+        //std::cout << "Payoff " << " = " << thisPayoff << "\n";
         gatherer.DumpOneResult(discounting * thisPayoff);
      }
     return;

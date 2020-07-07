@@ -63,6 +63,7 @@
 #include "PayOffRelPerformance.h"
 #include "PayOffStock.h"
 #include "PayOffAirthmeticMean.h"
+#include "PayOffCallPathDependant.h"
 //Backtest
 #include "BackTest.h"
 
@@ -184,8 +185,9 @@ int main()
     std::shared_ptr<valuationFunction> SPYOMXOutPerformanceOptionMC = std::make_shared<MonteCarloOutPerformanceOptionFunction>("OutPerformance Option SPY over OMX Monte Carlo", nominal, SPY_OMX_S0_vect, SPYOMXOutPerformPayoffs, r, SPY_OMX_div_vect, SPY_OMX_impvol_vect, SPYOMXRainBowCovMatrix, TTM, MCValuationNumberOfPaths);
     //Arithmetic Asian option on SPY
     PayOffArithmeticMean AsianPayOff(spotRates[4]);
-    unsigned long MCValuationNumberOfSteps = 10; nominal = 1;
-    std::shared_ptr<valuationFunction> SPYAsianOption = std::make_shared<MonteCarloPathDependantOptionFunction>("Asian Option SPY Monte Carlo", nominal, spotRates[4], r, SPY_OMX_div_vect[0], SPY_OMX_impvol_vect[0], TTM, AsianPayOff, MCValuationNumberOfPaths, MCValuationNumberOfSteps);
+    PayOffCallPathDependant PathsCallPayOff(spotRates[4]);
+    unsigned long MCValuationNumberOfSteps = 100; nominal = 1;
+    std::shared_ptr<valuationFunction> SPYAsianOption = std::make_shared<MonteCarloPathDependantOptionFunction>("Asian Option SPY Monte Carlo", nominal, spotRates[4], r, SPY_OMX_div_vect[0], SPY_OMX_impvol_vect[0], TTM, PathsCallPayOff, MCValuationNumberOfPaths, MCValuationNumberOfSteps);
                                                                                                                                
         
 

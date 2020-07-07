@@ -291,7 +291,10 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffAirthmeticMean.cpp">
       <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff</Filter>
     </ClCompile>
-    <ClCompile Include="include\MonteCarloPathDependantOption.cpp">
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffCallPathDependant.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloPathDependantOptionFunction.cpp">
       <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="include\MonteCarloPathDependantOption.h">
       <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffCallPathDependant.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
