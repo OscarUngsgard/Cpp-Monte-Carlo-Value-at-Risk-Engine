@@ -6,7 +6,6 @@ class StandardExcerciseOption
 {
 public:
 	StandardExcerciseOption(const Wrapper<PayOff>& ThePayOff_, double Expiry_);
-
 	double GetExpiry() const;
 	double OptionPayOff(double Spot) const;
 private:

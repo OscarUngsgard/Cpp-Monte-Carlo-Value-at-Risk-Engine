@@ -150,6 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\MonteCarloPathDependantOption.cpp" />
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\DiscretizedPathMonteCarloValuation.cpp" />
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\PathDependantOption.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffAirthmeticMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloOutPerformanceOptionFunction.cpp" />
     <ClCompile Include="src\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions\OutPerformanceFunction.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffRelPerformance.cpp" />
@@ -210,6 +214,7 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffStock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DiscretizedPathMonteCarloValuation.h" />
     <ClInclude Include="include\BinomialTest.h" />
     <ClInclude Include="include\Combinatorics.h" />
     <ClInclude Include="include\AbsOrRelReturns.h" />
@@ -272,6 +277,10 @@
     <ClInclude Include="include\MonteCarloOutPerformanceOptionFunction.h" />
     <ClInclude Include="include\OutPerformanceFunction.h" />
     <ClInclude Include="include\PayOffRelPerformance.h" />
+    <ClInclude Include="include\PathDependantOption.h" />
+    <ClInclude Include="include\PathDependantPayOff.h" />
+    <ClInclude Include="include\PayOffAirthmeticMean.h" />
+    <ClInclude Include="include\MonteCarloPathDependantOption.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

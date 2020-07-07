@@ -106,6 +106,12 @@
     <Filter Include="Source Files\ValuationFunctions\ClosedFormFunctions\InterestRateDerivativeFunctions">
       <UniqueIdentifier>{f2160ebd-b642-4630-8b55-fb6fc50f09a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ValuationFunctions\Payoffs\PathDependantPayOff">
+      <UniqueIdentifier>{8c88056d-d447-49e3-99d4-9d423d85e94a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ValuationFunctions\PayOffs\PathDependantPayOff">
+      <UniqueIdentifier>{f604e689-ad17-4b4e-9b71-8b9277cb44c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main_MCValueAtRisk.cpp">
@@ -204,24 +210,6 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffStock.cpp">
       <Filter>Source Files\ValuationFunctions\PayOffs</Filter>
     </ClCompile>
-    <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp">
-      <Filter>Source Files\SimulationEngines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StatisticsGatherers\StatisticsAbsVaR.cpp">
-      <Filter>Source Files\SimulationEngines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StatisticsGatherers\StatisticsMean.cpp">
-      <Filter>Source Files\SimulationEngines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StatisticsGatherers\StatisticsQuantiles.cpp">
-      <Filter>Source Files\SimulationEngines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StatisticsGatherers\StatisticsRelES.cpp">
-      <Filter>Source Files\SimulationEngines</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StatisticsGatherers\StatisticsRelVaR.cpp">
-      <Filter>Source Files\SimulationEngines</Filter>
-    </ClCompile>
     <ClCompile Include="src\ValuationFunctions\BinomTreeFunctions\ValuationFunctions\AmericanGeneralPayOffFunction.cpp">
       <Filter>Source Files\ValuationFunctions\BinomialTreeFunctions\ValuationFunctions</Filter>
     </ClCompile>
@@ -274,6 +262,36 @@
       <Filter>Source Files\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions</Filter>
     </ClCompile>
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloOutPerformanceOptionFunction.cpp">
+      <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatisticsGatherers\StatisticsRelVaR.cpp">
+      <Filter>Source Files\StaisticsGatherers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatisticsGatherers\StatisticsRelES.cpp">
+      <Filter>Source Files\StaisticsGatherers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatisticsGatherers\StatisticsQuantiles.cpp">
+      <Filter>Source Files\StaisticsGatherers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatisticsGatherers\StatisticsMean.cpp">
+      <Filter>Source Files\StaisticsGatherers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatisticsGatherers\StatisticsAbsVaR.cpp">
+      <Filter>Source Files\StaisticsGatherers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StatisticsGatherers\StatisticAllPaths.cpp">
+      <Filter>Source Files\StaisticsGatherers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\PathDependantOption.cpp">
+      <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\DiscretizedPathMonteCarloValuation.cpp">
+      <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffAirthmeticMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff</Filter>
+    </ClCompile>
+    <ClCompile Include="include\MonteCarloPathDependantOption.cpp">
       <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -462,6 +480,21 @@
       <Filter>Header Files\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions</Filter>
     </ClInclude>
     <ClInclude Include="include\MonteCarloOutPerformanceOptionFunction.h">
+      <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffAirthmeticMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PathDependantPayOff.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DiscretizedPathMonteCarloValuation.h">
+      <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PathDependantOption.h">
+      <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MonteCarloPathDependantOption.h">
       <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClInclude>
   </ItemGroup>

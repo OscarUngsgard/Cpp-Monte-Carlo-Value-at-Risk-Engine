@@ -54,6 +54,7 @@
 #include "MonteCarloRainbowOptionFunction.h" //Note: Monte Carlo valuations increase computation time significantly but are the only sensible alternative for rainbow options
 #include "MonteCarloBasketOptionFunction.h"
 #include "MonteCarloOutPerformanceOptionFunction.h"
+#include "MonteCarloPathDependantOption.h"
 //Payoffs
 #include "PayOffCall.h"
 #include "PayOffPut.h"
@@ -61,6 +62,7 @@
 #include "PayOffPutRelative.h"
 #include "PayOffRelPerformance.h"
 #include "PayOffStock.h"
+#include "PayOffAirthmeticMean.h"
 //Backtest
 #include "BackTest.h"
 
@@ -180,13 +182,19 @@ int main()
     vector<double> SPY_OMX_impvol_vect{ 0.2434175,0.215258 };
     vector<double> SPY_OMX_div_vect{ 0.02007, 0.02313 };
     std::shared_ptr<valuationFunction> SPYOMXOutPerformanceOptionMC = std::make_shared<MonteCarloOutPerformanceOptionFunction>("OutPerformance Option SPY over OMX Monte Carlo", nominal, SPY_OMX_S0_vect, SPYOMXOutPerformPayoffs, r, SPY_OMX_div_vect, SPY_OMX_impvol_vect, SPYOMXRainBowCovMatrix, TTM, MCValuationNumberOfPaths);
+    //Arithmetic Asian option on SPY
+    PayOffArithmeticMean AsianPayOff(spotRates[4]);
+    unsigned long MCValuationNumberOfSteps = 10; nominal = 1;
+    std::shared_ptr<valuationFunction> SPYAsianOption = std::make_shared<MonteCarloPathDependantOptionFunction>("Asian Option SPY Monte Carlo", nominal, spotRates[4], r, SPY_OMX_div_vect[0], SPY_OMX_impvol_vect[0], TTM, AsianPayOff, MCValuationNumberOfPaths, MCValuationNumberOfSteps);
+                                                                                                                               
+        
 
     //Combining the positions into new groups that will be stressed for each risk factor. Note that the same position can be stressed for any number of its risk factors
     std::shared_ptr<valuationFunction> StillFrontFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ stillFrontEuropeanCallButterflySpread1, stillFrontEuropeanCallButterflySpread2, stillFrontEuropeanCallButterflySpread3}); //Several different instruments are simulated with the process for this risk factor //stillFrontEuropeanPutMonteCarlo //stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption ,
     std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{  storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings //stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption 
     std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ USTreasuryBond, EURUSDForward }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
     std::shared_ptr<valuationFunction> USDEURFXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward, EURUSDFXSwap});
-    std::shared_ptr<valuationFunction> SPYFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption,  SPYOMXOutPerformanceOptionMC});
+    std::shared_ptr<valuationFunction> SPYFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption,  SPYOMXOutPerformanceOptionMC, SPYAsianOption});
     std::shared_ptr<valuationFunction> OMXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption , SPYOMXOutPerformanceOptionMC});
     std::shared_ptr<valuationFunction> SX5EFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption });
     //Selecting the stochastic processes and risk factors to simulate for each position

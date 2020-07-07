@@ -1,5 +1,5 @@
 #pragma once
-#define SIMPLEMC_H
+#define ONE_STEP_MC_VALUATION
 #include "StandardExcerciseOption.h"
 #include "MCStatistics.h"
 #include "Arrays.h"

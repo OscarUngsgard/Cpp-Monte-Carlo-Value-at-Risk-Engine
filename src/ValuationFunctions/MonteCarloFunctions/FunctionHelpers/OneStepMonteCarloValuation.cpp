@@ -2,19 +2,19 @@
 #include "Random.h"
 
 
-void OneStepMonteCarloValuation(const StandardExcerciseOption& TheOption, double Spot, double Vol, double r, double d, unsigned long NumberOfPaths, MJArray normVariates, StatisticsMC& gatherer)
+void OneStepMonteCarloValuation(const StandardExcerciseOption& TheOption, double spot, double vol, double r, double d, unsigned long numberOfPaths, MJArray normVariates, StatisticsMC& gatherer)
 {
-    if (normVariates.size() != NumberOfPaths)
+    if (normVariates.size() != numberOfPaths)
         throw("mismatched number of paths and normal variates");
     //Pre-calculate as much as possible
     double Expiry = TheOption.GetExpiry();
-    double variance = Vol * Vol * Expiry;
+    double variance = vol * vol * Expiry;
     double rootVariance = sqrt(variance);
     double itoCorrection = -0.5 * variance;
-    double movedSpot = Spot * exp((r-d) * Expiry + itoCorrection);
+    double movedSpot = spot * exp((r-d) * Expiry + itoCorrection);
     double thisSpot;
     double discounting = exp(-r * Expiry);
-    for (unsigned long i = 0; i < NumberOfPaths; i++)
+    for (unsigned long i = 0; i < numberOfPaths; i++)
     {
         thisSpot = movedSpot * exp(rootVariance * normVariates[i]);
         double thisPayoff = TheOption.OptionPayOff(thisSpot);
