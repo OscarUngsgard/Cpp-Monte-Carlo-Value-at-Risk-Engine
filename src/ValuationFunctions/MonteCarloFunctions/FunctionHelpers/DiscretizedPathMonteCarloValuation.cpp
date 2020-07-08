@@ -10,12 +10,12 @@ void DiscretizedPathMonteCarloValuation(const PathDependantOption& TheOption, do
     //Pre-calculate as much as possible
     double Expiry = TheOption.GetExpiry();
     double discounting = exp(-r * Expiry);   
-    double dt = Expiry / numberOfPaths;
+    double dt = Expiry / numberOfSteps;
     double logDrift = (r - d - (vol * vol) / 2.0) * dt;
-    double logDifussion = vol * sqrt(dt);
-    double CurrentLogSpot = log(spot);
+    double logDifussion = vol * sqrt(dt);  
     for (unsigned long i = 0; i < numberOfPaths; i++)
     {
+        double CurrentLogSpot = log(spot);
         std::vector<double> SpotValues(numberOfSteps);
         for (unsigned long j = 0; j < numberOfSteps; j++)
         {       

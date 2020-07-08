@@ -112,6 +112,12 @@
     <Filter Include="Source Files\ValuationFunctions\PayOffs\PathDependantPayOff">
       <UniqueIdentifier>{f604e689-ad17-4b4e-9b71-8b9277cb44c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option">
+      <UniqueIdentifier>{93f4950c-de8a-4cd4-8d13-a6d9a2a69e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options">
+      <UniqueIdentifier>{85d56e49-49b6-43da-ba34-df54c58b7b3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main_MCValueAtRisk.cpp">
@@ -288,14 +294,23 @@
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\DiscretizedPathMonteCarloValuation.cpp">
       <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions</Filter>
     </ClCompile>
-    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffAirthmeticMean.cpp">
-      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff</Filter>
+    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloPathDependantOptionFunction.cpp">
+      <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClCompile>
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffCallPathDependant.cpp">
       <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff</Filter>
     </ClCompile>
-    <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloPathDependantOptionFunction.cpp">
-      <Filter>Source Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallGeometricMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallStrikeArithmeticMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallStrikeGeometricMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallAirthmeticMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -485,12 +500,6 @@
     <ClInclude Include="include\MonteCarloOutPerformanceOptionFunction.h">
       <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClInclude>
-    <ClInclude Include="include\PayOffAirthmeticMean.h">
-      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PathDependantPayOff.h">
-      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
-    </ClInclude>
     <ClInclude Include="include\DiscretizedPathMonteCarloValuation.h">
       <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\HelperFunctions</Filter>
     </ClInclude>
@@ -500,8 +509,23 @@
     <ClInclude Include="include\MonteCarloPathDependantOption.h">
       <Filter>Header Files\ValuationFunctions\MonteCarloFunctions\ValuationFunctions</Filter>
     </ClInclude>
+    <ClInclude Include="include\PayOffCallAirthmeticMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PathDependantPayOff.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
+    </ClInclude>
     <ClInclude Include="include\PayOffCallPathDependant.h">
       <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffCallStrikeArithmeticMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffCallGeometricMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffCallStrikeGeometricMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

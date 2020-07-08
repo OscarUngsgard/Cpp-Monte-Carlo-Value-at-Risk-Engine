@@ -7,8 +7,6 @@ PayOffCallPathDependant::PayOffCallPathDependant(double Strike_) : strike(Strike
 
 double PayOffCallPathDependant::operator()(std::vector<double> spotPath) const
 {
-   // std::cout << "strike: " << strike << "\n";
-   // std::cout << "terminal value: " << spotPath[spotPath.size() - 1] << "\n";
     return std::max(spotPath[spotPath.size() - 1] - strike, 0.0);
 }
 

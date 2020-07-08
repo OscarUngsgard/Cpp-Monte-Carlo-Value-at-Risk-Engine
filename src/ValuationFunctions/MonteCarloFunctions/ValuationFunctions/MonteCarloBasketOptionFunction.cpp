@@ -8,7 +8,7 @@
 #include <iostream>
 #include "MonteCarloBasketOptionFunction.h"
 
-MonteCarloBasketOptionFunction::MonteCarloBasketOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<double> weights_vect_, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, Wrapper<PayOff> ThePayOff_, unsigned long numberOfPaths_) : r(r_), S_vect(S0_vect), weights_vect(weights_vect_), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), ThePayOff(std::move(ThePayOff_)), numberOfPaths(numberOfPaths_), impvol_vect(impvol_vect_)
+MonteCarloBasketOptionFunction::MonteCarloBasketOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<double> weights_vect_, std::vector<double> r_Vect_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, Wrapper<PayOff> ThePayOff_, unsigned long numberOfPaths_) : r_Vect(r_Vect_), S_vect(S0_vect), weights_vect(weights_vect_), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_), ThePayOff(std::move(ThePayOff_)), numberOfPaths(numberOfPaths_), impvol_vect(impvol_vect_)
 {
 	if (covMatrix.size() != S_vect.size())
 		throw("Missmatched Covariance matrix and initial spot values array sizes in MonteCarloBasketOptionFunction");
@@ -26,7 +26,7 @@ void MonteCarloBasketOptionFunction::ValueInstrument()
 		StandardExcerciseOption thisStockPayOff(stockPayOffVect[i], TTM);
 		StatisticAllPaths onePathGatherer;
 		thesePathGatherers.push_back(onePathGatherer);
-		OneStepMonteCarloValuation(thisStockPayOff, S_vect[i], impvol_vect[i], r, d_vect[i], numberOfPaths, correlatedNormVariates[i], thesePathGatherers[i]);
+		OneStepMonteCarloValuation(thisStockPayOff, S_vect[i], impvol_vect[i], r_Vect[i], d_vect[i], numberOfPaths, correlatedNormVariates[i], thesePathGatherers[i]);
 	}
 	f = 0;
 	for (unsigned long i = 0; i < numberOfPaths; i++)
@@ -53,7 +53,8 @@ void MonteCarloBasketOptionFunction::RiskFactorAdd(double increment, RiskFactor 
 	switch (simulatedRiskFactor)
 	{
 	case RiskFactor::interest_rate:
-		r += increment;
+		for (unsigned long i = 0; i < r_Vect.size(); i++)
+			r_Vect[i] += increment;
 		break;
 	case RiskFactor::equity1:
 		S_vect[0] += increment;
@@ -82,7 +83,8 @@ void MonteCarloBasketOptionFunction::RiskFactorMultiply(double factor, RiskFacto
 	switch (simulatedRiskFactor)
 	{
 	case RiskFactor::interest_rate:
-		r *= factor;
+		for (unsigned long i = 0; i < r_Vect.size(); i++)
+			r_Vect[i] *= factor;
 		break;
 	case RiskFactor::equity1:
 		S_vect[0] *= factor;

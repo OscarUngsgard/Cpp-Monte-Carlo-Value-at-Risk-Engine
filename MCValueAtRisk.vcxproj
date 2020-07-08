@@ -150,11 +150,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallGeometricMean.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallStrikeArithmeticMean.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallStrikeGeometricMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloPathDependantOptionFunction.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffCallPathDependant.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\DiscretizedPathMonteCarloValuation.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\FunctionHelpers\PathDependantOption.cpp" />
-    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\PayOffAirthmeticMean.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallAirthmeticMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\MonteCarloFunctions\ValuationFunctions\MonteCarloOutPerformanceOptionFunction.cpp" />
     <ClCompile Include="src\ValuationFunctions\ClosedFormFunctions\EquityDerivativeFunctions\OutPerformanceFunction.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffRelPerformance.cpp" />
@@ -280,9 +283,12 @@
     <ClInclude Include="include\PayOffRelPerformance.h" />
     <ClInclude Include="include\PathDependantOption.h" />
     <ClInclude Include="include\PathDependantPayOff.h" />
-    <ClInclude Include="include\PayOffAirthmeticMean.h" />
+    <ClInclude Include="include\PayOffCallAirthmeticMean.h" />
     <ClInclude Include="include\MonteCarloPathDependantOption.h" />
     <ClInclude Include="include\PayOffCallPathDependant.h" />
+    <ClInclude Include="include\PayOffCallGeometricMean.h" />
+    <ClInclude Include="include\PayOffCallStrikeArithmeticMean.h" />
+    <ClInclude Include="include\PayOffCallStrikeGeometricMean.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

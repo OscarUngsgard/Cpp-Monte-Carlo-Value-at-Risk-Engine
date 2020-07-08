@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <iostream>
 
-MonteCarloRainbowOptionFunction::MonteCarloRainbowOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, double r_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, std::vector<Wrapper<PayOff>> ThePayOffVect_, unsigned long numberOfPaths_, RainbowOptionType optionType_) : r(r_), S_vect(S0_vect), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_),ThePayOffVect(std::move(ThePayOffVect_)), numberOfPaths(numberOfPaths_), optionType(optionType_), impvol_vect(impvol_vect_)
+MonteCarloRainbowOptionFunction::MonteCarloRainbowOptionFunction(std::string uniqueIdentifier_, int nominal_, std::vector<double> S0_vect, std::vector<double>  r_vect_, std::vector<double> d_vect_, std::vector<double> impvol_vect_, std::vector<std::vector<double>> covMatrix_, double TTM_, std::vector<Wrapper<PayOff>> ThePayOffVect_, unsigned long numberOfPaths_, RainbowOptionType optionType_) : r_Vect(r_vect_), S_vect(S0_vect), d_vect(d_vect_), covMatrix(covMatrix_), valuationFunction(uniqueIdentifier_, TTM_, nominal_),ThePayOffVect(std::move(ThePayOffVect_)), numberOfPaths(numberOfPaths_), optionType(optionType_), impvol_vect(impvol_vect_)
 {
 	if (covMatrix.size() != S_vect.size())
 		throw("Missmatched Covariance matrix and initial spot values array sizes in MonteCarloRainbowOptionFunction");
@@ -22,7 +22,7 @@ void MonteCarloRainbowOptionFunction::ValueInstrument()
 		StandardExcerciseOption thisOption(ThePayOffVect[i], TTM);
 		StatisticAllPaths onePathGatherer;
 		thesePathGatherers.push_back(onePathGatherer);
-		OneStepMonteCarloValuation(thisOption, S_vect[i], impvol_vect[i], r, d_vect[i], numberOfPaths, correlatedNormVariates[i], thesePathGatherers[i]);
+		OneStepMonteCarloValuation(thisOption, S_vect[i], impvol_vect[i], r_Vect[i], d_vect[i], numberOfPaths, correlatedNormVariates[i], thesePathGatherers[i]);
 	}
 	f = 0;
 	for (unsigned long i = 0; i < numberOfPaths; i++)
@@ -55,7 +55,8 @@ void MonteCarloRainbowOptionFunction::RiskFactorAdd(double increment, RiskFactor
 	switch (simulatedRiskFactor)
 	{
 	case RiskFactor::interest_rate:
-		r += increment;
+		for (unsigned long i = 0; i < r_Vect.size(); i++)
+			r_Vect[i] += increment;
 		break;
 	case RiskFactor::equity1:
 		S_vect[0] += increment;
@@ -84,7 +85,8 @@ void MonteCarloRainbowOptionFunction::RiskFactorMultiply(double factor, RiskFact
 	switch (simulatedRiskFactor)
 	{
 	case RiskFactor::interest_rate:
-		r *= factor;
+		for (unsigned long i = 0; i < r_Vect.size(); i++)
+			r_Vect[i] *= factor;
 		break;
 	case RiskFactor::equity1:
 		S_vect[0] *= factor;
