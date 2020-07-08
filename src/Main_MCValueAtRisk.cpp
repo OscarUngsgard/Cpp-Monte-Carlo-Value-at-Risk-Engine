@@ -168,6 +168,10 @@ int main()
     //RiskFactor 5/6/7 derivatives - Derivatives on SPX,SX5E and OMX indices.
     nominal = 10000; TTM = 1.97;
     vector<vector<double>> indicesRainBowCovMatrix = myTimeSeriesHandler.GetPartsOfCovarianceMatrix(vector<unsigned long>{4, 5, 6});
+    //vector<double> covmat1{ 1.0, 0.82, 0.82 };
+    //vector<double> covmat2{ 0.82, 1.0, 0.82 };
+    //vector<double> covmat3{ 0.82, 0.82, 1.0};
+    //vector<vector<double>> indicesRainBowCovMatrix{ covmat1 ,covmat2 ,covmat3 };
     vector<double> indices_S0_vect{ spotRates[4], spotRates[5], spotRates[6] }; 
     vector<double> indices_impvol_vect{ 0.2434175,0.215258, 0.2267145  };
     vector<double> indices_div_vect{ 0.02007, 0.02313, 0.03825 };
@@ -179,15 +183,17 @@ int main()
     std::vector<double> basketWeights{ (1 / 3.0),(1 / 3.0),(1 / 3.0) }; PayOffCall basketCallPayOff((1 / 3.0)* spotRates[4] + (1 / 3.0) * spotRates[5] + (1 / 3.0) * spotRates[6]);
     std::shared_ptr<valuationFunction> indicesBasketCallOption = std::make_shared<MonteCarloBasketOptionFunction>("Basket Call Option SPY/OMX/SX5E", nominal, indices_S0_vect, basketWeights, indices_r_vect, indices_div_vect, indices_impvol_vect, indicesRainBowCovMatrix, TTM, basketCallPayOff, MCValuationNumberOfPaths);
     //Outperformance option
-    nominal = 5000; TTM = 1;
+    nominal = 1; TTM = 1;
     vector<vector<double>> SPYOMXRainBowCovMatrix = myTimeSeriesHandler.GetPartsOfCovarianceMatrix(vector<unsigned long>{4, 5});
     PayOffRelPerformance SPXrelPayOff(3055.73); PayOffRelPerformance OMXrelPayOff(1649.38);
     vector<Wrapper<PayOff>> SPYOMXOutPerformPayoffs{ SPXrelPayOff,OMXrelPayOff };
     vector<double> SPY_OMX_S0_vect{ spotRates[4], spotRates[5] };
     vector<double> SPY_OMX_impvol_vect{ 0.2434175,0.215258 };
     vector<double> SPY_OMX_div_vect{ 0.02007, 0.02313 };
-    vector<double> SPY_OMX_r_vect{ 0.003, -0.004 };
+    vector<double> SPY_OMX_r_vect{ 0.003, -0.004};
     std::shared_ptr<valuationFunction> SPYOMXOutPerformanceOptionMC = std::make_shared<MonteCarloOutPerformanceOptionFunction>("OutPerformance Option SPY over OMX Monte Carlo", nominal, SPY_OMX_S0_vect, SPYOMXOutPerformPayoffs, SPY_OMX_r_vect, SPY_OMX_div_vect, SPY_OMX_impvol_vect, SPYOMXRainBowCovMatrix, TTM, MCValuationNumberOfPaths);
+    vector<double> S_0_start_vect{ 3055.73, 1649.38 };
+    std::shared_ptr<valuationFunction> SPYOMXOutPerformanceOption = std::make_shared<OutPerformanceFunction>("OutPerformance Option SPY over OMX", nominal, SPY_OMX_S0_vect, S_0_start_vect, r, SPY_OMX_div_vect, SPY_OMX_impvol_vect, SPYOMXRainBowCovMatrix, TTM);                                                                                                      
     //Arithmetic Asian option on SPY
     PayOffCallArithmeticMean AsianPayOff(spotRates[4]);
     unsigned long MCValuationNumberOfSteps = 52; nominal = 1;
@@ -200,8 +206,8 @@ int main()
     std::shared_ptr<valuationFunction> StorytelFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{  storytelStock, StorytelAmericanCall}); //Note how the rainbow options are simulated for both underylings //stillFrontStoryTelBestOfCallOption, stillFrontStoryTelWorstOfCallOption, stillFrontStoryTelBasketCallOption 
     std::shared_ptr<valuationFunction> USTreasuryFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ USTreasuryBond, EURUSDForward }); //Can add equitiy derivates and others here as well to simulate the risk free rate for discounting (example of stressing different risk factors for the same position)
     std::shared_ptr<valuationFunction> USDEURFXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ EURUSDForward, EURUSDFXSwap});
-    std::shared_ptr<valuationFunction> SPYFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption,  SPYOMXOutPerformanceOptionMC, SPYAsianOption, SPYAsianStrikeOption});
-    std::shared_ptr<valuationFunction> OMXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption , SPYOMXOutPerformanceOptionMC});
+    std::shared_ptr<valuationFunction> SPYFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption,  SPYOMXOutPerformanceOptionMC, SPYAsianOption, SPYAsianStrikeOption, SPYOMXOutPerformanceOption});
+    std::shared_ptr<valuationFunction> OMXFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption , SPYOMXOutPerformanceOptionMC, SPYOMXOutPerformanceOption});
     std::shared_ptr<valuationFunction> SX5EFunctions = std::make_shared<FunctionCombiner>(vector<std::shared_ptr<valuationFunction>>{ indicesBestOfCallOption, indicesBasketCallOption });
     //Selecting the stochastic processes and risk factors to simulate for each position
     OneStepBSEngine StockSimulation(zeroDrift, StillFrontFunctions, RiskFactor::equity1);
