@@ -168,14 +168,10 @@ int main()
     //RiskFactor 5/6/7 derivatives - Derivatives on SPX,SX5E and OMX indices.
     nominal = 10000; TTM = 1.97;
     vector<vector<double>> indicesRainBowCovMatrix = myTimeSeriesHandler.GetPartsOfCovarianceMatrix(vector<unsigned long>{4, 5, 6});
-    //vector<double> covmat1{ 1.0, 0.82, 0.82 };
-    //vector<double> covmat2{ 0.82, 1.0, 0.82 };
-    //vector<double> covmat3{ 0.82, 0.82, 1.0};
-    //vector<vector<double>> indicesRainBowCovMatrix{ covmat1 ,covmat2 ,covmat3 };
-    vector<double> indices_S0_vect{ spotRates[4], spotRates[5], spotRates[6] }; 
-    vector<double> indices_impvol_vect{ 0.2434175,0.215258, 0.2267145  };
-    vector<double> indices_div_vect{ 0.02007, 0.02313, 0.03825 };
-    vector<double> indices_r_vect{ 0.003, -0.004, -0.002 };
+    vector<double> indices_S0_vect{ spotRates[4], spotRates[5], spotRates[6] };
+    vector<double> indices_impvol_vect{ 0.2409, 0.201056, 0.1996 };
+    vector<double> indices_div_vect{ 0.02031, 0.03117, 0.03502 };
+    vector<double> indices_r_vect{ 0.00212, -0.0003911, -0.003779 };
     PayOffCallRelative SPXPayOff(3055.73); PayOffCallRelative OMXPayOff(1649.38); PayOffCallRelative SX5EPayoff(3077.92);
     vector<Wrapper<PayOff>> indicesRainbowPayoffs{ SPXPayOff, OMXPayOff, SX5EPayoff };
     std::shared_ptr<valuationFunction> indicesBestOfCallOption = std::make_shared<MonteCarloRainbowOptionFunction>("Best-Of Call Option SPY/OMX/SX5E", nominal, indices_S0_vect, indices_r_vect, indices_div_vect, indices_impvol_vect, indicesRainBowCovMatrix, TTM, indicesRainbowPayoffs, MCValuationNumberOfPaths, RainbowOptionType::best_of);

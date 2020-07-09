@@ -150,6 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutArithmeticMean.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutGeometricMean.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutStrikeArithmeticMean.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutStrikeGeometricMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallGeometricMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallStrikeArithmeticMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallStrikeGeometricMean.cpp" />
@@ -289,6 +293,10 @@
     <ClInclude Include="include\PayOffCallGeometricMean.h" />
     <ClInclude Include="include\PayOffCallStrikeArithmeticMean.h" />
     <ClInclude Include="include\PayOffCallStrikeGeometricMean.h" />
+    <ClInclude Include="include\PayOffPutArithmeticMean.h" />
+    <ClInclude Include="include\PayOffPutGeometricMean.h" />
+    <ClInclude Include="include\PayOffPutStrikeArithmeticMean.h" />
+    <ClInclude Include="include\PayOffPutStrikeGeometricMean.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -312,6 +312,18 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffCallAirthmeticMean.cpp">
       <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
     </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutArithmeticMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutGeometricMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutStrikeArithmeticMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutStrikeGeometricMean.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RiskFactors.h">
@@ -525,6 +537,18 @@
       <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
     </ClInclude>
     <ClInclude Include="include\PayOffCallStrikeGeometricMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffPutArithmeticMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffPutGeometricMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffPutStrikeArithmeticMean.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffPutStrikeGeometricMean.h">
       <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
     </ClInclude>
   </ItemGroup>
