@@ -118,6 +118,12 @@
     <Filter Include="Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options">
       <UniqueIdentifier>{85d56e49-49b6-43da-ba34-df54c58b7b3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\LookBackOptions">
+      <UniqueIdentifier>{2ebc1d5f-3b25-41d2-8ff8-cdbcfcbad87a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option\LookbackOptions">
+      <UniqueIdentifier>{2b3f0bcb-5d1f-4873-85b6-45ce1a669ef4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main_MCValueAtRisk.cpp">
@@ -323,6 +329,18 @@
     </ClCompile>
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutStrikeGeometricMean.cpp">
       <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackCallFixed.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option\LookbackOptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackCallFloating.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option\LookbackOptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackPutFixed.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option\LookbackOptions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackPutFloating.cpp">
+      <Filter>Source Files\ValuationFunctions\PayOffs\PathDependantPayOff\Asian option\LookbackOptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +568,18 @@
     </ClInclude>
     <ClInclude Include="include\PayOffPutStrikeGeometricMean.h">
       <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\Asian Options</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffLookbackCallFixed.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\LookBackOptions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffLookbackCallFloating.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\LookBackOptions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffLookbackPutFixed.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\LookBackOptions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PayOffLookbackPutFloating.h">
+      <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\LookBackOptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -150,6 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackCallFixed.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackCallFloating.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackPutFixed.cpp" />
+    <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Lookback Options\PayOffLookbackPutFloating.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutArithmeticMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutGeometricMean.cpp" />
     <ClCompile Include="src\ValuationFunctions\PayOffs\PathDependantPayOff\Asian options\PayOffPutStrikeArithmeticMean.cpp" />
@@ -297,6 +301,10 @@
     <ClInclude Include="include\PayOffPutGeometricMean.h" />
     <ClInclude Include="include\PayOffPutStrikeArithmeticMean.h" />
     <ClInclude Include="include\PayOffPutStrikeGeometricMean.h" />
+    <ClInclude Include="include\PayOffLookbackCallFixed.h" />
+    <ClInclude Include="include\PayOffLookbackCallFloating.h" />
+    <ClInclude Include="include\PayOffLookbackPutFixed.h" />
+    <ClInclude Include="include\PayOffLookbackPutFloating.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
