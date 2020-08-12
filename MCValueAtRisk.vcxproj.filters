@@ -581,6 +581,9 @@
     <ClInclude Include="include\PayOffLookbackPutFloating.h">
       <Filter>Header Files\ValuationFunctions\Payoffs\PathDependantPayOff\LookBackOptions</Filter>
     </ClInclude>
+    <ClInclude Include="include\BarrierOptionTypes.h">
+      <Filter>Header Files\GeneralClassesAndFunctions\enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -18,7 +18,7 @@ void OutPerformanceFunction::ValueInstrument()
 	double sigma = sqrt(pow(impvol_vect[0],2) + pow(impvol_vect[1],2) - 2.0 * impvol_vect[0] * impvol_vect[1] * corr);
 	double d1 = log(((S_vect[0] / S_start_vect[0]) / (S_vect[1] / S_start_vect[1])) + (d_vect[1] - d_vect[0] + (pow(sigma, 2) / 2.0) * TTM)) / (sigma * sqrt(TTM));
 	double d2 = d1 - sigma * sqrt(TTM);
-	f = exp(-d_vect[0] * TTM) * (S_vect[0] / S_start_vect[0]) * CumulativeNormal(d1) - exp(-d_vect[1] * TTM) * (S_vect[1] / S_start_vect[1]) * CumulativeNormal(d2);
+	f = nominal * (exp(-d_vect[0] * TTM) * (S_vect[0] / S_start_vect[0]) * CumulativeNormal(d1) - exp(-d_vect[1] * TTM) * (S_vect[1] / S_start_vect[1]) * CumulativeNormal(d2));
 	return;
 }
 

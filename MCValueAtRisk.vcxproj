@@ -226,6 +226,7 @@
     <ClCompile Include="src\ValuationFunctions\PayOffs\PayOffStock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BarrierOptionTypes.h" />
     <ClInclude Include="include\DiscretizedPathMonteCarloValuation.h" />
     <ClInclude Include="include\BinomialTest.h" />
     <ClInclude Include="include\Combinatorics.h" />

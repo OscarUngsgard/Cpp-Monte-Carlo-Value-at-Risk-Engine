@@ -98,3 +98,7 @@ valuationFunction* MonteCarloOutPerformanceOptionFunction::clone() const
 {
 	return new MonteCarloOutPerformanceOptionFunction(*this);
 }
+
+
+
+///std::shared_ptr<valuationFunction> SPYOMXOutPerformanceOptionMC = std::make_shared<MonteCarloOutPerformanceOptionFunction>("OutPerformance Option SPY over OMX Monte Carlo", nominal, SPY_OMX_S0_vect, SPYOMXOutPerformPayoffs, SPY_OMX_r_vect, SPY_OMX_div_vect, SPY_OMX_impvol_vect, SPYOMXRainBowCovMatrix, TTM, MCValuationNumberOfPaths);
